@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    /* Required by shadcn CLI + editors resolving @/ imports from the root */
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
