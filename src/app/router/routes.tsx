@@ -7,6 +7,7 @@ import { HomePage } from './pages/home-page'
 import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
+import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
 
 /**
  * Route tree.
@@ -31,6 +32,7 @@ const routes: RouteObject[] = [
       { path: PATHS.home, element: <HomePage /> },
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
+      { path: PATHS.appointment, element: <AppointmentPage /> },
 
       // ——— Protected routes ———
       {
