@@ -11,6 +11,9 @@ export const PATHS = {
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
+  signIn:'/signIn',
+  signUp:'/signUp',
+  codeVerfication:'/codeVerfication',
   // Protected — app shell examples
   dashboard: '/dashboard',
   settings: '/settings',
