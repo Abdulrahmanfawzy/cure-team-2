@@ -1,5 +1,5 @@
 
-import { ChevronLeft } from "lucide-react"
+
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
@@ -9,6 +9,9 @@ import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
 import DoctorLocation from "../component/DoctorProfile/DoctorLocation"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
 import HeaderMobile from "../component/Appointment/HeaderMobile"
+import DoctorDetailsMobile from "../component/Appointment/DoctorDetailsMobile"
+import docImg from "../../../assets/women.jpg"
+import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
 
 const AppointmentPage = () => {
     return (
@@ -24,10 +27,15 @@ const AppointmentPage = () => {
                     <Testimonial />
                 </div>
             </div>
+            
             {/*---------- doc info mobile----------- */}
             <div className="sm:hidden flex flex-col gap-3">
                <HeaderMobile/>
+               <DoctorDetailsMobile image={docImg} doctorName="Dr. Jessica Turner" doctorLocation="129,El-Nasr Street, Cairo " doctorSpecialist="Pulmonologist" />
             </div>
+
+            {/* picker for appointment in mob */}
+            <AppointmentPickerMob />
             {/*----------- doc info----------- */}
             <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-[#F5F6F7] px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader />
