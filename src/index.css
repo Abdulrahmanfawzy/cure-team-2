@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -29,6 +30,10 @@
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
+    --color-text-secondary-default: var(--text-secondary-default);
+    --color-text-neutral-darkest: var(--text-neutral-darkest);
+    --color-background-neutral-lightest: var(--background-neutral-lightest);
+    --color-background-primary-default: var(--background-primary-default);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -49,6 +54,8 @@
     --color-neutral-darker: var(--color-neutral-darker);
     --color-secondery: var(--color-secondery); 
     --color-primary: var(--color-primary);    
+    --font-header: Georgia;
+    --font-header-weight: 600;
 }
 
 :root {
@@ -59,7 +66,7 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
+    --primary: #145DB8;
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
@@ -68,6 +75,10 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
+    --text-secondary-default: #05162C;
+    --text-neutral-darkest: #404448;
+    --background-neutral-lightest: #F5F6F7;
+    --background-primary-default: #145DB8;
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
@@ -88,6 +99,7 @@
     --color-neutral-darker:#6D7379;
     --color-secondery:#05162C ; 
     --color-primary:#145DB8;
+    --font-family: Georgia, serif;
 }
 
 .dark {
@@ -131,4 +143,8 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
 }
