@@ -18,9 +18,9 @@ const TimeSlots=({availableTimes,selectedTime,setSelectedTime}:IProps)=> {
                                 <Button
 
                                     onClick={() => setSelectedTime(time)}
-                                    className={` flex h-12 w-26.25 p-2! flex-col items-center justify-center rounded-[10px] text-[14px] font-medium transition
-                                            ${isSelected ? "bg-[#145DB8] text-white  "
-                                            : "bg-[#F5F6F7] text-[#6D7379] hover:bg-[#E5E7EB]"}`}
+                                    className={` flex h-12 w-26.25 p-2! flex-col items-center justify-center rounded-[10px] text-sm font-medium transition
+                                            ${isSelected ? "bg-background-primary-default text-white  "
+                                            : "bg-background-neutral-lightest text-[#6D7379] hover:bg-[#E5E7EB]"}`}
                                 >
                                     {time}
 
@@ -28,7 +28,7 @@ const TimeSlots=({availableTimes,selectedTime,setSelectedTime}:IProps)=> {
                             );
                         })
                     ) : (
-                        <p className="col-span-4 py-3 text-center text-[11px] text-[#9CA3AF]">
+                        <p className="col-span-4 py-3 text-center text-xs text-[#9CA3AF]">
                             No available appointments
                         </p>
                     )

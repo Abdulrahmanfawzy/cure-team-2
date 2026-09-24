@@ -31,7 +31,7 @@ const WeekDays=({selectedDate,isDayAvailable,weekDays,handleDateChange,previousW
                                 disabled={!isAvailable}
                                 onClick={() => handleDateChange(day)}
                                 className={` flex h-12 flex-col items-center justify-center rounded-[6px] text-[10px] transition
-                         ${isSelected ? "bg-[#145DB8] text-white w-12.5 h-15 " : isAvailable
+                         ${isSelected ? "bg-background-primary-default text-white w-12.5 h-15 " : isAvailable
                                         ? "bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB] w-12.5 h-15"
                                         : "cursor-not-allowed bg-white text-[#8f8f8f]"}
                         `}

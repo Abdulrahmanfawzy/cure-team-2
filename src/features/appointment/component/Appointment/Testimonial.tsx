@@ -14,8 +14,8 @@ const Testimonial=({}:IProps)=> {
                         <div className="flex items-center gap-2">
                             <img src={personImage} className="rounded-[50%] bg-[#d7d7e4]" />
                             <div>
-                                <p className="text-[#05162C] text-[16px]">Ferry Ichsan A</p>
-                                <p className="text-[#404448] text-[14px]">A week ago</p>
+                                <p className="text-text-secondary-default text-[16px]">Ferry Ichsan A</p>
+                                <p className="text-text-neutral-darkest text-[14px]">A week ago</p>
                             </div>
                         </div>
                         <div className="flex items-center justify-between bg-[#F9E0001A] rounded-[6px] p-1.5 gap-1">
