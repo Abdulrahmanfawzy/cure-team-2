@@ -1,24 +1,24 @@
-/**
- * Auth form schemas (Zod).
- *
- * Schemas are the single source of truth for form validation and are
- * passed to React Hook Form via `zodResolver(schema)`.
- *
- * Expected schemas when auth is implemented:
- * - loginSchema
- * - registerSchema
- * - forgotPasswordSchema
- * - otpSchema (e.g. z.string().length(6))
- *
- * Example:
- *
- *   import { z } from 'zod'
- *
- *   export const loginSchema = z.object({
- *     email: z.string().email(),
- *     password: z.string().min(8),
- *   })
- *
- *   export type LoginValues = z.infer<typeof loginSchema>
- */
-export {}
+import { z } from 'zod';
+
+export const registerSchema = z.object({
+  name: z.string().min(4, "Name must be at least 4 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number is required"),
+  password: z.string().min(7, "Password must be at least 7 characters"),
+  password_confirmation: z.string(),
+}).refine((data) => data.password === data.password_confirmation, {
+  message: "Passwords don't match",
+  path: ["password_confirmation"],
+});
+
+export type RegisterType = z.infer<typeof registerSchema>;
+
+export const resetPasswordSchema = z.object({
+  password: z.string().min(7, "Password must be at least 7 characters"),
+  password_confirmation: z.string(),
+}).refine((data) => data.password === data.password_confirmation, {
+  message: "Passwords don't match",
+  path: ["password_confirmation"],
+});
+
+export type ResetPasswordType = z.infer<typeof resetPasswordSchema>;
