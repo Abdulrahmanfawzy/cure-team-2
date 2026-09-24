@@ -46,11 +46,11 @@ const DoctorStats = () => {
             />
           </div>
 
-          <p className="text-[14px] font-semibold leading-[150%] text-[#4B5563]">
+          <p className="text-sm font-semibold leading-[150%] text-[#4B5563]">
             {value}
           </p>
 
-          <p className="text-[14px] leading-[100%] text-[#6D7379]">
+          <p className="text-sm leading-[100%] text-[#6D7379]">
             {label}
           </p>
         </div>
