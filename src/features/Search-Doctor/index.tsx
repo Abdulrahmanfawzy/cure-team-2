@@ -20,11 +20,17 @@ const SearchDoctor = () => {
           <BtnMap />
         </section>
         <ChooseSpecialistCard />
-        {isFilterOpen && (
-          <div className="w-50">
+        <div
+          className={`
+      shrink-0 overflow-hidden
+      transition-[width] duration-500 ease-in-out
+      ${isFilterOpen ? "w-[300px]" : "w-0"}
+    `}
+        >
+          <div className="w-[300px]">
             <SidebarFilter />
           </div>
-        )}
+        </div>
       </main>
     </div>
   );
