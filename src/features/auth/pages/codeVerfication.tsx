@@ -3,6 +3,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -19,32 +20,45 @@ import {
 import { PATHS } from "../../../app/router/paths";
 
 export default function VerificationCodePage() {
-  const [verificationCode, setVerificationCode] =
+const [verificationCode, setVerificationCode] =
     useState(["", "", "", ""]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const flow = location.state?.flow;
-  
+  const stateFlow = location.state?.flow;
+  if (stateFlow) {
+    sessionStorage.setItem("auth_flow", stateFlow);
+  }
+  const flow = sessionStorage.getItem("auth_flow") || stateFlow;
+
   const isLogin = flow === "login";
   const isForgotPassword = flow === "forgot-password";
 
+  const sessionPhoneKey = isLogin ? "login_phone" : isForgotPassword ? "forgot_phone" : "register_phone";
+  
+  if (location.state?.phone) {
+    sessionStorage.setItem(sessionPhoneKey, location.state.phone);
+    if (isForgotPassword) sessionStorage.setItem("forgot_phone", location.state.phone);
+  }
+
   const phone =
+    sessionStorage.getItem(sessionPhoneKey) ||
+    sessionStorage.getItem("forgot_phone") ||
     location.state?.phone ||
-    sessionStorage.getItem(
-      isLogin ? "login_phone" : "register_phone"
-    ) ||
     "";
 
   useEffect(() => {
-    if (!flow) {
+    const currentFlow = sessionStorage.getItem("auth_flow");
+    const currentPhone = sessionStorage.getItem("forgot_phone") || sessionStorage.getItem("login_phone") || sessionStorage.getItem("register_phone");
+
+    if (!currentFlow || !currentPhone) {
       navigate(PATHS.signIn, { replace: true });
     }
-  }, [flow, navigate]);
+  }, [navigate]);
 
-  if (!flow) {
-    return null;
+  if (!flow || !phone) {
+    return null; 
   }
 
   const getMutationFn = () => {
@@ -64,8 +78,15 @@ export default function VerificationCodePage() {
     onSuccess: (data) => {
       console.log("========== VERIFY SUCCESS ==========");
       console.log("RESPONSE:", data);
+      const token = data?.data?.access_token;
+      if (token) {
+        Cookies.set("access_token", token, { expires: 7, secure: true, sameSite: 'strict' });
+      }
 
       if (isLogin) {
+        sessionStorage.removeItem("login_phone");
+        sessionStorage.removeItem("auth_flow");
+
         navigate(PATHS.home, { replace: true });
         return;
       }
@@ -73,11 +94,11 @@ export default function VerificationCodePage() {
       if (isForgotPassword) {
         const resetToken = data?.data?.reset_token || data?.reset_token;
         
-        // حفظ الـ Token و الـ Phone في SessionStorage عشان الـ Refresh
         sessionStorage.setItem("reset_token", resetToken);
         sessionStorage.setItem("reset_phone", phone);
+        sessionStorage.removeItem("forgot_phone");
+        sessionStorage.removeItem("auth_flow");
         
-        // التوجيه الصحيح لصفحة الـ Reset Password
         navigate(PATHS.ResetPassword, {
           replace: true,
           state: { phone, resetToken },
@@ -85,6 +106,7 @@ export default function VerificationCodePage() {
         return; 
       }
 
+      sessionStorage.removeItem("auth_flow");
       navigate(PATHS.signIn, { replace: true });
     },
 

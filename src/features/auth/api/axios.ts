@@ -1,24 +1,22 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 export const api = axios.create({
-  // بنقرا الرابط من ملف البيئة، ولو مش موجود بيقرا الرابط الاحتياطي
   baseURL: import.meta.env.VITE_API_BASE_URL || 'https://round-13-cure.huma-volve.com/api/',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-api.interceptors.request.use(
-  (config) => {
-    const accessToken = localStorage.getItem('access_token');
-    
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+api.interceptors.request.use((config) => {
+  const token = Cookies.get("access_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+export default api;

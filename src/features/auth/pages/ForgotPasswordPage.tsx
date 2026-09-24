@@ -25,20 +25,30 @@ export default function ForgotPasswordPage() {
     },
   });
 
-  const { mutate: forgotPassword, isPending, isError, error } = useMutation({
+const { mutate: forgotPassword, isPending, isError, error } = useMutation({
     mutationFn: forgotPasswordApi,
     onSuccess: (_, variables) => {
+      // تخزين البيانات في الـ sessionStorage فوراً لمنع أي تأخير أو فقدان في الـ state
+      sessionStorage.setItem("forgot_phone", variables.phone);
+      sessionStorage.setItem("auth_flow", "forgot-password");
+
       navigate(PATHS.codeVerfication, { 
-        state: { phone: variables.phone, type: 'reset-password' } 
+        replace: true, // استخدام replace بيمنع إن صفحة اللوجن أو الـ forgot تدخل في الـ history بالخطأ
+        state: { 
+          phone: variables.phone, 
+          flow: 'forgot-password' 
+        } 
       });
     },
     onError: (err: any) => {
       console.error('Forgot Password Error:', err.response?.data);
     },
   });
-
   const onSubmit = (data: { phone: string }) => {
     forgotPassword(data);
+    navigate(PATHS.codeVerfication, { 
+      state: { phone: data.phone, type: 'reset-password' } 
+    });
   };
 
   return (

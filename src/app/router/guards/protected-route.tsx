@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { PATHS } from '../paths'
+import Cookies from 'js-cookie';
 
 /**
  * Route guard for authenticated-only areas.
@@ -14,12 +15,10 @@ import { PATHS } from '../paths'
  *   { element: <ProtectedRoute />, children: [ ...protectedRoutes ] }
  */
 export function ProtectedRoute(): ReactNode {
+  const token = Cookies.get("access_token");
   const location = useLocation()
 
-  // TODO: replace with real `isAuthenticated` check.
-  const isAuthenticated = true
-
-  if (!isAuthenticated) {
+  if (!token) {
     return <Navigate to={PATHS.login} state={{ from: location }} replace />
   }
 

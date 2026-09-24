@@ -22,3 +22,11 @@ export const resetPasswordSchema = z.object({
 });
 
 export type ResetPasswordType = z.infer<typeof resetPasswordSchema>;
+
+export const signInSchema = z.object({
+  phone: z.string().min(10, "Phone number is required"),
+  password: z.string().min(7, "Password must be at least 7 characters"),
+});
+
+export type SignInType = z.infer<typeof signInSchema>;
+  
