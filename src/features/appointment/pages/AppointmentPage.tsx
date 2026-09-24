@@ -1,4 +1,5 @@
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
+import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 
 const AppointmentPage=()=> {
   return (
@@ -6,6 +7,7 @@ const AppointmentPage=()=> {
       {/* ---------- */}
       <div className="max-w-196">
         <AppointmentHeader/>
+        <AppointmentPicker />
        
 
       
