@@ -5,18 +5,19 @@ import AppointmentRating from "../component/Appointment/AppointmentRating"
 import Testimonial from "../component/Appointment/Testimonial"
 import DoctorAbout from "../component/DoctorProfile/DoctorAbout"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
+import DoctorLocation from "../component/DoctorProfile/DoctorLocation"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
 
 const AppointmentPage = () => {
     return (
-        <main className="font-[Georgia] mt-27 mx-15 flex gap-6">
+        <main className="mx-auto mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
             {/* ---------- */}
-            <div className="max-w-196">
+            <div className="w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
                 <AppointmentPicker />
                 <AppointmentRating />
                 {/* <Testimonial /> */}
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-13">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 ">
                     <Testimonial />
                     <Testimonial />
                 </div>
@@ -27,10 +28,14 @@ const AppointmentPage = () => {
 
             </div>
             {/*----------- doc info----------- */}
-            <div className="w-full max-w-115 rounded-4xl pt-8 px-4 pb-6 bg-[#F5F6F7] ">
+            <div className="w-full max-w-115 rounded-4xl bg-[#F5F6F7] px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader />
                 <DoctorStats />
                 <DoctorAbout />
+                <DoctorLocation 
+                    address="129, El-Nasr Street, Cairo, Egypt"
+                    latitude={30.0444}
+                    longitude={31.2357} />
             </div>
 
 
