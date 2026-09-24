@@ -7,6 +7,11 @@ import { HomePage } from './pages/home-page'
 import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
+import SignIn from '@/features/auth/pages/signIn'
+import SignUp from '@/features/auth/pages/signUp'
+import CodeVerfication from '@/features/auth/pages/codeVerfication'
+import ForgotPasswordPage from '@/features/auth/pages/ForgotPasswordPage'
+import ResetPasswordPage from '@/features/auth/pages/ResetPassword'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
 
 /**
@@ -32,6 +37,12 @@ const routes: RouteObject[] = [
       { path: PATHS.home, element: <HomePage /> },
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
+      { path: PATHS.signIn, element: <SignIn /> },
+      { path: PATHS.signUp, element: <SignUp /> },
+      { path: PATHS.codeVerfication, element: <CodeVerfication /> },
+      { path: PATHS.forgotPassword, element: <ForgotPasswordPage /> },
+      { path: PATHS.ResetPassword, element: <ResetPasswordPage /> },
+
       { path: PATHS.appointment, element: <AppointmentPage /> },
 
       // ——— Protected routes ———
@@ -41,6 +52,7 @@ const routes: RouteObject[] = [
           { path: PATHS.dashboard, element: <DashboardPage /> },
           // Add nested protected feature routes here:
           // { path: PATHS.settings, element: <SettingsPage /> },
+
         ],
       },
 
