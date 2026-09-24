@@ -1,10 +1,10 @@
 
 import { addDays, addWeeks, startOfWeek, subWeeks } from "date-fns";
 import { useMemo, useState } from "react";
-import Footer from "../AppointmentPicker/Footer";
-import TimeSlots from "../AppointmentPicker/TimeSlots";
-import WeekDays from "../AppointmentPicker/weekDays";
-import Header from "../AppointmentPicker/Header";
+import Footer from "./AppointmentPicker/Footer";
+import TimeSlots from "./AppointmentPicker/TimeSlots";
+import WeekDays from "./AppointmentPicker/weekDays";
+import Header from "./AppointmentPicker/Header";
 
 interface IProps {
 

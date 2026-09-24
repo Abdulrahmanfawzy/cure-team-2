@@ -4,6 +4,7 @@ import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
 import Testimonial from "../component/Appointment/Testimonial"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
+import DoctorStats from "../component/DoctorProfile/DoctorStats"
 
 const AppointmentPage = () => {
     return (
@@ -27,6 +28,7 @@ const AppointmentPage = () => {
             {/*----------- doc info----------- */}
             <div className="w-full max-w-115 rounded-4xl pt-8 px-4 pb-6 bg-[#F5F6F7] ">
                 <DoctorHeader />
+                <DoctorStats />
             </div>
 
 
