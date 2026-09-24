@@ -11,7 +11,7 @@ const DoctorLocation = ({
 }: IProps) => {
   return (
     <section className="flex flex-col gap-3 p-4">
-      <h2 className="text-[20px] text-[#05162C]">
+      <h2 className="text-[20px] text-text-secondary-default">
         Location
       </h2>
 

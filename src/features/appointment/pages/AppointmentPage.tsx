@@ -15,7 +15,7 @@ import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/App
 
 const AppointmentPage = () => {
     return (
-        <main className="mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
+        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
@@ -37,7 +37,7 @@ const AppointmentPage = () => {
             {/* picker for appointment in mob */}
             <AppointmentPickerMob />
             {/*----------- doc info----------- */}
-            <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-[#F5F6F7] px-4 pb-6 pt-8 lg:shrink-0">
+            <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-background-neutral-lightest px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader />
                 <DoctorStats />
                 <DoctorAbout />

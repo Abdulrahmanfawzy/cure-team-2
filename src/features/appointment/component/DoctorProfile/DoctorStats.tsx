@@ -41,7 +41,7 @@ const DoctorStats = () => {
             <Icon
               size={19}
               strokeWidth={2}
-              className="text-[#05162C]"
+              className="text-text-secondary-default"
               fill={"currentColor"}
             />
           </div>

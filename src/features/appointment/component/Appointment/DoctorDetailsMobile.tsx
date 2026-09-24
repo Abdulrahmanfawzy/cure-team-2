@@ -23,7 +23,7 @@ const DoctorDetailsMobile = ({ image, doctorName, doctorLocation, doctorSpeciali
             </div>
             
                 <div className="flex flex-col gap-2">
-                    <p className="text-[20px] text-[#05162C] ">{doctorName}</p>
+                    <p className="text-[20px] text-text-secondary-default">{doctorName}</p>
                     <p className="text-[14px] text-[#6D7379] ">{doctorSpecialist}</p>
                     <p className="text-[14px] text-[#6D7379] ">{doctorLocation}</p>
 
@@ -37,7 +37,7 @@ const DoctorDetailsMobile = ({ image, doctorName, doctorLocation, doctorSpeciali
                 className="cursor-pointer"
             >
                 <Heart
-                    className={isFavorite ? "fill-red-500 text-red-500" : "text-[#05162C]"}
+                    className={isFavorite ? "fill-red-500 text-red-500" : "text-text-secondary-default"}
                 />
             </button>
         </section>
