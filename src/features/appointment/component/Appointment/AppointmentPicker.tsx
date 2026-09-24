@@ -54,7 +54,7 @@ const AppointmentPicker = ({ }: IProps) => {
 
 
     return (
-        <section className="w-full font-[Montserrat]!  rounded-[19px] border border-[#BBC1C7] bg-white p-4">
+        <section className="w-full font-[Montserrat]! rounded-[19px] border border-[#BBC1C7] bg-white p-4 mt-4">
 
             {/* ----------header---------- */}
             <Header selectedDate={selectedDate} handleDateChange={handleDateChange} isDayAvailable={isDayAvailable} />

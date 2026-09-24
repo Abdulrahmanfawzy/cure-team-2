@@ -1,5 +1,6 @@
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
+import AppointmentRating from "../component/Appointment/AppointmentRating"
 
 const AppointmentPage=()=> {
   return (
@@ -8,6 +9,7 @@ const AppointmentPage=()=> {
       <div className="max-w-196">
         <AppointmentHeader/>
         <AppointmentPicker />
+        <AppointmentRating />
        
 
       
