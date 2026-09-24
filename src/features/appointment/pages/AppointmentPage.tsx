@@ -3,6 +3,7 @@ import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
 import Testimonial from "../component/Appointment/Testimonial"
+import DoctorAbout from "../component/DoctorProfile/DoctorAbout"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
 
@@ -29,6 +30,7 @@ const AppointmentPage = () => {
             <div className="w-full max-w-115 rounded-4xl pt-8 px-4 pb-6 bg-[#F5F6F7] ">
                 <DoctorHeader />
                 <DoctorStats />
+                <DoctorAbout />
             </div>
 
 
