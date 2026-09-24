@@ -1,4 +1,5 @@
 
+import { ChevronLeft } from "lucide-react"
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
@@ -7,12 +8,13 @@ import DoctorAbout from "../component/DoctorProfile/DoctorAbout"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
 import DoctorLocation from "../component/DoctorProfile/DoctorLocation"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
+import HeaderMobile from "../component/Appointment/HeaderMobile"
 
 const AppointmentPage = () => {
     return (
-        <main className="mx-auto mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
-            {/* ---------- */}
-            <div className="w-full max-w-196 lg:flex-1">
+        <main className="mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
+            {/* -----select appointment Desktop----- */}
+            <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
                 <AppointmentPicker />
                 <AppointmentRating />
@@ -21,14 +23,13 @@ const AppointmentPage = () => {
                     <Testimonial />
                     <Testimonial />
                 </div>
-
-
-
-
-
+            </div>
+            {/*---------- doc info mobile----------- */}
+            <div className="sm:hidden flex flex-col gap-3">
+               <HeaderMobile/>
             </div>
             {/*----------- doc info----------- */}
-            <div className="w-full max-w-115 rounded-4xl bg-[#F5F6F7] px-4 pb-6 pt-8 lg:shrink-0">
+            <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-[#F5F6F7] px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader />
                 <DoctorStats />
                 <DoctorAbout />
