@@ -7,6 +7,7 @@ import { HomePage } from './pages/home-page'
 import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
+import SearchDoctor from '@/features/Search-Doctor'
 import SignIn from '@/features/auth/pages/signIn'
 import SignUp from '@/features/auth/pages/signUp'
 import CodeVerfication from '@/features/auth/pages/codeVerfication'
@@ -37,6 +38,7 @@ const routes: RouteObject[] = [
       { path: PATHS.home, element: <HomePage /> },
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
+      { path: PATHS.searchDoctor, element: <SearchDoctor /> },
       { path: PATHS.signIn, element: <SignIn /> },
       { path: PATHS.signUp, element: <SignUp /> },
       { path: PATHS.codeVerfication, element: <CodeVerfication /> },
