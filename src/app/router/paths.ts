@@ -12,6 +12,7 @@ export const PATHS = {
   register: '/register',
   forgotPassword: '/forgot-password',
   appointment: '/appointment',
+  booking: '/booking',
   // Protected — app shell examples
   dashboard: '/dashboard',
   settings: '/settings',

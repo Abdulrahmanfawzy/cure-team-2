@@ -14,7 +14,7 @@ isDayAvailable:  (date: Date) => boolean;
 const Header=({selectedDate,handleDateChange,isDayAvailable}:IProps)=> {
   return (
         <header className="flex items-center justify-between border-b border-[#99A2AB] pb-3">
-                <p className="text-[16px] font-[Montserrat] text-text-neutral-darkest">
+                <p className="text-[16px] font-[Montserrat] text-neutral-darkest">
                     Choose date and time
                 </p>
 

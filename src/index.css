@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@500&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -30,10 +31,11 @@
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
-    --color-text-secondary-default: var(--text-secondary-default);
-    --color-text-neutral-darkest: var(--text-neutral-darkest);
-    --color-background-neutral-lightest: var(--background-neutral-lightest);
-    --color-background-primary-default: var(--background-primary-default);
+    --color-app-secondary: var(--app-secondary);
+    --color-neutral-darkest: var(--neutral-darkest);
+    --color-neutral-lightest: var(--neutral-lightest);
+    --color-secondary-lightest: var(--secondary-lightest);
+    --color-app-main: var(--app-main);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -69,10 +71,11 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --text-secondary-default: #05162C;
-    --text-neutral-darkest: #404448;
-    --background-neutral-lightest: #F5F6F7;
-    --background-primary-default: #145DB8;
+    --app-secondary: #05162C;
+    --neutral-darkest: #404448;
+    --neutral-lightest: #F5F6F7;
+    --secondary-lightest:#B2B7BE;
+    --app-main: #145DB8;
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
@@ -136,4 +139,7 @@
 
 .font-montserrat {
   font-family: 'Montserrat', sans-serif;
+}
+.font-Georgia{
+    font-family: "Georgia" , sans-serif;
 }

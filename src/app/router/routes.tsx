@@ -8,6 +8,7 @@ import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
+import BookingPage from '@/features/booking/pages/BookingPage'
 
 /**
  * Route tree.
@@ -33,6 +34,7 @@ const routes: RouteObject[] = [
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
       { path: PATHS.appointment, element: <AppointmentPage /> },
+      { path: PATHS.booking, element: <BookingPage /> },
 
       // ——— Protected routes ———
       {
