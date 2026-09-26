@@ -13,21 +13,21 @@ const tabs: { label: string; value: AppointmentTab }[] = [
     },
     {
         label: "Upcoming",
-        value: "upcoming",
+        value: "Upcoming",
     },
     {
         label: "Completed",
-        value: "completed",
+        value: "Completed",
     },
     {
         label: "Canceled",
-        value: "cancelled",
+        value: "Cancelled",
     },
 ];
 
 const AppointmentTabs = ({ activeTab, onChange }: IProps) => {
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex max-w-full items-center gap-2 overflow-x-auto">
             {tabs.map((tab) => {
                 const isActive = activeTab === tab.value;
                 return (
@@ -35,7 +35,7 @@ const AppointmentTabs = ({ activeTab, onChange }: IProps) => {
                         key={tab.value}
                         type="button"
                         onClick={() => onChange(tab.value)}
-                        className={`font-montserrat rounded-md px-4 py-2 text-base font-medium leading-[100%]  transition ${isActive
+                        className={`font-montserrat h-11 shrink-0 rounded-md px-4 py-2 text-base font-medium leading-[100%] transition ${isActive
                                 ? "bg-app-main text-white"
                                 : "text-gray-500 hover:text-gray-700"
                             }`}

@@ -1,9 +1,9 @@
 // types/appointment.types.ts
 
 export type AppointmentStatus =
-  | "upcoming"
-  | "completed"
-  | "cancelled";
+  | "Upcoming"
+  | "Completed"
+  | "Cancelled";
 
 export interface Appointment {
   id: string;

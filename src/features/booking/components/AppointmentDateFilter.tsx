@@ -11,7 +11,7 @@ const AppointmentDateFilter=({value}:IProps)=> {
   return (
     <button
       type="button"
-      className="flex w-full h-12 max-w-99 px-4 py-2 items-center justify-between rounded-[12px] border border-secondary-lightest bg-white  text-xs text-gray-600"
+      className="flex h-12 w-full items-center justify-between rounded-xl border border-secondary-lightest bg-white px-4 py-2 text-xs text-gray-600 sm:max-w-99"
     >
       <div className="flex items-center gap-2">
         <CalendarDays size={13} />

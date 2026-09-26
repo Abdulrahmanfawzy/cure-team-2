@@ -16,6 +16,8 @@
     --radius-2xl: calc(var(--radius) + 8px);
     --radius-3xl: calc(var(--radius) + 12px);
     --radius-4xl: calc(var(--radius) + 16px);
+    --radius-card: 20px;
+    --radius-action: 10px;
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -35,7 +37,16 @@
     --color-neutral-darkest: var(--neutral-darkest);
     --color-neutral-lightest: var(--neutral-lightest);
     --color-secondary-lightest: var(--secondary-lightest);
+    --color-neutral-lighter:var(--neutral-lighter);
     --color-app-main: var(--app-main);
+    --color-app-success:var(--app-success);
+    --color-app-error:var(--app-error);
+    --color-doctor-name: var(--doctor-name);
+    --color-content-muted: var(--content-muted);
+    --color-content-subtle: var(--content-subtle);
+    --color-action-muted: var(--action-muted);
+    --color-app-support: var(--app-support);
+    
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -71,12 +82,20 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
+    --app-success:#4CAF50;
+    --app-error:#FC4B4E;
+    --doctor-name: #33384B;
+    --content-muted: #6D7379;
+    --content-subtle: #9CA3AF;
+    --action-muted: #99A2AB;
+    --app-support: #075BA7;
     --app-secondary: #05162C;
     --neutral-darkest: #404448;
     --neutral-lightest: #F5F6F7;
     --secondary-lightest:#B2B7BE;
     --app-main: #145DB8;
     --border: oklch(0.922 0 0);
+    --neutral-lighter:#BBC1C7;
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
     --chart-1: oklch(0.87 0 0);
