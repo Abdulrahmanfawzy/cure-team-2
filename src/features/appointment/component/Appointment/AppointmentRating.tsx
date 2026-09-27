@@ -12,8 +12,8 @@ const AppointmentRating=({}:IProps)=> {
     
         
         <>
-        <section className="flex items-center justify-between mt-4 ">
-          <p className="text-[20px] text-[#000000] font-[family-name:Georgia]!">Reviews and Rating</p>
+        <section className="flex items-center justify-between mt-4  font-montserrat">
+          <p className="text-[20px] text-[#000000] ">Reviews and Rating</p>
           <div className="flex items-center ">
             <Button variant={'ghost'} className="cursor-pointer -mr-2">
                 <Pencil className="w-[16.6px] h-[16.6px] text-[#145DB8]" />
@@ -23,7 +23,7 @@ const AppointmentRating=({}:IProps)=> {
         </section>
 
         <section className="flex items-center justify-between mt-4">
-          <p className="text-[40px] font-[family-name:Georgia] text-app-secondary">4.5/5</p>
+          <p className="text-[40px] text-app-secondary">4.5/5</p>
           <div className="flex flex-col items-center gap-2">
 
             <div className="flex items-center gap-1">
