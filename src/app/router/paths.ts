@@ -1,3 +1,4 @@
+
 /**
  * Centralized route path constants.
  *
@@ -11,6 +12,11 @@ export const PATHS = {
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
+  signIn:'/signIn',
+  signUp:'/signUp',
+  codeVerfication:'/codeVerfication',
+  ResetPassword: '/ResetPassword',
+  
   // Protected — app shell examples
   dashboard: '/dashboard',
   settings: '/settings',
