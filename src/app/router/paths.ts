@@ -18,6 +18,7 @@ export const PATHS = {
   ResetPassword: '/ResetPassword',
   
   appointment: '/appointment',
+  booking: '/booking',
   // Protected — app shell examples
   dashboard: '/dashboard',
   settings: '/settings',

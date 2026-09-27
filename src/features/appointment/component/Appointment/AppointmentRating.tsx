@@ -23,7 +23,7 @@ const AppointmentRating=({}:IProps)=> {
         </section>
 
         <section className="flex items-center justify-between mt-4">
-          <p className="text-[40px] font-[family-name:Georgia] text-text-secondary-default">4.5/5</p>
+          <p className="text-[40px] font-[family-name:Georgia] text-app-secondary">4.5/5</p>
           <div className="flex flex-col items-center gap-2">
 
             <div className="flex items-center gap-1">

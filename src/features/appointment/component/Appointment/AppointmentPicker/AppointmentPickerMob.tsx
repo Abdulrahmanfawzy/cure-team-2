@@ -66,7 +66,7 @@ const AppointmentPickerMob = ({ }: IProps) => {
       >
         <div className="flex items-center gap-2">
           <CalendarDays size={17} className="text-[#99A2AB]" />
-          <span className="text-[14px] text-text-secondary-default font-medium">
+          <span className="text-[14px] text-app-secondary font-medium">
             {format(selectedDate, "EEEE, MMMM d")}
           </span>
         </div>
@@ -123,7 +123,7 @@ const AppointmentPickerMob = ({ }: IProps) => {
                   type="button"
                   onClick={() => setSelectedDate(day)}
                   className={` mx-auto w-9 h-9 flex items-center justify-center gap-4 mt-2 p-4 rounded-[14px] text-[14px] font-medium transition-colors
-                   ${isSelected ? "bg-background-primary-default text-white" : isCurrentMonth ? "text-text-secondary-default bg-background-neutral-lightest" : "text-[#C7CDD3]"} `}
+                   ${isSelected ? "bg-app-main text-white" : isCurrentMonth ? "text-app-secondary bg-neutral-lightest" : "text-[#C7CDD3]"} `}
                 >
                   {format(day, "d")}
                 </button>
@@ -147,8 +147,8 @@ const AppointmentPickerMob = ({ }: IProps) => {
                 onClick={() => setSelectedTime(time)}
                 className={`h-10 rounded-xl text-[11px] font-medium transition-colors
             ${isSelected
-                    ? "bg-background-primary-default text-white"
-                    : "bg-background-neutral-lightest text-[#99A2AB] hover:bg-[#E9F1FB]"
+                    ? "bg-app-main text-white"
+                    : "bg-neutral-lightest text-[#99A2AB] hover:bg-[#E9F1FB]"
                   }
           `}
               >
@@ -183,7 +183,7 @@ const AppointmentPickerMob = ({ }: IProps) => {
         <button
           type="button"
           disabled={!selectedTime}
-          className="w-full h-10 rounded-[6px] bg-background-primary-default text-white text-[12px]"
+          className="w-full h-10 rounded-[6px] bg-app-main text-white text-[12px]"
         >
           Continue to Pay
         </button>
