@@ -6,15 +6,15 @@ import {
 } from "date-fns";
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import { useState } from "react";
-import TimeSlots from "./TimeSlots";
+import type { AvailableSlot } from "@/features/appointment/types/docAppointment.types";
 
 interface IProps {
-
+ availableSlots: AvailableSlot[];
 
 
 }
 
-const AppointmentPickerMob = ({ }: IProps) => {
+const AppointmentPickerMob = ({availableSlots }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -43,19 +43,24 @@ const AppointmentPickerMob = ({ }: IProps) => {
     setCurrentMonth((prev) => addMonths(prev, 1));
   };
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const availableDates =availableSlots.filter((slot)=> !slot.is_booked).map((slot) => slot.date);
+ const isDateAvailable = (day: Date) => {
+  const dateString = format(day, "yyyy-MM-dd");
 
+  return availableDates.includes(dateString);
+};
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const timeSlots = [
-    "09:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:30 AM",
-    "4:00 PM",
-    "5:30 PM",
-    "7:00 PM",
-    "9:00 PM",
-    "10:00 PM",
-  ];
+  // const timeSlots = [
+  //   "09:00 AM",
+  //   "10:00 AM",
+  //   "11:00 AM",
+  //   "12:30 AM",
+  //   "4:00 PM",
+  //   "5:30 PM",
+  //   "7:00 PM",
+  //   "9:00 PM",
+  //   "10:00 PM",
+  // ];
   return (
     <div className="w-full  flex flex-col sm:hidden font-montserrat ">
       <p className="mb-3">Select a Day</p>
@@ -116,14 +121,18 @@ const AppointmentPickerMob = ({ }: IProps) => {
             {days.map((day) => {
               const isCurrentMonth = isSameMonth(day, currentMonth);
               const isSelected = isSameDay(day, selectedDate);
+              const isAvailable = isDateAvailable(day);
 
               return (
                 <button
                   key={day.toISOString()}
                   type="button"
+                  disabled={!isAvailable}
                   onClick={() => setSelectedDate(day)}
                   className={` mx-auto w-9 h-9 flex items-center justify-center gap-4 mt-2 p-4 rounded-[14px] text-[14px] font-medium transition-colors
-                   ${isSelected ? "bg-background-primary-default text-white" : isCurrentMonth ? "text-text-secondary-default bg-background-neutral-lightest" : "text-[#C7CDD3]"} `}
+                   ${isSelected ? "bg-background-primary-default text-white" : 
+                    isAvailable ? "text-text-secondary-default bg-background-neutral-lightest" : 
+                    "text-[#C7CDD3]"} `}
                 >
                   {format(day, "d")}
                 </button>
@@ -137,7 +146,7 @@ const AppointmentPickerMob = ({ }: IProps) => {
       <div className=" bg-[#FFFFFF] mt-5  mb-12 ">
         <p className="mb-3">Select time</p>
         <div className="grid grid-cols-3 gap-3">
-          {timeSlots.map((time) => {
+          {/* {timeSlots.map((time) => {
             const isSelected = selectedTime === time;
 
             return (
@@ -155,7 +164,7 @@ const AppointmentPickerMob = ({ }: IProps) => {
                 {time}
               </button>
             );
-          })}
+          })} */}
         </div>
 
 

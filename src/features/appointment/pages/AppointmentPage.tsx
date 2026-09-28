@@ -61,7 +61,7 @@ const AppointmentPage = () => {
             </div>
 
             {/* picker for appointment in mob */}
-            <AppointmentPickerMob />
+            <AppointmentPickerMob availableSlots={doctor.data.available_slots} />
             {/*----------- doc info----------- */}
             <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-background-neutral-lightest px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader />
