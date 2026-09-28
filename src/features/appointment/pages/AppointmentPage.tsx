@@ -12,8 +12,30 @@ import HeaderMobile from "../component/Appointment/HeaderMobile"
 import DoctorDetailsMobile from "../component/Appointment/DoctorDetailsMobile"
 import docImg from "../../../assets/women.jpg"
 import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
+import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
+import { useParams } from "react-router-dom"
+
 
 const AppointmentPage = () => {
+
+    const { id } = useParams<{ id: string }>();
+    const { data: doctor, isLoading, isError } = useGetDoctorDetails(id!);
+
+    if (!id) {
+        return <div>Missing doctor id</div>
+    }
+
+    if (isLoading) {
+        return <div>..Loooooding</div>
+    }
+
+    if (isError || !doctor?.data) {
+        return  
+            <p>Something went wrong</p>
+            
+        
+    }
+
     return (
         <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
             {/* -----select appointment Desktop----- */}
@@ -30,8 +52,12 @@ const AppointmentPage = () => {
             
             {/*---------- doc info mobile----------- */}
             <div className="sm:hidden flex flex-col gap-3">
-               <HeaderMobile/>
-               <DoctorDetailsMobile image={docImg} doctorName="Dr. Jessica Turner" doctorLocation="129,El-Nasr Street, Cairo " doctorSpecialist="Pulmonologist" />
+                <HeaderMobile />
+                <DoctorDetailsMobile
+                    profile_image={doctor.data.profile_image}
+                    name={doctor.data.name }
+                    specialist={doctor.data.specialist.name}
+                    is_favorite={doctor.data.is_favorite } />
             </div>
 
             {/* picker for appointment in mob */}
