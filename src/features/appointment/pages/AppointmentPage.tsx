@@ -14,6 +14,7 @@ import docImg from "../../../assets/women.jpg"
 import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
 import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
 import { useParams } from "react-router-dom"
+import Reviews from "../component/Appointment/Reviews"
 
 
 const AppointmentPage = () => {
@@ -42,12 +43,9 @@ const AppointmentPage = () => {
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
                 <AppointmentPicker />
-                <AppointmentRating />
-                {/* <Testimonial /> */}
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 ">
-                    <Testimonial />
-                    <Testimonial />
-                </div>
+                <AppointmentRating rating={doctor.data.rating_avg} totalReview={doctor.data.reviews_count} />
+                <Reviews  reviews={doctor.data.reviews} />
+              
             </div>
             
             {/*---------- doc info mobile----------- */}
