@@ -69,12 +69,17 @@ const AppointmentPage = () => {
                     is_favorite={doctor.data.is_favorite}
 
                 />
-                <DoctorStats />
-                <DoctorAbout />
+                <DoctorStats
+                    patients_count={doctor.data.patients_count}
+                    experience={doctor.data.experience}
+                    rating_avg={doctor.data.rating_avg}
+                    reviews_count={doctor.data.reviews_count}
+                />
+                <DoctorAbout about={doctor.data.about}/>
                 <DoctorLocation 
-                    address="129, El-Nasr Street, Cairo, Egypt"
-                    latitude={30.0444}
-                    longitude={31.2357} />
+                    
+                    latitude={doctor.data.location.latitude}
+                    longitude={doctor.data.location.longitude} />
             </div>
 
 
