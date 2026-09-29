@@ -17,7 +17,7 @@ export const PATHS = {
   codeVerfication:'/codeVerfication',
   ResetPassword: '/ResetPassword',
   
-  appointment: '/appointment',
+  appointment: '/appointment/:id',
   booking: '/booking',
   // Protected — app shell examples
   dashboard: '/dashboard',
