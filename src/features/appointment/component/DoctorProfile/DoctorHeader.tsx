@@ -7,7 +7,7 @@ interface Ipros{
     specialist:string;
     is_favorite:boolean;
 }
-const DoctorHeader = ({name,profile_image,specialist,is_favorite}:Ipros) => {
+const DoctorHeader = ({name,profile_image,specialist}:Ipros) => {
     return (
 
         <div className="flex items-start justify-between gap-2">
