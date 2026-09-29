@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from '@/components/ui/sonner'
+import { Navbar } from '@/components/shared/Navbar'
+import Footer from '@/components/shared/Footer'
 
 /**
  * Root layout — matches all routes.
@@ -13,9 +15,11 @@ import { Toaster } from '@/components/ui/sonner'
 export function RootLayout(): ReactNode {
   return (
     <div className="flex min-h-svh flex-col">
+      <Navbar/>
       <main className="flex-1">
         <Outlet />
       </main>
+      <Footer/>
       {/* Global toast notifications (Sonner). */}
       <Toaster position="top-right" richColors />
     </div>

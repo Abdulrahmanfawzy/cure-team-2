@@ -17,13 +17,13 @@ export default function BtnMap({ isOpen, onToggle }: BtnMapProps) {
         aria-label={isOpen ? "Hide doctors map" : "Show doctors map"}
         className={`flex items-center justify-center gap-2.5 rounded-xl px-5 py-5 font-medium transition-all shadow-sm ${
           isOpen
-            ? "border-[#3F3D9E] bg-[#3F3D9E] text-white hover:bg-[#3F3D9E]/90 hover:text-white"
+            ? "border-primary bg-primary text-white hover:bg-primary/90 hover:text-white"
             : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50"
         }`}
       >
         <MapIcon
           className={`size-4 transition-transform duration-200 ${
-            isOpen ? "scale-110 text-white" : "text-[#3F3D9E]"
+            isOpen ? "scale-110 text-white" : "text-primary"
           }`}
         />
         <span>{isOpen ? "Hide Map" : "Map"}</span>

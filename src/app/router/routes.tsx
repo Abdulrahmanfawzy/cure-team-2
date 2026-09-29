@@ -3,7 +3,7 @@ import { ProtectedRoute } from './guards/protected-route'
 import { RootLayout } from './layouts/root-layout'
 import { PATHS } from './paths'
 import { DashboardPage } from './pages/dashboard-page'
-import { HomePage } from './pages/home-page'
+
 import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
@@ -14,7 +14,10 @@ import CodeVerfication from '@/features/auth/pages/codeVerfication'
 import ForgotPasswordPage from '@/features/auth/pages/ForgotPasswordPage'
 import ResetPasswordPage from '@/features/auth/pages/ResetPassword'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
+import ChatScreen from '@/features/chat'
 import BookingPage from '@/features/booking/pages/BookingPage'
+import HomePage from './pages/home-page'
+
 
 /**
  * Route tree.
@@ -40,6 +43,7 @@ const routes: RouteObject[] = [
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
       { path: PATHS.searchDoctor, element: <SearchDoctor /> },
+      {path:PATHS.chat , element:<ChatScreen />} , 
       { path: PATHS.signIn, element: <SignIn /> },
       { path: PATHS.signUp, element: <SignUp /> },
       { path: PATHS.codeVerfication, element: <CodeVerfication /> },
