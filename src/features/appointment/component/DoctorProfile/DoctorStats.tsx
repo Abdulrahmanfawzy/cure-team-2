@@ -6,26 +6,35 @@ import {
   UsersRound,
 } from "lucide-react";
 
-const DoctorStats = () => {
+interface Iprops {
+  patients_count: number;
+  experience: number;
+  rating_avg: number;
+  reviews_count: number;
+}
+const DoctorStats = ({ patients_count,
+  experience,
+  rating_avg,
+  reviews_count }: Iprops) => {
   const stats = [
     {
       icon: UsersRound,
-      value: "2,000+",
+      value: `${patients_count}+`,
       label: "Patients",
     },
     {
       icon: Award,
-      value: "10+",
+      value: `${experience}+`,
       label: "Experience",
     },
     {
       icon: Star,
-      value: "4.5",
+      value: rating_avg.toFixed(1),
       label: "Rating",
     },
     {
       icon: MessageCircle,
-      value: "1,872",
+      value: reviews_count,
       label: "Reviews",
     },
   ];
@@ -41,7 +50,7 @@ const DoctorStats = () => {
             <Icon
               size={19}
               strokeWidth={2}
-              className="text-text-secondary-default"
+              className="text-app-secondary"
               fill={"currentColor"}
             />
           </div>

@@ -3,7 +3,6 @@ import CaretDown from "@/assets/Vector.svg";
 import { Button } from "@/components/ui/button";
 import { consultationOptions, sortOptions } from "../constants/Sort";
 export default function FilterSidebar() {
-  // إدارة حالات الفلاتر
   const [filters, setFilters] = useState({
     date: [],
     gender: "Male",

@@ -14,6 +14,7 @@ import CodeVerfication from '@/features/auth/pages/codeVerfication'
 import ForgotPasswordPage from '@/features/auth/pages/ForgotPasswordPage'
 import ResetPasswordPage from '@/features/auth/pages/ResetPassword'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
+import BookingPage from '@/features/booking/pages/BookingPage'
 
 /**
  * Route tree.
@@ -46,6 +47,7 @@ const routes: RouteObject[] = [
       { path: PATHS.ResetPassword, element: <ResetPasswordPage /> },
 
       { path: PATHS.appointment, element: <AppointmentPage /> },
+      { path: PATHS.booking, element: <BookingPage /> },
 
       // ——— Protected routes ———
       {

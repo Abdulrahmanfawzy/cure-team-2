@@ -14,7 +14,7 @@ const AppointmentHeader = ({ }: IProps) => {
             <Button variant={"ghost"}>
                 <ArrowLeft className="cursor-pointer" />
             </Button>
-            <p className="text-[20px] text-text-secondary-default">Make an appointment</p>
+            <p className="text-[20px] text-app-secondary">Make an appointment</p>
         </header>
     )
 }

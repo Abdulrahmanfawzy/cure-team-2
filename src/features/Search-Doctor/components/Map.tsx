@@ -1,53 +1,40 @@
-import { useState } from "react";
-import Tunning from "@/assets/Tuning.svg";
-import CaretDown from "@/assets/Vector.svg";
+import { Map as MapIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import SidebarFilter from "./SidebarFilter";
-export default function BtnMap() {
-  const [isOpen, setIsOpen] = useState(false);
-  const handelChange = () => {
-    setIsOpen((prev) => !prev);
-    console.log(isOpen);
-  };
 
+type BtnMapProps = {
+  isOpen: boolean;
+  onToggle: () => void;
+};
+
+export default function BtnMap({ isOpen, onToggle }: BtnMapProps) {
   return (
-    <section className="flex flex-col gap-5">
-      <div className="flex w-fit items-center rounded-md border border-gray-300 bg-white shadow-sm hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
-        <Button
-          type="button"
-          variant={"outline"}
-          onClick={handelChange}
-          className="flex items-center bg-transparent justify-center gap-2.5 px-4 py-5 text-gray-700 font-medium hover:bg-gray-50 rounded-l-xl transition-colors focus:outline-none"
-        >
-          <img src={Tunning} alt="tunning" />
-          <span>Filter</span>
-        </Button>
-        <div className="w-px bg-gray-300 my-1.5" />
-        <Button
-          type="button"
-          variant={"default"}
-          onClick={handelChange}
-          aria-expanded={isOpen}
-          aria-haspopup="true"
-          aria-label="Filter Options"
-          className="flex items-center  bg-transparent justify-center py-5 px-3 text-gray-600 hover:bg-gray-50  transition-colors focus:outline-none"
-        >
-          <img
-            src={CaretDown}
-            alt="caretdown"
-            className={
-              isOpen
-                ? "rotate-180 transition-all duration-300 "
-                : "transition-all duration-300"
-            }
-          />
-        </Button>
-      </div>
-      {isOpen && (
-        <div className="w-fit transition-all duration-300 ">
-          <SidebarFilter />
-        </div>
-      )}
-    </section>
+    <div className="flex w-fit shrink-0 items-center">
+      <Button
+        type="button"
+        variant="outline"
+        onClick={onToggle}
+        aria-pressed={isOpen}
+        aria-label={isOpen ? "Hide doctors map" : "Show doctors map"}
+        className={`flex items-center justify-center gap-2.5 rounded-xl px-5 py-5 font-medium transition-all shadow-sm ${
+          isOpen
+            ? "border-[#3F3D9E] bg-[#3F3D9E] text-white hover:bg-[#3F3D9E]/90 hover:text-white"
+            : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50"
+        }`}
+      >
+        <MapIcon
+          className={`size-4 transition-transform duration-200 ${
+            isOpen ? "scale-110 text-white" : "text-[#3F3D9E]"
+          }`}
+        />
+        <span>{isOpen ? "Hide Map" : "Map"}</span>
+        {isOpen && (
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+            <span className="relative inline-flex size-2 rounded-full bg-white" />
+          </span>
+        )}
+      </Button>
+    </div>
   );
 }
+
