@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@500&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -16,8 +17,10 @@
     --radius-2xl: calc(var(--radius) + 8px);
     --radius-3xl: calc(var(--radius) + 12px);
     --radius-4xl: calc(var(--radius) + 16px);
-     --radius-card: 20px;
+    /*------ aya------------------ */
+    --radius-card: 20px;
     --radius-action: 10px;
+    /* -------------------------- */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -59,7 +62,8 @@
     --color-primary: var(--color-primary);    
     --font-header: Georgia;
     --font-header-weight: 600;
-  --color-app-secondary: var(--app-secondary);
+  /*------ aya------------------ */
+    --color-app-secondary: var(--app-secondary);
     --color-neutral-darkest: var(--neutral-darkest);
     --color-neutral-lightest: var(--neutral-lightest);
     --color-secondary-lightest: var(--secondary-lightest);
@@ -72,9 +76,7 @@
     --color-content-subtle: var(--content-subtle);
     --color-action-muted: var(--action-muted);
     --color-app-support: var(--app-support);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
+      /*------------------------ */
 }
 
 :root {
@@ -119,6 +121,7 @@
     --color-secondery:#05162C ; 
     --color-primary:#145DB8;
     --font-family: Georgia, serif;
+      /*------ aya------------------ */
     --app-success:#4CAF50;
     --app-error:#FC4B4E;
     --doctor-name: #33384B;
@@ -129,9 +132,10 @@
     --app-secondary: #05162C;
     --neutral-darkest: #404448;
     --neutral-lightest: #F5F6F7;
-     --neutral-lighter:#BBC1C7;
     --secondary-lightest:#B2B7BE;
     --app-main: #145DB8;
+    --neutral-lighter:#BBC1C7;
+      /*------------------------ */
 }
 
 .dark {
@@ -226,4 +230,10 @@
 
 .custom-doctor-popup .leaflet-popup-tip {
   background: white;
+}
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+.font-Georgia{
+    font-family: "Georgia" , sans-serif;
 }

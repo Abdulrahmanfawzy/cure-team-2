@@ -1,29 +1,38 @@
 
-import { addDays, addWeeks, startOfWeek, subWeeks } from "date-fns";
-import { useMemo, useState } from "react";
+import { addDays, addWeeks, format, startOfWeek, subWeeks } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
 import Footer from "./AppointmentPicker/Footer";
 import TimeSlots from "./AppointmentPicker/TimeSlots";
 import WeekDays from "./AppointmentPicker/weekDays";
 import Header from "./AppointmentPicker/Header";
+import type { AvailableSlot } from "../../types/docAppointment.types";
 
 interface IProps {
 
+    availableSlots: AvailableSlot[];
 
+    consultation_price: number;
 
 }
 
-const AppointmentPicker = ({ }: IProps) => {
+const AppointmentPicker = ({ availableSlots }: IProps) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
-    const doctorAvailability: Partial<Record<number, string[]>> = {
-        5: ["09:00 AM", "10:00 AM", "11:00 AM", "12:30 AM", "5:30 PM", "7:00 PM" , "9:00 PM", "11:00 PM"],
-        6: ["02:00 PM", "03:00 PM"],
-        0: ["10:00 AM", "11:00 AM", "12:00 AM", "1:00 AM"],
-        1: ["10:00 AM", "11:00 AM"],
-        2: ["10:00 AM", "11:00 AM"],
-        3: ["10:00 AM", "11:00 AM"],
-        4: ["10:00 AM", "11:00 AM"],
-    };
+    // ---------------------------------------------------
+    // to set first available date instead of date of today
+    useEffect(() => {
+        const firstAvailableSlot = availableSlots.find(
+            (slot) => !slot.is_booked
+        );
+
+        if (firstAvailableSlot) {
+            setSelectedDate(
+                new Date(`${firstAvailableSlot.date}T00:00:00`)
+            );
+        }
+    }, [availableSlots]);
+
+    // ---------------------------------------------------
     const weekStart = startOfWeek(selectedDate, {
         weekStartsOn: 5,
     })
@@ -31,12 +40,40 @@ const AppointmentPicker = ({ }: IProps) => {
         return Array.from({ length: 7 }, (_, index) =>
             addDays(weekStart, index));
     }, [weekStart]);
-    const availableTimes = doctorAvailability[selectedDate.getDay()] || [];
+    // ---------------------------------------------------
+
+
     const isDayAvailable = (date: Date) => {
-        return Boolean(doctorAvailability[date.getDay()]);
+        const dateString = format(date, "yyyy-MM-dd");
+
+        return availableSlots.some(
+            (slot) =>
+                slot.date === dateString &&
+                !slot.is_booked
+        );
     };
+
+    // -----------------------------------------------
+    const selectedSlot = useMemo(() => {
+        const dateString = format(selectedDate, "yyyy-MM-dd");
+
+        return availableSlots.find(
+            (slot) =>
+                slot.date === dateString &&
+                !slot.is_booked
+        );
+    }, [availableSlots, selectedDate]);
+    // -----------------------------------------------
+    const availableTimes = useMemo(() => {
+        if (!selectedSlot) return [];
+
+        return [selectedSlot.start_time];
+    }, [selectedSlot]);
+    // -----------------------------------------------
+
     const handleDateChange = (date: Date | undefined) => {
         if (!date) return;
+        if (!isDayAvailable(date)) return;
 
         setSelectedDate(date);
 
@@ -51,6 +88,8 @@ const AppointmentPicker = ({ }: IProps) => {
         setSelectedDate((current) => subWeeks(current, 1));
         setSelectedTime(null);
     };
+
+
 
 
     return (
@@ -68,9 +107,9 @@ const AppointmentPicker = ({ }: IProps) => {
                 handleDateChange={handleDateChange}
             />
             {/* ----------time slots------- */}
-            <TimeSlots  availableTimes={availableTimes} selectedTime={selectedTime}  setSelectedTime={setSelectedTime} />
+            <TimeSlots availableTimes={availableTimes} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
             {/* ----------footer------------ */}
-            <Footer selectedDate={selectedDate} selectedTime={selectedTime}  />
+            <Footer selectedDate={selectedDate} selectedTime={selectedTime} />
 
         </section>
     )
