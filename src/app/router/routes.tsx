@@ -3,7 +3,7 @@ import { ProtectedRoute } from './guards/protected-route'
 import { RootLayout } from './layouts/root-layout'
 import { PATHS } from './paths'
 import { DashboardPage } from './pages/dashboard-page'
-import { HomePage } from './pages/home-page'
+
 import { LoginPage } from './pages/login-page'
 import { NotFoundPage } from './pages/not-found-page'
 import { RegisterPage } from './pages/register-page'
@@ -16,6 +16,8 @@ import ResetPasswordPage from '@/features/auth/pages/ResetPassword'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
 import ChatScreen from '@/features/chat'
 import BookingPage from '@/features/booking/pages/BookingPage'
+import HomePage from './pages/home-page'
+
 
 /**
  * Route tree.
