@@ -7,15 +7,29 @@ import SidebarFilter from "./components/SidebarFilter";
 import Doctors from "./components/Doctors";
 import DoctorsMap from "./components/MAP/DoctorsMap";
 import type { DoctorsType } from "./types/sort.type";
-import { doctors } from "./constants/Sort";
+import { useSearch } from "./hooks/useSearch";
 
 const SearchDoctor = () => {
+  // =============================Start States =========================================//
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [searchDoctor, setSearchDoctor] = useState(1);
   const [selectedDoctor, setSelectedDoctor] = useState<DoctorsType | null>(
     null,
   );
+    // =============================End States =========================================//
+    //===================================================================================//
+    // =============================Start Hooks =========================================//
+    const { data:doctors, isLoading, error } = useSearch("", searchDoctor);
+    // =============================End Hooks =========================================//
+    
+    //===================================================================================//
 
+    //=============================Start Functions===================================//
+    const handelNextPage = () => {
+      setSearchDoctor((prev) => prev + 1);
+
+    }
   const handleSelectDoctor = (doctor: DoctorsType) => {
     setSelectedDoctor(doctor);
     if (!isMapOpen) {
@@ -26,7 +40,8 @@ const SearchDoctor = () => {
   const handleToggleMap = () => {
     setIsMapOpen((prev) => !prev);
   };
-
+  //===================================================================================//
+  //=============================End Functions===================================//
   return (
     <div className="w-full pb-16">
       <main className="container mx-auto flex flex-col gap-6 px-4">
@@ -59,10 +74,11 @@ const SearchDoctor = () => {
                 }`}
               >
                 <Doctors
-                  doctors={doctors}
+                  doctorsList={doctors}
                   selectedDoctorId={selectedDoctor?.id}
                   onSelectDoctor={handleSelectDoctor}
                   isMapOpen={isMapOpen}
+                  handelNextPage={handelNextPage}
                 />
               </div>
 
@@ -78,7 +94,7 @@ const SearchDoctor = () => {
                   {/* Full Screen Map */}
                   <div className="fixed items-center inset-0 z-50 h-[80%] mt-20 w-[80%] mx-auto ">
                     <DoctorsMap
-                      doctorsList={doctors}
+                      doctors={doctors}
                       selectedDoctor={selectedDoctor}
                       onSelectDoctor={setSelectedDoctor}
                       onClose={() => setIsMapOpen(false)}
