@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import AppointmentTabs from "../components/AppointmentTabs"
-import type { Appointment, AppointmentTab } from "../types/appointment.types";
+// import type { Appointment, AppointmentTab } from "../types/booking.types";
 import AppointmentDateFilter from "../components/AppointmentDateFilter";
 import AppointmentCard from "../components/AppointmentCard";
+import useGetDocBooking from "../hooks/useGetDocBooking";
+import type { AppointmentTab } from "../types/appointment.types";
 
 interface IProps {
 
@@ -49,7 +51,8 @@ const BookingPage = ({ }: IProps) => {
   //   },
   // ];
 
-
+  const {data:booking, isLoading, isError} = useGetDocBooking();
+  console.log('all booking ',booking)
 
   return (
     <main className="mt-9 min-h-screen p-4 sm:p-6">

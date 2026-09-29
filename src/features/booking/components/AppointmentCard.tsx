@@ -1,7 +1,7 @@
 import { CalendarDays, MapPin } from "lucide-react"
 import docImg from "../../../assets/women.jpg"
 import AppointmentActions from "./AppointmentActions";
-import type { AppointmentStatus } from "../types/appointment.types";
+import type { AppointmentStatus } from "../types/booking.types";
 
 interface IProps {
 

@@ -1,5 +1,6 @@
 import type { AppointmentTab } from "../types/appointment.types";
 
+
 interface IProps {
 
     activeTab: AppointmentTab;
