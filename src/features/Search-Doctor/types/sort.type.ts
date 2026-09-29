@@ -16,7 +16,6 @@ export type DoctorsType = {
   hours: string;
   price: number;
   image: string;
-
   lat: number;
   long: number;
 };
