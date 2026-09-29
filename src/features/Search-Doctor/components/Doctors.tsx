@@ -12,18 +12,14 @@ type DoctorCardProps = {
   onSelect?: () => void;
 };
 
-function DoctorCard({
-  doctor,
-  isSelected = false,
-  onSelect,
-}: DoctorCardProps) {
+function DoctorCard({ doctor, isSelected = false, onSelect }: DoctorCardProps) {
   return (
     <Card
       id={`doctor-card-${doctor.id}`}
       onClick={onSelect}
       className={`group relative cursor-pointer rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md ${
         isSelected
-          ? "border-[#3F3D9E] ring-2 ring-[#3F3D9E] bg-[#3F3D9E]/[0.03]"
+          ? "border-primary ring-2 ring-primary bg-primary/[0.03]"
           : "border-gray-200 hover:border-gray-300 bg-white"
       }`}
     >
@@ -33,7 +29,7 @@ function DoctorCard({
             src={doctor.image}
             alt={doctor.name}
             className={`size-14 rounded-full object-cover transition-all ${
-              isSelected ? "ring-2 ring-[#3F3D9E] ring-offset-2" : ""
+              isSelected ? "ring-2 ring-primary ring-offset-2" : ""
             }`}
             onError={(e) => {
               (e.target as HTMLImageElement).src =
@@ -41,13 +37,13 @@ function DoctorCard({
             }}
           />
           {isSelected && (
-            <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-[#3F3D9E] border-2 border-white" />
+            <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-primary border-2 border-white" />
           )}
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between">
-            <p className="font-medium leading-tight truncate text-gray-900 group-hover:text-[#3F3D9E] transition-colors">
+            <p className="font-medium leading-tight truncate text-gray-900 group-hover:text-primary transition-colors">
               {doctor.name}
             </p>
           </div>
@@ -75,7 +71,7 @@ function DoctorCard({
       <div className="mt-3 flex items-center gap-2">
         <Button
           type="button"
-          className="flex-1 rounded-lg bg-[#3F3D9E] hover:bg-[#3F3D9E]/90 text-white"
+          className="flex-1 rounded-lg bg-primary hover:bg-primary/90 text-white"
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -91,8 +87,8 @@ function DoctorCard({
           aria-label={`View ${doctor.name} on map`}
           className={`shrink-0 rounded-lg transition-colors ${
             isSelected
-              ? "bg-[#3F3D9E] text-white border-[#3F3D9E] hover:bg-[#3F3D9E]/90 hover:text-white"
-              : "text-[#3F3D9E] hover:bg-[#3F3D9E]/10 border-gray-200"
+              ? "bg-primary text-white border-primary hover:bg-primary/90 hover:text-white"
+              : "text-primary hover:bg-primary/10 border-gray-200"
           }`}
           onClick={(e) => {
             e.stopPropagation();

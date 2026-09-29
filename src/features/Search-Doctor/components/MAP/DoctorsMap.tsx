@@ -7,6 +7,7 @@ import type { DoctorsType } from "../../types/sort.type";
 import DoctorMarker from "./DoctortMark";
 import MapLocation from "./MapLocation";
 import { Button } from "@/components/ui/button";
+import ResetViewButton from "./ResetView";
 
 const CAIRO_CENTER: [number, number] = [30.0444, 31.2357];
 
@@ -24,7 +25,6 @@ function MapController({
 }) {
   const map = useMap();
 
-  // Invalidate map size so Leaflet renders all tiles properly when container changes
   useEffect(() => {
     map.invalidateSize();
     const timer = setTimeout(() => {
@@ -33,7 +33,6 @@ function MapController({
     return () => clearTimeout(timer);
   }, [map]);
 
-  // Fly to doctor location when a doctor is selected
   useEffect(() => {
     if (selectedDoctor && selectedDoctor.lat && selectedDoctor.long) {
       map.flyTo([selectedDoctor.lat, selectedDoctor.long], 15, {
@@ -44,33 +43,6 @@ function MapController({
   }, [selectedDoctor, map]);
 
   return null;
-}
-
-function ResetViewButton({ doctors }: { doctors: DoctorsType[] }) {
-  const map = useMap();
-
-  const handleReset = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (doctors.length > 0) {
-      const bounds = doctors.map((d) => [d.lat, d.long] as [number, number]);
-      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
-    } else {
-      map.setView(CAIRO_CENTER, 13);
-    }
-  };
-
-  return (
-    <Button
-      type="button"
-      size="sm"
-      variant="secondary"
-      onClick={handleReset}
-      className="absolute top-4 left-4 z-[1000] flex items-center gap-1.5 rounded-xl bg-white/95 px-3 py-1.5 text-xs font-medium text-gray-700 shadow-md backdrop-blur-sm hover:bg-white border border-gray-100"
-    >
-      <Navigation className="size-3.5 text-[#3F3D9E]" />
-      <span>Center All</span>
-    </Button>
-  );
 }
 
 export default function DoctorsMap({
@@ -85,7 +57,7 @@ export default function DoctorsMap({
       : CAIRO_CENTER;
 
   return (
-    <div className="relative h-full min-h-[500px] flex w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-gray-100">
+    <div className="relative h-full min-h-125 flex w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-gray-100">
       <MapContainer
         center={initialCenter}
         zoom={selectedDoctor ? 15 : 13}
@@ -117,7 +89,7 @@ export default function DoctorsMap({
           variant="secondary"
           size="icon"
           onClick={onClose}
-          className="absolute top-4 right-4 z-[1000] size-8 rounded-full bg-white/95 text-gray-600 shadow-md backdrop-blur-sm hover:bg-white hover:text-gray-900 border border-gray-100"
+          className="absolute top-4 right-4 z-1000 size-8 rounded-full bg-white/95 text-gray-600 shadow-md backdrop-blur-sm hover:bg-white hover:text-gray-900 border border-gray-100"
           title="Close map"
           aria-label="Close map"
         >
@@ -136,4 +108,3 @@ export default function DoctorsMap({
     </div>
   );
 }
-
