@@ -42,7 +42,7 @@ const AppointmentPage = () => {
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
-                <AppointmentPicker />
+                <AppointmentPicker availableSlots={doctor.data.available_slots} consultation_price={doctor.data.consultation_price} />
                 <AppointmentRating rating={doctor.data.rating_avg} totalReview={doctor.data.reviews_count} />
                 <Reviews  reviews={doctor.data.reviews} />
               

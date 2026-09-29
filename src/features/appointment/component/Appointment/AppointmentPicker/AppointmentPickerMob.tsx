@@ -61,7 +61,7 @@ const selectedDateSlots = availableSlots.filter(
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="border border-[#145DB8] rounded-[12px] p-4 flex items-center justify-between "
+        className="border border-[#145DB8] rounded-2xl p-4 flex items-center justify-between "
       >
         <div className="flex items-center gap-2">
           <CalendarDays size={17} className="text-[#99A2AB]" />
