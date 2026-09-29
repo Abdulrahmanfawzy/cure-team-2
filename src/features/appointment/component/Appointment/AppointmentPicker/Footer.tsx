@@ -22,11 +22,11 @@ const Footer = ({ selectedTime, selectedDate, onBook }: IProps) => {
                 />
 
                 {selectedTime ? (
-                    <p className="text-text-secondary-default text-[14px] font-medium">
+                    <p className="text-app-secondary text-[14px] font-medium">
                         {format(selectedDate, "EEEE, MMMM d")} · {selectedTime}
                     </p>
                 ) : (
-                    <p className="text-text-secondary-default text-[14px] font-medium">
+                    <p className="text-app-secondary text-[14px] font-medium">
                         {format(selectedDate, "EEEE, MMMM d")} · Select time
                     </p>
                 )}
