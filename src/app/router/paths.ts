@@ -17,9 +17,13 @@ export const PATHS = {
   codeVerfication:'/codeVerfication',
   ResetPassword: '/ResetPassword',
   
+  appointment: '/appointment/:id',
+  booking: '/booking',
   // Protected — app shell examples
   dashboard: '/dashboard',
   settings: '/settings',
+  searchDoctor: '/search-doctor',
+  chat:'/chat'
 } as const
 
 export type PathKey = keyof typeof PATHS

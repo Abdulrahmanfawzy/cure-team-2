@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@500&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -14,6 +17,10 @@
     --radius-2xl: calc(var(--radius) + 8px);
     --radius-3xl: calc(var(--radius) + 12px);
     --radius-4xl: calc(var(--radius) + 16px);
+    /*------ aya------------------ */
+    --radius-card: 20px;
+    --radius-action: 10px;
+    /* -------------------------- */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -29,6 +36,10 @@
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
+    --color-text-secondary-default: var(--text-secondary-default);
+    --color-text-neutral-darkest: var(--text-neutral-darkest);
+    --color-background-neutral-lightest: var(--background-neutral-lightest);
+    --color-background-primary-default: var(--background-primary-default);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -45,8 +56,27 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+    --color-neutral: var(--color-neutral);
+    --color-neutral-darker: var(--color-neutral-darker);
+    --color-secondery: var(--color-secondery); 
+    --color-primary: var(--color-primary);    
     --font-header: Georgia;
     --font-header-weight: 600;
+  /*------ aya------------------ */
+    --color-app-secondary: var(--app-secondary);
+    --color-neutral-darkest: var(--neutral-darkest);
+    --color-neutral-lightest: var(--neutral-lightest);
+    --color-secondary-lightest: var(--secondary-lightest);
+    --color-neutral-lighter:var(--neutral-lighter);
+    --color-app-main: var(--app-main);
+    --color-app-success:var(--app-success);
+    --color-app-error:var(--app-error);
+    --color-doctor-name: var(--doctor-name);
+    --color-content-muted: var(--content-muted);
+    --color-content-subtle: var(--content-subtle);
+    --color-action-muted: var(--action-muted);
+    --color-app-support: var(--app-support);
+      /*------------------------ */
 }
 
 :root {
@@ -66,6 +96,10 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
+    --text-secondary-default: #05162C;
+    --text-neutral-darkest: #404448;
+    --background-neutral-lightest: #F5F6F7;
+    --background-primary-default: #145DB8;
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
@@ -82,7 +116,26 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --color-neutral:#bbc1c7;
+    --color-neutral-darker:#6D7379;
+    --color-secondery:#05162C ; 
+    --color-primary:#145DB8;
     --font-family: Georgia, serif;
+      /*------ aya------------------ */
+    --app-success:#4CAF50;
+    --app-error:#FC4B4E;
+    --doctor-name: #33384B;
+    --content-muted: #6D7379;
+    --content-subtle: #9CA3AF;
+    --action-muted: #99A2AB;
+    --app-support: #075BA7;
+    --app-secondary: #05162C;
+    --neutral-darkest: #404448;
+    --neutral-lightest: #F5F6F7;
+    --secondary-lightest:#B2B7BE;
+    --app-main: #145DB8;
+    --neutral-lighter:#BBC1C7;
+      /*------------------------ */
 }
 
 .dark {
@@ -128,3 +181,59 @@
     }
 }
 
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+.font-Georgia{
+    font-family: "Georgia" , sans-serif;
+}
+.doctor-marker-wrapper {
+  background: transparent;
+  border: none;
+}
+
+.doctor-marker {
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.doctor-marker.selected {
+  border-color: #3F3D9E;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px rgba(63, 61, 158, 0.35), 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.doctor-marker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Custom Doctor Map Popup */
+.custom-doctor-popup .leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  padding: 4px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.custom-doctor-popup .leaflet-popup-content {
+  margin: 6px;
+  line-height: normal;
+}
+
+.custom-doctor-popup .leaflet-popup-tip {
+  background: white;
+}
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+.font-Georgia{
+    font-family: "Georgia" , sans-serif;
+}
