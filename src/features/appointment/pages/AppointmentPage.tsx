@@ -15,6 +15,7 @@ import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
 import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
 import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
+import ErrorComponent from "@/components/shared/components/ErrorComponent"
 
 
 const AppointmentPage = () => {
@@ -31,7 +32,7 @@ const AppointmentPage = () => {
     }
 
     if (isError || !doctor?.data) {
-        return  <p>Something went wrong</p>
+       return <ErrorComponent />;
             
         
     }

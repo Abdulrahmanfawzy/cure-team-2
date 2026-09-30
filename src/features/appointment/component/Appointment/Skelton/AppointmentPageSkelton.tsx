@@ -2,7 +2,7 @@ const AppointmentPageSkelton = () => {
     return (
         <div className="w-full animate-pulse flex">
 
-            <div className="hidden sm:block w-full max-w-196 lg:flex-1 m-9">
+            <div className="block w-full max-w-196 lg:flex-1 m-9">
 
                 <div className="h-8 w-68 bg-gray-200 rounded-[19px]" />
 
