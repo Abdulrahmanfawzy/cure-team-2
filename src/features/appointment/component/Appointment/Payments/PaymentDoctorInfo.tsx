@@ -1,4 +1,5 @@
 import type { Doctor, Slot } from "@/features/appointment/types/docAppointment.types";
+import { getImageUrl } from "@/utils/getImageUrl";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
 
@@ -19,7 +20,7 @@ const PaymentDoctorInfo = ({
     <>
       <div className="flex items-center gap-3 sm:gap-4">
         <img
-          src={doctor.profile_image}
+          src={getImageUrl(doctor.profile_image)}
           alt={doctor.name}
           className="h-16 w-16 rounded-full object-cover sm:h-20 sm:w-20"
         />
