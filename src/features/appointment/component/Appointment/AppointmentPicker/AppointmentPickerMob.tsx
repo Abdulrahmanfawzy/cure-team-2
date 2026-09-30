@@ -19,9 +19,7 @@ const AppointmentPickerMob = ({ availableSlots, consultation_price }: IProps) =>
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
 
-  const firstAvailableSlot = availableSlots.find(
-    (day) => day.slots.some((slot) => !slot.is_booked)
-  );
+ 
   // ---------------------------------------------------
   // to set first available date instead of date of today
   useEffect(() => {

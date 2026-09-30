@@ -3,14 +3,13 @@
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
-import Testimonial from "../component/Appointment/Testimonial"
 import DoctorAbout from "../component/DoctorProfile/DoctorAbout"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
 import DoctorLocation from "../component/DoctorProfile/DoctorLocation"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
 import HeaderMobile from "../component/Appointment/HeaderMobile"
 import DoctorDetailsMobile from "../component/Appointment/DoctorDetailsMobile"
-import docImg from "../../../assets/women.jpg"
+
 import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
 import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
 import { useParams } from "react-router-dom"
@@ -41,7 +40,7 @@ const AppointmentPage = () => {
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
-                <AppointmentPicker availableSlots={doctor.data.available_slots} consultation_price={doctor.data.consultation_price} />
+                <AppointmentPicker availableSlots={doctor.data.available_slots} doctor={doctor.data} />
                 <AppointmentRating rating={doctor.data.rating_avg} totalReview={doctor.data.reviews_count} />
                 <Reviews  reviews={doctor.data.reviews} />
               

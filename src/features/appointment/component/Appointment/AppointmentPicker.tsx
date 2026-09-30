@@ -5,21 +5,24 @@ import Footer from "./AppointmentPicker/Footer";
 import TimeSlots from "./AppointmentPicker/TimeSlots";
 import WeekDays from "./AppointmentPicker/weekDays";
 import Header from "./AppointmentPicker/Header";
-import type { AvailableSlotDate } from "../../types/docAppointment.types";
+import type { AvailableSlotDate, Doctor, Slot } from "../../types/docAppointment.types";
+import PaymentPanel from "./Payments/PaymentPanel";
 
 
 interface IProps {
 
-
+    doctor: Doctor;
     availableSlots: AvailableSlotDate[];  // contain (date & slots[])
 
-    consultation_price: number;
+   
 
 }
 
-const AppointmentPicker = ({ availableSlots }: IProps) => {
+const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
+    const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+    const [isPaymentOpen, setIsPaymentOpen] = useState(false);
     // ---------------------------------------------------
     // to set first available date instead of date of today
     useEffect(() => {
@@ -69,8 +72,10 @@ const AppointmentPicker = ({ availableSlots }: IProps) => {
     const availableTimes = useMemo(() => {
         if (!selectedDay) return [];
 
-        return selectedDay.slots.filter((slot)=> !slot.is_booked)
-        .map((slot)=>slot.start_time)
+        return selectedDay.slots.filter(
+            (slot) => !slot.is_booked
+        )
+        
     }, [selectedDay]);
     // -----------------------------------------------
 
@@ -81,19 +86,23 @@ const AppointmentPicker = ({ availableSlots }: IProps) => {
         setSelectedDate(date);
 
         // Reset selected time
-        setSelectedTime(null);
+        setSelectedSlot(null);
     };
     const nextWeek = () => {
         setSelectedDate((current) => addWeeks(current, 1));
-        setSelectedTime(null);
+        setSelectedSlot(null);
     };
     const previousWeek = () => {
         setSelectedDate((current) => subWeeks(current, 1));
-        setSelectedTime(null);
+        setSelectedSlot(null);
     };
 
-
-
+    // ---------------------------------------------------
+  const handleBook = () => {
+    if (!selectedSlot) return;
+    
+    setIsPaymentOpen(true);
+};
 
     return (
         <section className="w-full font-montserrat rounded-[19px] border border-[#BBC1C7] bg-white p-4 mt-4">
@@ -110,9 +119,16 @@ const AppointmentPicker = ({ availableSlots }: IProps) => {
                 handleDateChange={handleDateChange}
             />
             {/* ----------time slots------- */}
-            <TimeSlots availableTimes={availableTimes} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+            <TimeSlots availableTimes={availableTimes} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
             {/* ----------footer------------ */}
-            <Footer selectedDate={selectedDate} selectedTime={selectedTime} />
+            <Footer selectedDate={selectedDate} selectedSlot={selectedSlot}  onBook={handleBook}/>
+            <PaymentPanel 
+            isOpen={isPaymentOpen} 
+            setIsOpen={setIsPaymentOpen}
+            selectedDate={selectedDate} 
+            selectedSlot={selectedSlot} 
+            onClose={()=> setIsPaymentOpen(false)} 
+            doctor={doctor} />
 
         </section>
     )

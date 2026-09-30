@@ -1,16 +1,19 @@
 import { Button } from "@/components/ui/button"
+import type { Slot } from "@/features/appointment/types/docAppointment.types";
 import { format } from "date-fns"
 import { CalendarDays } from "lucide-react"
 
 interface IProps {
-    selectedTime: string | null;
+    selectedSlot: Slot | null;
     selectedDate: Date;
     onBook?: () => void;
 
 
 }
 
-const Footer = ({ selectedTime, selectedDate, onBook }: IProps) => {
+
+const Footer = ({ selectedSlot, selectedDate, onBook }: IProps) => {
+    
     return (
         <div className="mt-8 flex items-center justify-between">
             {/* --------------selected date----------------- */}
@@ -18,12 +21,12 @@ const Footer = ({ selectedTime, selectedDate, onBook }: IProps) => {
 
                 <CalendarDays
 
-                    className="text-[#145DB8] w-[15.83px] h-[16.66px] "
+                    className="text-app-main w-[15.83px] h-[16.66px] "
                 />
 
-                {selectedTime ? (
+                {selectedSlot ? (
                     <p className="text-app-secondary text-[14px] font-medium">
-                        {format(selectedDate, "EEEE, MMMM d")} · {selectedTime}
+                        {format(selectedDate, "EEEE, MMMM d")} · {selectedSlot.start_time}
                     </p>
                 ) : (
                     <p className="text-app-secondary text-[14px] font-medium">
@@ -34,8 +37,8 @@ const Footer = ({ selectedTime, selectedDate, onBook }: IProps) => {
 
             </div>
             <Button
-                variant={'outline'} disabled={!selectedTime} onClick={onBook}
-                className="h-12 w-30.75 border border-[#145DB8] p-2 text-[16px] text-[#145DB8] hover:bg-[#1261A0]
+                variant={'outline'} disabled={!selectedSlot} onClick={onBook}
+                className="h-12 w-30.75 border border-app-main p-2 text-[16px] text-app-main hover:bg-[#1261A0]
                        hover:text-white disabled:cursor-not-allowed disabled:opacity-50"> 
                 Book
             </Button>
