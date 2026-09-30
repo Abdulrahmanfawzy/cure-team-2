@@ -11,7 +11,8 @@ type DoctorCardProps = {
 };
 
 export default function DoctorCard({ doctor, isSelected = false, onSelect }: DoctorCardProps) {
-
+  console.log(doctor);
+  
   return (
     <Card
       id={`doctor-card-${doctor.id}`}
