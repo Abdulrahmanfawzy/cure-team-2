@@ -14,6 +14,7 @@ import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/App
 import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
 import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
+import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
 
 
 const AppointmentPage = () => {
@@ -25,8 +26,8 @@ const AppointmentPage = () => {
         return <div>Missing doctor id</div>
     }
 
-    if (isLoading) {
-        return <div>..Loooooding</div>
+    if (isLoading ) {
+        return <AppointmentPageSkelton />
     }
 
     if (isError || !doctor?.data) {

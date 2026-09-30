@@ -7,7 +7,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 
 const links = [
     { label: "Home", href: "/" },
-    { label: "Bookings", href: "/bookings" },
+    { label: "Bookings", href: "/booking" },
     { label: "Chat", href: "/chat" },
 ];
 
