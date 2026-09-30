@@ -1,9 +1,10 @@
 interface IProps {
   price: number;
   onPay: () => void;
+  disabled?: boolean;
 }
 
-const PaymentSummary = ({ price, onPay }: IProps) => {
+const PaymentSummary = ({ price, onPay, disabled = false }: IProps) => {
   return (
     <div className="mt-4 flex flex-col gap-3 sm:gap-4">
       <div className="mt-4 flex items-center justify-between sm:mt-8">
@@ -25,9 +26,10 @@ const PaymentSummary = ({ price, onPay }: IProps) => {
       <button
         type="button"
         onClick={onPay}
-        className="mt-2 h-11 w-full rounded-lg bg-app-main text-sm text-white sm:h-12"
+        disabled={disabled}
+        className="mt-2 h-11 w-full rounded-lg bg-app-main text-sm text-white disabled:cursor-not-allowed disabled:opacity-60 sm:h-12"
       >
-        Pay {price}$
+        {disabled ? "Processing..." : `Pay ${price}$`}
       </button>
     </div>
   );

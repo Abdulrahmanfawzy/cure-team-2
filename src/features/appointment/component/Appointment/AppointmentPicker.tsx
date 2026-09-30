@@ -7,6 +7,8 @@ import WeekDays from "./AppointmentPicker/weekDays";
 import Header from "./AppointmentPicker/Header";
 import type { AvailableSlotDate, Doctor, Slot } from "../../types/docAppointment.types";
 import PaymentPanel from "./Payments/PaymentPanel";
+import useCreateBookAppointment from "../../hooks/useCreateBookAppointment";
+import { toast } from "sonner";
 
 
 interface IProps {
@@ -14,20 +16,22 @@ interface IProps {
     doctor: Doctor;
     availableSlots: AvailableSlotDate[];  // contain (date & slots[])
 
-   
+
 
 }
 
-const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
+const AppointmentPicker = ({ availableSlots, doctor }: IProps) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
     const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+    const [bookingId, setBookingId] = useState("");
+    const { mutate: createbooking, isPending } = useCreateBookAppointment();
     // ---------------------------------------------------
     // to set first available date instead of date of today
     useEffect(() => {
         const firstAvailableSlot = availableSlots.find(
-            (day) => day.slots.some((slot)=> !slot.is_booked)
+            (day) => day.slots.some((slot) => !slot.is_booked)
         );
 
         if (firstAvailableSlot) {
@@ -52,9 +56,9 @@ const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
         const dateString = format(date, "yyyy-MM-dd");
 
         return availableSlots.some(
-            (day) => day.date === dateString && 
-            day.slots.some((slot)=> !slot.is_booked)
-               
+            (day) => day.date === dateString &&
+                day.slots.some((slot) => !slot.is_booked)
+
         );
     };
 
@@ -64,8 +68,8 @@ const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
 
         return availableSlots.find(
             (day) =>
-                day.date === dateString 
-                
+                day.date === dateString
+
         );
     }, [availableSlots, selectedDate]);
     // -----------------------------------------------
@@ -75,7 +79,7 @@ const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
         return selectedDay.slots.filter(
             (slot) => !slot.is_booked
         )
-        
+
     }, [selectedDay]);
     // -----------------------------------------------
 
@@ -98,11 +102,27 @@ const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
     };
 
     // ---------------------------------------------------
-  const handleBook = () => {
-    if (!selectedSlot) return;
-    
-    setIsPaymentOpen(true);
-};
+    const handleBook = () => {
+        if (!selectedSlot) return;
+
+        const bookingData = {
+            doctor_id: doctor.id,
+            slot_id: selectedSlot.id,
+            consultation_type: "in_person" as const,
+        };
+
+        createbooking(bookingData, {
+            onSuccess: (data) => {
+                toast.success("Booking created successfully:");
+                setBookingId(data.data.id);
+                setIsPaymentOpen(true);
+            },
+
+            onError: () => {
+                toast.error("Booking failed:");
+            },
+        });
+    };
 
     return (
         <section className="w-full font-montserrat rounded-[19px] border border-[#BBC1C7] bg-white p-4 mt-4">
@@ -121,14 +141,15 @@ const AppointmentPicker = ({ availableSlots ,doctor}: IProps) => {
             {/* ----------time slots------- */}
             <TimeSlots availableTimes={availableTimes} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
             {/* ----------footer------------ */}
-            <Footer selectedDate={selectedDate} selectedSlot={selectedSlot}  onBook={handleBook}/>
-            <PaymentPanel 
-            isOpen={isPaymentOpen} 
-            setIsOpen={setIsPaymentOpen}
-            selectedDate={selectedDate} 
-            selectedSlot={selectedSlot} 
-            onClose={()=> setIsPaymentOpen(false)} 
-            doctor={doctor} />
+            <Footer selectedDate={selectedDate} selectedSlot={selectedSlot} onBook={handleBook} isPending={isPending} />
+            <PaymentPanel
+                isOpen={isPaymentOpen}
+                setIsOpen={setIsPaymentOpen}
+                selectedDate={selectedDate}
+                selectedSlot={selectedSlot}
+                bookingId={bookingId}
+                onClose={() => setIsPaymentOpen(false)}
+                doctor={doctor} />
 
         </section>
     )

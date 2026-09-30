@@ -33,9 +33,7 @@ const PaymentDoctorInfo = ({
             {doctor.specialist.name}
           </p>
 
-          <p className="mt-1 text-[11px] text-[#6B7280] sm:text-[13px]">
-            Cairo
-          </p>
+          
         </div>
       </div>
 

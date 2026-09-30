@@ -6,13 +6,14 @@ import { CalendarDays } from "lucide-react"
 interface IProps {
     selectedSlot: Slot | null;
     selectedDate: Date;
+    isPending:boolean;
     onBook?: () => void;
 
 
 }
 
 
-const Footer = ({ selectedSlot, selectedDate, onBook }: IProps) => {
+const Footer = ({ selectedSlot, selectedDate, isPending,onBook }: IProps) => {
     
     return (
         <div className="mt-8 flex items-center justify-between">
@@ -37,10 +38,10 @@ const Footer = ({ selectedSlot, selectedDate, onBook }: IProps) => {
 
             </div>
             <Button
-                variant={'outline'} disabled={!selectedSlot} onClick={onBook}
+                variant={'outline'} disabled={!selectedSlot || isPending} onClick={onBook}
                 className="h-12 w-30.75 border border-app-main p-2 text-[16px] text-app-main hover:bg-[#1261A0]
                        hover:text-white disabled:cursor-not-allowed disabled:opacity-50"> 
-                Book
+                 {isPending ? "....booking" : "Book"}
             </Button>
         </div>
     )

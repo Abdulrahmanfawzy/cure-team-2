@@ -24,3 +24,16 @@ export interface AddPaymentMethodResponse {
   message: string;
   data: PaymentMethod;
 }
+
+export interface CreatePaymentPayload {
+  booking_id: string;
+}
+
+export interface CreatePaymentResponse {
+  data: {
+    success: boolean;
+    url: string;
+    session_id: string;
+  };
+  message: string;
+}

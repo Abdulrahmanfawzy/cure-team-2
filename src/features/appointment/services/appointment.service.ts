@@ -1,6 +1,7 @@
 import { api } from "@/utils/axios";
 import type { DoctorResponse } from "../types/docAppointment.types";
-import type { AddPaymentMethodPayload, AddPaymentMethodResponse, PaymentMethodsResponse } from "../types/paymentMethods.types";
+import type { AddPaymentMethodPayload, AddPaymentMethodResponse, CreatePaymentPayload, CreatePaymentResponse, PaymentMethodsResponse } from "../types/paymentMethods.types";
+import type { CreateBookingPayload } from "../types/bookAppointment.types";
 
 
 
@@ -30,4 +31,25 @@ export const addPaymentMethod = async (
   );
 
   return result.data;
+};
+export const createPayment = async (
+  payload: CreatePaymentPayload
+): Promise<CreatePaymentResponse> => {
+  const { data } = await api.post<CreatePaymentResponse>(
+    "payments",
+    
+    payload
+  );
+
+  return data;
+};
+export const bookAppointment = async (
+  data: CreateBookingPayload
+) => {
+  const response = await api.post(
+    "bookings",
+    data
+  );
+
+  return response.data;
 };

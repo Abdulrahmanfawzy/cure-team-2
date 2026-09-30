@@ -9,6 +9,7 @@ setSelectedSlot:(slot: Slot) => void;
 }
 
 const TimeSlots=({availableTimes,selectedSlot,setSelectedSlot}:IProps)=> {
+    
   return (
     <div className="mt-3 grid grid-cols-4 gap-2">
                 {

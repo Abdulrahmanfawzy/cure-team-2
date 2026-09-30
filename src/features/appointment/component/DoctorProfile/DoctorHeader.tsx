@@ -17,7 +17,7 @@ const DoctorHeader = ({name,profile_image,specialist}:Ipros) => {
                 <Heart className="  w-6 h-6 " />
             </button>
             <div className="flex flex-col items-center">
-                <img src={profile_image} className="w-28.25 h-28.25 rounded-[50%] object-cover " />
+                <img src={getImageUrl(profile_image)} className="w-28.25 h-28.25 rounded-[50%] object-cover " />
                 <h3 className="text-xl text-text-secondary-default">{name}</h3>
                 <p className="text-sm text-text-neutral-darkest">{specialist}</p>
             </div>
