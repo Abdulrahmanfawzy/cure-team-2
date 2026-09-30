@@ -5,11 +5,13 @@ import Footer from "./AppointmentPicker/Footer";
 import TimeSlots from "./AppointmentPicker/TimeSlots";
 import WeekDays from "./AppointmentPicker/weekDays";
 import Header from "./AppointmentPicker/Header";
-import type { AvailableSlot } from "../../types/docAppointment.types";
+import type { AvailableSlotDate } from "../../types/docAppointment.types";
+
 
 interface IProps {
 
-    availableSlots: AvailableSlot[];
+
+    availableSlots: AvailableSlotDate[];  // contain (date & slots[])
 
     consultation_price: number;
 
@@ -22,7 +24,7 @@ const AppointmentPicker = ({ availableSlots }: IProps) => {
     // to set first available date instead of date of today
     useEffect(() => {
         const firstAvailableSlot = availableSlots.find(
-            (slot) => !slot.is_booked
+            (day) => day.slots.some((slot)=> !slot.is_booked)
         );
 
         if (firstAvailableSlot) {
@@ -40,35 +42,36 @@ const AppointmentPicker = ({ availableSlots }: IProps) => {
         return Array.from({ length: 7 }, (_, index) =>
             addDays(weekStart, index));
     }, [weekStart]);
-    // ---------------------------------------------------
+    // ------------------get available days ---------------------------------
 
 
     const isDayAvailable = (date: Date) => {
         const dateString = format(date, "yyyy-MM-dd");
 
         return availableSlots.some(
-            (slot) =>
-                slot.date === dateString &&
-                !slot.is_booked
+            (day) => day.date === dateString && 
+            day.slots.some((slot)=> !slot.is_booked)
+               
         );
     };
 
     // -----------------------------------------------
-    const selectedSlot = useMemo(() => {
+    const selectedDay = useMemo(() => {
         const dateString = format(selectedDate, "yyyy-MM-dd");
 
         return availableSlots.find(
-            (slot) =>
-                slot.date === dateString &&
-                !slot.is_booked
+            (day) =>
+                day.date === dateString 
+                
         );
     }, [availableSlots, selectedDate]);
     // -----------------------------------------------
     const availableTimes = useMemo(() => {
-        if (!selectedSlot) return [];
+        if (!selectedDay) return [];
 
-        return [selectedSlot.start_time];
-    }, [selectedSlot]);
+        return selectedDay.slots.filter((slot)=> !slot.is_booked)
+        .map((slot)=>slot.start_time)
+    }, [selectedDay]);
     // -----------------------------------------------
 
     const handleDateChange = (date: Date | undefined) => {

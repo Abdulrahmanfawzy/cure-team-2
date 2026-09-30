@@ -1,4 +1,3 @@
-
 export interface DoctorResponse {
   data: Doctor;
 }
@@ -10,19 +9,23 @@ export interface Doctor {
   email: string;
   phone: string;
   profile_image: string;
-  gender: string;
+  gender: "male" | "female";
   specialist: Specialist;
   about: string;
   experience: number;
+  education: string;
+  certificates: string;
+  languages: string[];
   consultation_price: number;
   rating_avg: number;
+  ratings_count: number;
   reviews_count: number;
   patients_count: number;
   opening_hours: string;
   location: Location;
   distance: number | null;
   is_favorite: boolean;
-  available_slots: AvailableSlot[];
+  available_slots: AvailableSlotDate[];
   reviews: Review[];
 }
 
@@ -36,9 +39,13 @@ export interface Location {
   longitude: number;
 }
 
-export interface AvailableSlot {
-  id: string;
+export interface AvailableSlotDate {
   date: string;
+  slots: Slot[];
+}
+
+export interface Slot {
+  id: string;
   start_time: string;
   end_time: string;
   is_booked: boolean;
@@ -58,4 +65,3 @@ export interface Patient {
   name: string;
   profile_image: string;
 }
-

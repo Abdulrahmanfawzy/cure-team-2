@@ -31,14 +31,13 @@ const AppointmentPage = () => {
     }
 
     if (isError || !doctor?.data) {
-        return  
-            <p>Something went wrong</p>
+        return  <p>Something went wrong</p>
             
         
     }
 
     return (
-        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
+        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-Georgia sm:px-6 lg:flex-row lg:items-start lg:px-8">
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
