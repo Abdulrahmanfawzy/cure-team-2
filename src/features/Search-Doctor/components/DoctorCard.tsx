@@ -14,13 +14,11 @@ type DoctorCardProps = {
 
 
 export default function DoctorCard({ doctor, isSelected = false, onSelect }: DoctorCardProps) {
-  console.log(doctor);
-  
   return (
     <Card
       id={`doctor-card-${doctor.id}`}
       onClick={onSelect}
-      className={`group relative cursor-pointer rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md ${
+      className={`group relative flex h-full cursor-pointer flex-col gap-4 rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md ${
         isSelected
           ? "border-primary ring-2 ring-primary bg-primary/[0.03]"
           : "border-gray-200 hover:border-gray-300 bg-white"
@@ -66,12 +64,14 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <span className="text-muted-foreground">Price/hour</span>
-        <span className="font-semibold text-red-500">${doctor.consultation_price ?? (doctor as any).price ?? "50"}</span>
-      </div>
+      {/* Price + actions pinned to the bottom so rows stay aligned */}
+      <div className="mt-auto space-y-3">
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">Price/hour</span>
+          <span className="font-semibold text-red-500">${doctor.consultation_price ?? (doctor as any).price ?? "50"}</span>
+        </div>
 
-      <div className="mt-3 flex items-center gap-2">
+        <div className="flex items-center gap-2">
         <Link to={`/appointment/${doctor.id}`} className="flex-1 min-w-0">
           <Button
             type="button"
@@ -102,6 +102,7 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
         >
           <MapPin className="size-4" />
         </Button>
+        </div>
       </div>
     </Card>
   );

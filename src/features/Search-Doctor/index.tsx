@@ -9,10 +9,8 @@ import DoctorsMap from "./components/MAP/DoctorsMap";
 import type { DoctorsType } from "./types/sort.type";
 import { useSearch } from "./hooks/useSearch";
 import { useSearchParams } from "react-router-dom";
-import ProductSkeleton from "./ui/ProductSkeleton";
 import DoctorsNotFound from "./ui/NotFoundDoctors";
 import axios from "axios";
-import { is } from "date-fns/locale";
 
 const SearchDoctor = () => {
   // =============================Start States =========================================//
@@ -26,7 +24,7 @@ const SearchDoctor = () => {
   // =============================Start Hooks =========================================//
   const [searchParam, setSearchParam] = useSearchParams();
   const page = Number(searchParam.get("page")) || 1;
-  const { data: doctors, isLoading, error, refetch , isError } = useSearch(searchParam, page);
+  const { data: doctors, isLoading, error, refetch, isError } = useSearch(searchParam, page);
   // =============================End Hooks =========================================//
 
   // =============================Start Functions===================================//
@@ -53,29 +51,26 @@ const SearchDoctor = () => {
   };
   //===================================================================================//
   //=============================End Functions===================================//
-  if (isLoading) {
-    return <ProductSkeleton />;
-  }
-  if(isError){
-  if (axios.isAxiosError(error)) {
-    const status = error.response?.status;
+  if (isError) {
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status;
 
-    if (status === 404) {
-      return <DoctorsNotFound type="empty" onRetry={refetch} />;
+      if (status === 404) {
+        return <DoctorsNotFound type="empty" onRetry={refetch} />;
+      }
+
+      if (status === 422) {
+        return <DoctorsNotFound type="error" onRetry={refetch} />;
+      }
     }
 
-   if (status === 422) {
-      return <DoctorsNotFound type="error" onRetry={refetch} />;
-    }
-  }
-
-  return <DoctorsNotFound type="error" onRetry={refetch} />;
+    return <DoctorsNotFound type="error" onRetry={refetch} />;
 
   }
-  
+
   return (
-    <div className="w-full pb-16">
-      <main className="container mx-auto flex flex-col gap-4 sm:gap-6 px-3 sm:px-4">
+    <div className="w-full pb-16 mt-10">
+      <main className="container mx-auto flex flex-col gap-4 sm:gap-6 px-6 lg:px-10">
         <section className="flex w-full items-center gap-2 sm:gap-4 md:gap-6">
           <SplitFilterButton
             isOpen={isFilterOpen}
@@ -90,9 +85,8 @@ const SearchDoctor = () => {
         <div className="flex items-start gap-6 flex-col md:flex-row">
           {/* Filter Sidebar - collapsible on mobile, sliding sidebar on md+ */}
           <div
-            className={`w-full md:w-80 shrink-0 transition-all duration-300 ease-in-out ${
-              isFilterOpen ? "block" : "hidden md:hidden md:w-0"
-            }`}
+            className={`w-full md:w-80 shrink-0 transition-all duration-300 ease-in-out ${isFilterOpen ? "block" : "hidden md:hidden md:w-0"
+              }`}
           >
             <SidebarFilter />
           </div>
@@ -107,6 +101,7 @@ const SearchDoctor = () => {
                   onSelectDoctor={handleSelectDoctor}
                   isMapOpen={isMapOpen}
                   handelNextPage={handelNextPage}
+                  isLoading={isLoading}
                 />
               </div>
 
