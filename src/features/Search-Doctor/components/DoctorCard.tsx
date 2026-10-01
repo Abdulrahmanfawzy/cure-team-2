@@ -2,6 +2,8 @@ import { Clock, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { DoctorsType } from "../types/sort.type";
+import { baseUrl } from "./Choose";
+import { Link } from "react-router-dom";
 
 
 type DoctorCardProps = {
@@ -9,6 +11,7 @@ type DoctorCardProps = {
   isSelected?: boolean;
   onSelect?: () => void;
 };
+
 
 export default function DoctorCard({ doctor, isSelected = false, onSelect }: DoctorCardProps) {
   console.log(doctor);
@@ -19,17 +22,17 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
       onClick={onSelect}
       className={`group relative cursor-pointer rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md ${
         isSelected
-          ? "border-[#3F3D9E] ring-2 ring-[#3F3D9E] bg-[#3F3D9E]/[0.03]"
+          ? "border-primary ring-2 ring-primary bg-primary/[0.03]"
           : "border-gray-200 hover:border-gray-300 bg-white"
       }`}
     >
       <div className="flex items-center gap-3">
         <div className="relative shrink-0">
           <img
-            src={doctor.profile_image || (doctor as any).image}
+            src={`${baseUrl}${doctor.profile_image}` || (doctor as any).image}
             alt={doctor.name}
             className={`size-14 rounded-full object-cover transition-all ${
-              isSelected ? "ring-2 ring-[#3F3D9E] ring-offset-2" : ""
+              isSelected ? "ring-2 ring-primary ring-offset-2" : ""
             }`}
             onError={(e) => {
               (e.target as HTMLImageElement).src =
@@ -37,7 +40,7 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
             }}
           />
           {isSelected && (
-            <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-[#3F3D9E] border-2 border-white" />
+            <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-primary border-2 border-white" />
           )}
         </div>
 
@@ -69,16 +72,18 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
       </div>
 
       <div className="mt-3 flex items-center gap-2">
-        <Button
-          type="button"
-          className="flex-1 rounded-lg bg-[#3F3D9E] hover:bg-[#3F3D9E]/90 text-white"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          Book appointment
-        </Button>
-
+        <Link to={`/appointment/${doctor.id}`} className="flex-1 min-w-0">
+          <Button
+            type="button"
+            className="w-full rounded-lg bg-primary hover:bg-primary/90 text-white text-xs sm:text-sm h-9 sm:h-10"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            Book appointment
+          </Button>
+        </Link>
+    
         <Button
           type="button"
           variant="outline"
@@ -87,7 +92,7 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
           aria-label={`View ${doctor.name} on map`}
           className={`shrink-0 rounded-lg transition-colors ${
             isSelected
-              ? "bg-[#3F3D9E] text-white border-[#3F3D9E] hover:bg-[#3F3D9E]/90 hover:text-white"
+              ? "bg-primary text-white border-primary hover:bg-primary/90 hover:text-white"
               : "text-[#3F3D9E] hover:bg-[#3F3D9E]/10 border-gray-200"
           }`}
           onClick={(e) => {

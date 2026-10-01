@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import { Navigation, X } from "lucide-react";
+import {  X } from "lucide-react";
 
 import type { DoctorsType } from "../../types/sort.type";
 import DoctorMarker from "./DoctortMark";
