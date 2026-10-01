@@ -3,20 +3,45 @@ import {
   subMonths,
   isSameDay,
 } from "date-fns";
+import useCreateBookAppointment from "@/features/appointment/hooks/useCreateBookAppointment";
+import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
-import type { AvailableSlot } from "@/features/appointment/types/docAppointment.types";
+import { useEffect, useState } from "react";
+import type { AvailableSlotDate, Doctor, Slot } from "@/features/appointment/types/docAppointment.types";
+import PaymentPanel from "../Payments/PaymentPanel";
 
 interface IProps {
- availableSlots: AvailableSlot[];
-
-consultation_price:number;
+  availableSlots: AvailableSlotDate[];
+  doctor: Doctor;
+  consultation_price: number;
 }
 
-const AppointmentPickerMob = ({availableSlots,consultation_price }: IProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const AppointmentPickerMob = ({ availableSlots, consultation_price, doctor }: IProps) => {
+  const [isOpen, setIsOpen] = useState(true);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+  const { mutate: createbooking, isPending } = useCreateBookAppointment();
+
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [bookingId, setBookingId] = useState("");
+
+
+  // ---------------------------------------------------
+  // to set first available date instead of date of today
+  useEffect(() => {
+    const firstAvailableSlot = availableSlots.find(
+      (day) => day.slots.some((slot) => !slot.is_booked)
+    );
+
+    if (firstAvailableSlot) {
+      setSelectedDate(
+        new Date(`${firstAvailableSlot.date}T00:00:00`)
+      );
+    }
+  }, [availableSlots]);
+
+  // ---------------------------------------------------
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
   const calenderStart = new Date(
@@ -42,19 +67,48 @@ const AppointmentPickerMob = ({availableSlots,consultation_price }: IProps) => {
     setCurrentMonth((prev) => addMonths(prev, 1));
   };
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const availableDates =availableSlots.filter((slot)=> !slot.is_booked).map((slot) => slot.date);
- const isDateAvailable = (day: Date) => {
-  const dateString = format(day, "yyyy-MM-dd");
 
-  return availableDates.includes(dateString);
-};
-const selectedDateSlots = availableSlots.filter(
-  (slot) =>
-    slot.date === format(selectedDate, "yyyy-MM-dd") &&
-    !slot.is_booked
-);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
- 
+  const isDateAvailable = (day: Date) => {
+    const dateString = format(day, "yyyy-MM-dd");
+
+    return availableSlots.some(
+      (availableDay) =>
+        availableDay.date === dateString &&
+        availableDay.slots.some((slot) => !slot.is_booked)
+    );
+  };
+  const selectedDay = availableSlots.find(
+    (day) =>
+      day.date === format(selectedDate, "yyyy-MM-dd")
+  );
+  const selectedDateSlots = selectedDay?.slots.filter(
+    (slot) => !slot.is_booked
+  ) ?? [];
+
+  const handleBook = () => {
+    if (!selectedSlot) return;
+
+    const bookingData = {
+      doctor_id: doctor.id,
+      slot_id: selectedSlot.id,
+      consultation_type: "in_person" as const,
+    };
+
+    createbooking(bookingData, {
+      onSuccess: (data) => {
+        toast.success("Booking created successfully");
+
+        setBookingId(data.data.id);
+        setIsPaymentOpen(true);
+      },
+
+      onError: () => {
+        toast.error("Booking failed");
+      },
+    });
+  };
+
+
   return (
     <div className="w-full  flex flex-col sm:hidden font-montserrat ">
       <p className="mb-3">Select a Day</p>
@@ -113,7 +167,7 @@ const selectedDateSlots = availableSlots.filter(
           </div>
           <div className="grid grid-cols-7">
             {days.map((day) => {
-              
+
               const isSelected = isSameDay(day, selectedDate);
               const isAvailable = isDateAvailable(day);
 
@@ -122,11 +176,15 @@ const selectedDateSlots = availableSlots.filter(
                   key={day.toISOString()}
                   type="button"
                   disabled={!isAvailable}
-                  onClick={() => setSelectedDate(day)}
+                  onClick={() => {
+                    setSelectedDate(day);
+                    setSelectedSlot(null);
+                    setIsOpen(false);
+                  }}
                   className={` mx-auto w-9 h-9 flex items-center justify-center gap-4 mt-2 p-4 rounded-[14px] text-[14px] font-medium transition-colors
-                   ${isSelected ? "bg-background-primary-default text-white" : 
-                    isAvailable ? "text-text-secondary-default bg-background-neutral-lightest" : 
-                    "text-[#C7CDD3]"} `}
+                   ${isSelected ? "bg-background-primary-default text-white" :
+                      isAvailable ? "text-text-secondary-default bg-background-neutral-lightest" :
+                        "text-[#C7CDD3]"} `}
                 >
                   {format(day, "d")}
                 </button>
@@ -141,14 +199,14 @@ const selectedDateSlots = availableSlots.filter(
         <p className="mb-3">Select time</p>
         <div className="grid grid-cols-3 gap-3">
           {selectedDateSlots.map((slot) => {
-            const isSelected = selectedTime === slot.start_time;
-            
+            const isSelected = selectedSlot?.id === slot.id;
+
 
             return (
               <button
                 key={slot.id}
                 type="button"
-                onClick={() => setSelectedTime(slot.start_time)}
+                onClick={() => setSelectedSlot(slot)}
                 className={`h-10 rounded-xl text-[11px] font-medium transition-colors
                 ${isSelected
                     ? "bg-background-primary-default text-white"
@@ -186,13 +244,25 @@ const selectedDateSlots = availableSlots.filter(
 
         <button
           type="button"
-          disabled={!selectedTime}
-          className="w-full h-10 rounded-[6px] bg-app-main text-white text-[12px]"
+          disabled={!selectedSlot?.start_time}
+          onClick={handleBook}
+          className="w-full h-10 rounded-[6px] bg-app-main text-white text-[12px] cursor-pointer"
         >
-          Continue to Pay
+          {isPending ? "booking..." : "Continue Pay"}
         </button>
 
       </div>
+
+
+      <PaymentPanel
+        isOpen={isPaymentOpen}
+        setIsOpen={setIsPaymentOpen}
+        selectedDate={selectedDate}
+        selectedSlot={selectedSlot}
+        bookingId={bookingId}
+        onClose={() => setIsPaymentOpen(false)}
+        doctor={doctor}
+      />
 
 
 

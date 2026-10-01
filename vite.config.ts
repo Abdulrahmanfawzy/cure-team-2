@@ -8,6 +8,9 @@ const srcPath = fileURLToPath(new URL('./src', import.meta.url))
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server:{
+    open:true , 
+  },
   resolve: {
     alias: {
       // Allows absolute imports from src/ (e.g. `import { Button } from '@/components/ui/button'`)

@@ -8,7 +8,7 @@ export default function Footer() {
         <>
             <footer className="bg-[#03162C] text-white px-20 relative mt-60">
                 <div className="absolute -top-60 right-0 left-0"><DownloadCTA /></div>
-                <div className="mx-auto max-w-310 px-6 pb-10 pt-25 sm:px-10 lg:px-0">
+                <div className="mx-auto container px-6 pb-10 pt-25 sm:px-10 lg:px-0">
                     <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:gap-x-15">
                         {/* Brand */}
                         <div className="max-w-82.5 lg:mr-30">
