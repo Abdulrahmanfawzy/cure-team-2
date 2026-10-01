@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { Navigation, X } from "lucide-react";
 
-import { doctors as defaultDoctors } from "../../constants/Sort";
 import type { DoctorsType } from "../../types/sort.type";
 import DoctorMarker from "./DoctortMark";
 import MapLocation from "./MapLocation";
@@ -12,12 +11,33 @@ import ResetViewButton from "./ResetView";
 const CAIRO_CENTER: [number, number] = [30.0444, 31.2357];
 
 type DoctorsMapProps = {
+  doctors?: any;
   doctorsList?: DoctorsType[];
   selectedDoctor?: DoctorsType | null;
   onSelectDoctor?: (doctor: DoctorsType) => void;
   onClose?: () => void;
 };
 
+export default function DoctorsMap({
+  doctors,
+  doctorsList,
+  selectedDoctor = null,
+  onSelectDoctor,
+  onClose,
+}: DoctorsMapProps) {
+  const list: DoctorsType[] = Array.isArray(doctors?.data)
+    ? doctors.data
+    : Array.isArray(doctors)
+    ? doctors
+    : Array.isArray(doctorsList)
+    ? doctorsList
+    : [];
+
+  const initialCenter: [number, number] =
+    selectedDoctor && selectedDoctor.latitude && selectedDoctor.longitude
+      ? [selectedDoctor.latitude, selectedDoctor.longitude]
+      : CAIRO_CENTER;
+//Map Controller 
 function MapController({
   selectedDoctor,
 }: {
@@ -34,8 +54,8 @@ function MapController({
   }, [map]);
 
   useEffect(() => {
-    if (selectedDoctor && selectedDoctor.lat && selectedDoctor.long) {
-      map.flyTo([selectedDoctor.lat, selectedDoctor.long], 15, {
+    if (doctors && doctors.latitude && doctors.longitude) {
+      map.flyTo([doctors.latitude, doctors.longitude], 15, {
         animate: true,
         duration: 1.2,
       });
@@ -44,18 +64,6 @@ function MapController({
 
   return null;
 }
-
-export default function DoctorsMap({
-  doctorsList = defaultDoctors,
-  selectedDoctor = null,
-  onSelectDoctor,
-  onClose,
-}: DoctorsMapProps) {
-  const initialCenter: [number, number] =
-    selectedDoctor && selectedDoctor.lat && selectedDoctor.long
-      ? [selectedDoctor.lat, selectedDoctor.long]
-      : CAIRO_CENTER;
-
   return (
     <div className="relative h-full min-h-125 flex w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-gray-100">
       <MapContainer
@@ -70,9 +78,9 @@ export default function DoctorsMap({
         />
 
         <MapController selectedDoctor={selectedDoctor} />
-        <ResetViewButton doctors={doctorsList} />
+        <ResetViewButton doctors={list} />
 
-        {doctorsList.map((doctor) => (
+        {list.map((doctor: DoctorsType) => (
           <DoctorMarker
             key={doctor.id}
             doctor={doctor}
@@ -102,7 +110,7 @@ export default function DoctorsMap({
         locationText={
           selectedDoctor
             ? `${selectedDoctor.name} • ${selectedDoctor.hospital}`
-            : `${doctorsList.length} Doctors found in Cairo`
+            : `${list.length} Doctors found in Cairo`
         }
       />
     </div>
