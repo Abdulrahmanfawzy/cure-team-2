@@ -4,7 +4,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import Cookies from 'js-cookie';
+import { authStorage } from "@/utils/auth-storage";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -85,22 +85,18 @@ const [verificationCode, setVerificationCode] =
     onSuccess: (data) => {
       console.log("========== VERIFY SUCCESS ==========");
       console.log("RESPONSE:", data);
-      const token = data?.data?.access_token;
-      const refreshToken = data?.data?.refresh_token;
-      if (token) {
-        Cookies.set("access_token", token, { expires: 7, secure: true, sameSite: 'strict' });
-      }
-      if (refreshToken) {
-        Cookies.set("refresh_token", refreshToken, { expires: 30, secure: true, sameSite: 'strict' });
-      }
 
+      const accessToken = data?.data?.access_token;
+      const refreshToken =
+        data?.data?.raw_refresh_token || data?.data?.refresh_token;
 
-      if (isLogin) {
-        sessionStorage.removeItem("login_phone");
-        sessionStorage.removeItem("auth_flow");
-
-        navigate(PATHS.home, { replace: true });
-        return;
+      if (accessToken) {
+        authStorage.setTokens(
+          accessToken,
+          refreshToken ?? null,
+          data?.data?.refresh_token_expires_at ?? null,
+          data?.data?.access_token_expires_at ?? null
+        );
       }
 
       if (isForgotPassword) {
@@ -118,8 +114,12 @@ const [verificationCode, setVerificationCode] =
         return; 
       }
 
+      // Login + register: account verified and logged in — go home.
+      sessionStorage.removeItem("login_phone");
+      sessionStorage.removeItem("register_phone");
       sessionStorage.removeItem("auth_flow");
-      navigate(PATHS.signIn, { replace: true });
+
+      navigate(PATHS.home, { replace: true });
     },
 
     onError: (err: any) => {

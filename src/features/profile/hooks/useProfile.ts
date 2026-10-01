@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { changePassword, getProfile, updateProfile, updateProfileImage } from "../api/profile-api";
+import { authStorage } from "@/utils/auth-storage";
 
 export const profileKeys = {
   profile: ["profile"] as const,
@@ -9,6 +10,7 @@ export function useProfile() {
   return useQuery({
     queryKey: profileKeys.profile,
     queryFn: getProfile,
+    enabled: Boolean(authStorage.getAccessToken()),
   });
 }
 

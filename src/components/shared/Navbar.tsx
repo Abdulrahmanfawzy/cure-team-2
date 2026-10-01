@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { PATHS } from "@/app/router/paths";
 import { NotificationsMenu } from "@/features/notifications";
+import { useProfile } from "@/features/profile/hooks/useProfile";
+import { authStorage } from "@/utils/auth-storage";
+import { getImageUrl } from "@/utils/getImageUrl";
 
 const links = [
     { label: "Home", href: "/" },
@@ -13,12 +16,34 @@ const links = [
     { label: "Chat", href: "/chat" },
 ];
 
+function ProfileAvatar() {
+  const { data: profile } = useProfile();
+
+  return (
+    <Link to={PATHS.profile} aria-label="Profile" className="shrink-0">
+      <Avatar className="h-10 w-10">
+        <AvatarImage
+          src={
+            profile?.profile_image
+              ? getImageUrl(profile.profile_image)
+              : "images/avatar.png"
+          }
+          alt={profile?.name || "avatar"}
+          className="object-cover"
+        />
+        <AvatarFallback>{profile?.name?.[0] || "U"}</AvatarFallback>
+      </Avatar>
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchValue = searchParams.get("search") || "";
+  const hasToken = Boolean(authStorage.getAccessToken());
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -103,12 +128,17 @@ export function Navbar() {
           </div>
           {/* Notification */}
           <NotificationsMenu />
-          {/* Avatar */}
-          <Link to={PATHS.profile} aria-label="Profile" className="shrink-0">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src="images/avatar.png" alt="avatar" />
-            </Avatar>
-          </Link>
+          {/* Profile / Sign in */}
+          {hasToken ? (
+            <ProfileAvatar />
+          ) : (
+            <Link
+              to={PATHS.signIn}
+              className="shrink-0 rounded-[10px] bg-[#F5F6F8] px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
     </header>

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import AuthLayout from "../components/AuthLayout";
 import AuthHeader from "../components/AuthHeader";
 
@@ -13,33 +11,33 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/auth-schemas";
 import { signUpApi } from "../api/auth-api";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../../app/router/paths";
-import { Eye, EyeOff } from "lucide-react";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     mutate: registerUser,
     isPending,
-    error,
-    isError,
   } = useMutation({
     mutationFn: signUpApi,
-    onSuccess: (response, variables) => {
+    onSuccess: (_response, variables) => {
       sessionStorage.setItem("register_phone", variables.phone);
-      navigate(PATHS.codeVerfication, {
-        state: {
-          flow: "register",
-          phone: variables.phone,
-        },
+      sessionStorage.setItem("auth_flow", "register");
+
+      const params = new URLSearchParams({ phone: variables.phone });
+      navigate(`${PATHS.codeVerfication}?${params.toString()}`, {
+        replace: true,
+        state: { flow: "register" },
       });
     },
     onError: (err: any) => {
       console.log("========== REGISTER ERROR ==========", err.response?.data);
+      toast.error(
+        err?.response?.data?.message || "Something went wrong. Please try again."
+      );
     },
   });
 
@@ -49,8 +47,6 @@ export default function SignUpPage() {
       name: "",
       email: "",
       phone: "",
-      password: "",
-      password_confirmation: "",
     },
   });
 
@@ -105,54 +101,6 @@ export default function SignUpPage() {
             )}
           </div>
 
-          {/* Password */}
-          <div className="w-full flex flex-col gap-2">
-            <label htmlFor="password" className="font-medium text-sm text-gray-700">Password</label>
-            <div className="relative flex items-center">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                {...register("password")}
-                className="border border-gray-200 rounded-xl px-3 py-2 w-full text-sm outline-none focus:border-blue-500 pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 text-gray-400 hover:text-gray-600"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-            {errors.password && (
-              <span className="text-xs text-red-500">{String(errors.password.message)}</span>
-            )}
-          </div>
-
-          {/* Password Confirmation */}
-          <div className="w-full flex flex-col gap-2">
-            <label htmlFor="password_confirmation" className="font-medium text-sm text-gray-700">Password Confirmation</label>
-            <div className="relative flex items-center">
-              <input
-                id="password_confirmation"
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Password Confirmation"
-                {...register("password_confirmation")}
-                className="border border-gray-200 rounded-xl px-3 py-2 w-full text-sm outline-none focus:border-blue-500 pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 text-gray-400 hover:text-gray-600"
-              >
-                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-            {errors.password_confirmation && (
-              <span className="text-xs text-red-500">{String(errors.password_confirmation.message)}</span>
-            )}
-          </div>
-
           {/* Phone Number */}
           <div className="w-full flex flex-col gap-2">
             <label htmlFor="phone" className="font-medium text-sm text-gray-700">Phone Number</label>
@@ -174,12 +122,6 @@ export default function SignUpPage() {
               <span className="text-xs text-red-500">{String(errors.phone.message)}</span>
             )}
           </div>
-
-          {isError && (
-            <p className="text-xs text-red-500 text-center">
-              {error?.message || "An error occurred during registration"}
-            </p>
-          )}
 
           <button
             type="submit"
