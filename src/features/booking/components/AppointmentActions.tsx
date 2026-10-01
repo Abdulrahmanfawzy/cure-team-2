@@ -1,20 +1,26 @@
+import { useState } from "react";
 import type { AppointmentFilter } from "../types/appointment.types";
+import CancelAppointmentDialog from "./CancelAppointmentDialog";
 
 interface IProps {
-
+bookingId:string;
  status: AppointmentFilter;
 
 }
 
-const AppointmentActions=({status}:IProps)=> {
+const AppointmentActions=({bookingId,status}:IProps)=> {
+  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
   
     const buttonClass =
     "h-10 flex-1 rounded-action border text-sm font-montserrat";
 
   if (status === "Upcoming") {
     return (
-      <div className="mt-2.5 flex gap-3.5">
+      <>
+      <div className="my-2 flex gap-3.5">
         <button
+          type="button"
+          onClick={() => setIsCancelDialogOpen(true)}
           className={`${buttonClass} border-action-muted text-action-muted`}
         >
           Cancel
@@ -26,6 +32,13 @@ const AppointmentActions=({status}:IProps)=> {
           Reschedule
         </button>
       </div>
+      <CancelAppointmentDialog
+        open={isCancelDialogOpen}
+        onOpenChange={setIsCancelDialogOpen}
+        bookingId={bookingId}
+      />
+      </>
+      
     );
   }
 

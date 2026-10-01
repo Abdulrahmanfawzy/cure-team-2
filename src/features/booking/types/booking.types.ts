@@ -22,3 +22,6 @@ export interface BookingsResponse {
   message: string;
   data: Booking[];
 }
+export interface CancelAppointmentPayload {
+  cancel_reason: string;
+}

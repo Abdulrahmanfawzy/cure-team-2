@@ -84,6 +84,7 @@ const BookingPage = () => {
           {filteredAppointments.map((card) => (
             <AppointmentCard
               key={card.id}
+              id={card.id}
               date={card.date}
               doctorInfo={card.doctor}
               time={card.time}

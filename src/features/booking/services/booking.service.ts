@@ -1,6 +1,6 @@
 import { api } from "@/utils/axios"
 import { format, parseISO } from "date-fns";
-import type { BookingsResponse } from "../types/booking.types";
+import type { BookingsResponse, CancelAppointmentPayload } from "../types/booking.types";
 import type { AppointmentStatus } from "../types/appointment.types";
 
 interface BookingFilters {
@@ -15,4 +15,8 @@ export const getDoctorsBooking = async (filters: BookingFilters = {}): Promise<B
 
     const result = await api.get<BookingsResponse>('booking', { params });
     return result.data;
+}
+export const cancelBook = async (id:string, data: CancelAppointmentPayload) :Promise<CancelAppointmentPayload>=>{
+    const res =await api.post(`booking/${id}/cancel`,data);
+    return  res.data;
 }

@@ -7,7 +7,7 @@ import type { AppointmentStatus } from "../types/appointment.types";
 import { mapAppointmentStatus } from "@/utils/mapAppointmentStatus";
 
 interface IProps {
-
+  id:string;
   date:string;
   doctorInfo:Doctor;
   time:string;
@@ -15,7 +15,7 @@ interface IProps {
 
 }
 
-const AppointmentCard = ({ date,doctorInfo,time,status }: IProps) => {
+const AppointmentCard = ({ id,date,doctorInfo,time,status }: IProps) => {
   const dayName = format(new Date(date), "EEEE");
   const Datee = format(new Date(date), "MMMM d");
   const Time =format(parse(time, "HH:mm:ss", new Date()), "h:mm a");
@@ -42,7 +42,7 @@ const AppointmentCard = ({ date,doctorInfo,time,status }: IProps) => {
       </div>
 
       {/* Doctor */}
-      <div className="my-2 flex items-center gap-2">
+      <div className="my-4 flex items-center gap-2">
         <img
           src={getImageUrl(doctorInfo.doctor_image)}
           alt={doctorInfo.doctor_name}
@@ -63,7 +63,7 @@ const AppointmentCard = ({ date,doctorInfo,time,status }: IProps) => {
     
 
       {/* Actions */}
-      <AppointmentActions status={displayStatus} />
+      <AppointmentActions status={displayStatus}  bookingId={id} />
 
     </div>
   )
