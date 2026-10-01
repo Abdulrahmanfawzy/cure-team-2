@@ -79,9 +79,14 @@ const [verificationCode, setVerificationCode] =
       console.log("========== VERIFY SUCCESS ==========");
       console.log("RESPONSE:", data);
       const token = data?.data?.access_token;
+      const refreshToken = data?.data?.refresh_token;
       if (token) {
         Cookies.set("access_token", token, { expires: 7, secure: true, sameSite: 'strict' });
       }
+      if (refreshToken) {
+        Cookies.set("refresh_token", refreshToken, { expires: 30, secure: true, sameSite: 'strict' });
+      }
+
 
       if (isLogin) {
         sessionStorage.removeItem("login_phone");

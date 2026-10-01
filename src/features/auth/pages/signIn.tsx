@@ -35,7 +35,7 @@ export default function SignInPage() {
     loginMutation.mutate(data.phone, { 
       onSuccess: (response) => {
         console.log("========== LOGIN SUCCESS =========Params:", response);
-
+        
         sessionStorage.setItem("login_phone", data.phone);
         sessionStorage.setItem("auth_flow", "login");
 

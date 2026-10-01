@@ -75,8 +75,8 @@ const SearchDoctor = () => {
   
   return (
     <div className="w-full pb-16">
-      <main className="container mx-auto flex flex-col gap-6 px-4">
-        <section className="flex w-full items-center gap-4 sm:gap-6">
+      <main className="container mx-auto flex flex-col gap-4 sm:gap-6 px-3 sm:px-4">
+        <section className="flex w-full items-center gap-2 sm:gap-4 md:gap-6">
           <SplitFilterButton
             isOpen={isFilterOpen}
             onToggle={() => setIsFilterOpen((prev) => !prev)}
@@ -88,24 +88,19 @@ const SearchDoctor = () => {
         <ChooseSpecialistCard setSearchParam={setSearchParam} />
 
         <div className="flex items-start gap-6 flex-col md:flex-row">
+          {/* Filter Sidebar - collapsible on mobile, sliding sidebar on md+ */}
           <div
-            className={`shrink-0 overflow-hidden transition-[width] duration-500 ease-in-out ${
-              isFilterOpen ? "w-80 md:w-90" : "w-0"
+            className={`w-full md:w-80 shrink-0 transition-all duration-300 ease-in-out ${
+              isFilterOpen ? "block" : "hidden md:hidden md:w-0"
             }`}
           >
             <SidebarFilter />
           </div>
-        
 
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 w-full">
             <div className="flex flex-col lg:flex-row items-start gap-6">
               {/* Doctors List */}
-  
-              <div
-                className={`w-full transition-all duration-300 ${
-                  isMapOpen ? "lg:w-1/2" : "w-full"
-                }`}
-              >
+              <div className="w-full">
                 <Doctors
                   doctors={doctors}
                   selectedDoctorId={selectedDoctor?.id}
@@ -115,23 +110,25 @@ const SearchDoctor = () => {
                 />
               </div>
 
-              {/* Doctors Map */}
+              {/* Doctors Map Modal */}
               {isMapOpen && (
                 <>
                   {/* Background Overlay */}
                   <div
-                    className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+                    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
                     onClick={() => setIsMapOpen(false)}
                   />
 
-                  {/* Full Screen Map */}
-                  <div className="fixed items-center inset-0 z-50 h-[80%] mt-20 w-[80%] mx-auto ">
-                    <DoctorsMap
-                      doctors ={doctors}
-                      selectedDoctor={selectedDoctor}
-                      onSelectDoctor={setSelectedDoctor}
-                      onClose={() => setIsMapOpen(false)}
-                    />
+                  {/* Responsive Map Modal */}
+                  <div className="fixed inset-3 sm:inset-6 md:inset-10 lg:inset-16 z-50 flex items-center justify-center pointer-events-none">
+                    <div className="w-full h-full max-w-5xl pointer-events-auto rounded-2xl overflow-hidden shadow-2xl bg-white flex flex-col">
+                      <DoctorsMap
+                        doctors={doctors}
+                        selectedDoctor={selectedDoctor}
+                        onSelectDoctor={setSelectedDoctor}
+                        onClose={() => setIsMapOpen(false)}
+                      />
+                    </div>
                   </div>
                 </>
               )}
