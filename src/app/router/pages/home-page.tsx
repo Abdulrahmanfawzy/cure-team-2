@@ -7,7 +7,7 @@ import { HowItWorks } from "@/features/auth/components/home/works";
 
 export default function Home() {
   return (
-    <main className="bg-white text-neutral-900 px-15">
+    <main className="bg-white text-neutral-900 md:px-15">
       <Hero />
       <HowItWorks />
       <FindCare />

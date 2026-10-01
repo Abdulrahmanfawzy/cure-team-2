@@ -46,8 +46,8 @@ export default function DoctorMarker({
   return (
     <Marker
       ref={markerRef}
-      position={[doctor.lat, doctor.long]}
-      icon={createDoctorIcon(doctor.image, isSelected)}
+      position={[doctor.latitude, doctor.longitude]}
+      icon={createDoctorIcon(doctor.profile_image, isSelected)}
       zIndexOffset={isSelected ? 1000 : 1}
       eventHandlers={{
         click: () => {
@@ -59,7 +59,7 @@ export default function DoctorMarker({
         <div className="w-56 p-1 text-gray-800">
           <div className="flex items-center gap-2.5">
             <img
-              src={doctor.image}
+              src={doctor.profile_image}
               alt={doctor.name}
               className="size-11 rounded-full object-cover border border-gray-200"
               onError={(e) => {
@@ -72,7 +72,7 @@ export default function DoctorMarker({
                 {doctor.name}
               </p>
               <p className="text-xs text-gray-500 truncate">
-                {doctor.specialty}
+                {doctor.specialist?.name}
               </p>
               <p className="text-[11px] text-gray-400 truncate">
                 {doctor.hospital}
@@ -83,17 +83,19 @@ export default function DoctorMarker({
           <div className="mt-2.5 flex items-center justify-between text-xs text-gray-600 border-t pt-2">
             <span className="flex items-center gap-1">
               <Star className="size-3 fill-yellow-400 text-yellow-400" />
-              {doctor.rating}
+              {doctor.rating_count}
             </span>
             <span className="flex items-center gap-1 text-[11px] text-gray-500">
               <Clock className="size-3" />
-              {doctor.hours}
+              {doctor.opening_hours}
             </span>
           </div>
 
           <div className="mt-2 flex items-center justify-between text-xs">
             <span className="text-gray-500">Price/hour</span>
-            <span className="font-bold text-red-500">${doctor.price}</span>
+            <span className="font-bold text-red-500">
+              ${doctor.consultation_price}
+            </span>
           </div>
 
           <Button
