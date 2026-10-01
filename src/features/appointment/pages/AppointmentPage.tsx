@@ -3,18 +3,19 @@
 import AppointmentHeader from "../component/Appointment/AppointmentHeader"
 import AppointmentPicker from "../component/Appointment/AppointmentPicker"
 import AppointmentRating from "../component/Appointment/AppointmentRating"
-import Testimonial from "../component/Appointment/Testimonial"
 import DoctorAbout from "../component/DoctorProfile/DoctorAbout"
 import DoctorHeader from "../component/DoctorProfile/DoctorHeader"
 import DoctorLocation from "../component/DoctorProfile/DoctorLocation"
 import DoctorStats from "../component/DoctorProfile/DoctorStats"
 import HeaderMobile from "../component/Appointment/HeaderMobile"
 import DoctorDetailsMobile from "../component/Appointment/DoctorDetailsMobile"
-import docImg from "../../../assets/women.jpg"
+
 import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
 import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
 import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
+import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
+import ErrorComponent from "@/components/shared/components/ErrorComponent"
 
 
 const AppointmentPage = () => {
@@ -26,23 +27,22 @@ const AppointmentPage = () => {
         return <div>Missing doctor id</div>
     }
 
-    if (isLoading) {
-        return <div>..Loooooding</div>
+    if (isLoading ) {
+        return <AppointmentPageSkelton />
     }
 
     if (isError || !doctor?.data) {
-        return  
-            <p>Something went wrong</p>
+       return <ErrorComponent />;
             
         
     }
 
     return (
-        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-[Georgia] sm:px-6 lg:flex-row lg:items-start lg:px-8">
+        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-Georgia sm:px-6 lg:flex-row lg:items-start lg:px-8">
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full max-w-196 lg:flex-1">
                 <AppointmentHeader />
-                <AppointmentPicker availableSlots={doctor.data.available_slots} consultation_price={doctor.data.consultation_price} />
+                <AppointmentPicker availableSlots={doctor.data.available_slots} doctor={doctor.data} />
                 <AppointmentRating rating={doctor.data.rating_avg} totalReview={doctor.data.reviews_count} />
                 <Reviews  reviews={doctor.data.reviews} />
               
@@ -59,7 +59,7 @@ const AppointmentPage = () => {
             </div>
 
             {/* picker for appointment in mob */}
-            <AppointmentPickerMob availableSlots={doctor.data.available_slots} consultation_price={doctor.data.consultation_price} />
+            <AppointmentPickerMob availableSlots={doctor.data.available_slots} consultation_price={doctor.data.consultation_price} doctor={doctor.data} />
             {/*----------- doc info desktop----------- */}
             <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-background-neutral-lightest px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader
