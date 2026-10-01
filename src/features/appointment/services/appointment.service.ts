@@ -53,3 +53,10 @@ export const bookAppointment = async (
 
   return response.data;
 };
+export const addToFavourite = async(id:string) =>{
+  console.log("doctor id:", id);
+  const response = await api.post('favourites', {doctor_id:id});
+   console.log("favourite response:", response.data);
+
+  return response.data;
+}

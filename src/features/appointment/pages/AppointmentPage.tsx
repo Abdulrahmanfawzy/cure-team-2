@@ -52,6 +52,7 @@ const AppointmentPage = () => {
             <div className="sm:hidden flex flex-col gap-3">
                 <HeaderMobile />
                 <DoctorDetailsMobile
+                    doctor_id={doctor.data.id}
                     profile_image={doctor.data.profile_image}
                     name={doctor.data.name }
                     specialist={doctor.data.specialist.name}
@@ -63,6 +64,7 @@ const AppointmentPage = () => {
             {/*----------- doc info desktop----------- */}
             <div className="hidden sm:block w-full max-w-115 rounded-4xl bg-background-neutral-lightest px-4 pb-6 pt-8 lg:shrink-0">
                 <DoctorHeader
+                    doctor_id={doctor.data.id}
                     name={doctor.data.name}
                     profile_image={doctor.data.profile_image}
                     specialist={doctor.data.specialist.name}

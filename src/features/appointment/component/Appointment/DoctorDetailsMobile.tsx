@@ -3,6 +3,7 @@ import { Check, Heart } from "lucide-react";
 import { getImageUrl } from "@/utils/getImageUrl";
 
 interface IProps {
+    doctor_id: string;
     profile_image: string;
     name: string;
     specialist: string;
@@ -10,7 +11,7 @@ interface IProps {
 
 }
 
-const DoctorDetailsMobile = ({ profile_image, name, specialist,is_favorite }: IProps) => {
+const DoctorDetailsMobile = ({doctor_id, profile_image, name, specialist,is_favorite }: IProps) => {
     const [isFavorite, setIsFavorite] = useState(is_favorite);
 
     return (
