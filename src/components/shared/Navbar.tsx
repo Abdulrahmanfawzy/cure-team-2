@@ -127,7 +127,7 @@ export function Navbar() {
             </Button>
           </div>
           {/* Notification */}
-          <NotificationsMenu />
+          {hasToken && <NotificationsMenu />}
           {/* Profile / Sign in */}
           {hasToken ? (
             <ProfileAvatar />

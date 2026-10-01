@@ -46,7 +46,6 @@ const routes: RouteObject[] = [
       { path: PATHS.login, element: <LoginPage /> },
       { path: PATHS.register, element: <RegisterPage /> },
       { path: PATHS.searchDoctor, element: <SearchDoctor /> },
-      {path:PATHS.chat , element:<ChatScreen />} , 
       { path: PATHS.signIn, element: <SignIn /> },
       { path: PATHS.signUp, element: <SignUp /> },
       { path: PATHS.codeVerfication, element: <CodeVerfication /> },
@@ -55,7 +54,6 @@ const routes: RouteObject[] = [
       { path: PATHS.profile, element: <ProfilePage /> },
 
       { path: PATHS.appointment, element: <AppointmentPage /> },
-      { path: PATHS.booking, element: <BookingPage /> },
       { path: PATHS.paymentSuccess, element: <PaymentSuccessPage /> },
       { path: PATHS.paymentFailed, element: <PaymentFaildPage /> },
 
@@ -64,6 +62,8 @@ const routes: RouteObject[] = [
         element: <ProtectedRoute />,
         children: [
           { path: PATHS.dashboard, element: <DashboardPage /> },
+          { path: PATHS.booking, element: <BookingPage /> },
+          { path: PATHS.chat, element: <ChatScreen /> },
           // Add nested protected feature routes here:
           // { path: PATHS.settings, element: <SettingsPage /> },
 
