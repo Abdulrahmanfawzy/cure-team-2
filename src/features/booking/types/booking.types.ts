@@ -33,3 +33,7 @@ export interface BookagainPayload {
   slotId: string;
  
 }
+export interface FeedbackPayload {
+  comment: string;
+  rating: string;
+}

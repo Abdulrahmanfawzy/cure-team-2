@@ -1,4 +1,4 @@
-import { CalendarDays, MapPin } from "lucide-react"
+import { CalendarDays } from "lucide-react"
 import AppointmentActions from "./AppointmentActions";
 import type {  Doctor } from "../types/booking.types";
 import { getImageUrl } from "@/utils/getImageUrl";
@@ -23,7 +23,7 @@ const AppointmentCard = ({ id,date,doctorInfo,time,status }: IProps) => {
   const displayStatus = mapAppointmentStatus(status);
   
   return (
-    <div className="w-full sm:max-w-99 rounded-card border border-neutral-lighter bg-white p-3 pb-4">
+    <div className="w-full  sm:max-w-99 min-h-50 flex flex-col justify-between  rounded-card border border-neutral-lighter  bg-white  p-3 pb-4">
       {/* Appointment Date */}
       <div className="w-full flex items-center justify-between text-[9px] border-b border-b-neutral-lighter ">
         {/* date & state */}
@@ -63,7 +63,7 @@ const AppointmentCard = ({ id,date,doctorInfo,time,status }: IProps) => {
     
 
       {/* Actions */}
-      <AppointmentActions status={displayStatus}  bookingId={id}  />
+      <AppointmentActions status={displayStatus}  bookingId={id} doctor={doctorInfo}  />
 
     </div>
   )

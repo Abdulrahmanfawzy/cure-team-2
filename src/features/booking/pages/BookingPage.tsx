@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AppointmentTabs from "../components/AppointmentTabs";
 import AppointmentDateFilter from "../components/AppointmentDateFilter";
 import AppointmentCard from "../components/AppointmentCard";
+import BookingPageSkeleton from "../components/BookingPageSkeleton";
 import useGetDocBooking from "../hooks/useGetDocBooking";
 import type { AppointmentStatus, AppointmentTab } from "../types/appointment.types";
 
@@ -19,12 +20,12 @@ const BookingPage = () => {
   const statuses = statusesForTab(activeTab);
   const {
     data: availableBookings,
-    isLoading: isAvailabilityLoading,
+    isFetching: isAvailabilityFetching,
     isError: isAvailabilityError,
   } = useGetDocBooking({ statuses });
   const {
     data: booking,
-    isLoading,
+    isFetching,
     isError,
   } = useGetDocBooking({
     statuses,
@@ -47,7 +48,7 @@ const BookingPage = () => {
     }
 
     if (!selectedDate) {
-      setSelectedDate(validDates[0]);
+      setSelectedDate('validDates[0]');
       return;
     }
 
@@ -58,7 +59,7 @@ const BookingPage = () => {
 
   const filteredAppointments = booking?.data ?? [];
 
-  if (isLoading || isAvailabilityLoading) return <div>Booking is loaaading.....</div>;
+  if (isFetching || isAvailabilityFetching) return <BookingPageSkeleton />;
   if (isError || isAvailabilityError) return <div>error</div>;
 
   return (
