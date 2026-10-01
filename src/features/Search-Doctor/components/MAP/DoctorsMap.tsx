@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import {  X } from "lucide-react";
+import { cn } from "cn";
 
 import type { DoctorsType } from "../../types/sort.type";
 import DoctorMarker from "./DoctortMark";
@@ -16,6 +17,7 @@ type DoctorsMapProps = {
   selectedDoctor?: DoctorsType | null;
   onSelectDoctor?: (doctor: DoctorsType) => void;
   onClose?: () => void;
+  className?: string;
 };
 
 export default function DoctorsMap({
@@ -24,6 +26,7 @@ export default function DoctorsMap({
   selectedDoctor = null,
   onSelectDoctor,
   onClose,
+  className,
 }: DoctorsMapProps) {
   const list: DoctorsType[] = Array.isArray(doctors?.data)
     ? doctors.data
@@ -65,7 +68,7 @@ function MapController({
   return null;
 }
   return (
-    <div className="relative h-full min-h-125 flex w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-gray-100">
+    <div className={cn("relative h-full min-h-125 flex w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-gray-100", className)}>
       <MapContainer
         center={initialCenter}
         zoom={selectedDoctor ? 15 : 13}

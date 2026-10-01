@@ -10,7 +10,7 @@ const CAIRO_CENTER: [number, number] = [30.0444, 31.2357];
   const handleReset = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (doctors.length > 0) {
-      const bounds = doctors.map((d) => [d.lat, d.long] as [number, number]);
+      const bounds = doctors.map((d) => [d.latitude, d.longitude] as [number, number]);
       map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
     } else {
       map.setView(CAIRO_CENTER, 13);
