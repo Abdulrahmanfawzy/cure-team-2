@@ -25,3 +25,7 @@ export interface BookingsResponse {
 export interface CancelAppointmentPayload {
   cancel_reason: string;
 }
+export interface SupportAppointmentPayload {
+  message: string;
+  subject: string;
+}

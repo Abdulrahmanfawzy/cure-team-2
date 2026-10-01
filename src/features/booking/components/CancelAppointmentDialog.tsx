@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useCancelBooking } from "../hooks/useCancelBooking";
-import { cancelAppointmentSchema, type CancelAppointmentFormValues } from "../schemas/cancelAppointmentSchema";
+import { cancelAppointmentSchema, type CancelAppointmentFormValues } from "../schemas/AppointmentSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

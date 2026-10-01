@@ -10,3 +10,17 @@ export const cancelAppointmentSchema = z.object({
 export type CancelAppointmentFormValues = z.infer<
   typeof cancelAppointmentSchema
 >;
+
+export const supportSchema = z.object({
+  subject: z
+    .string()
+    .trim()
+    .min(3, "Subject must be at least 3 characters"),
+
+  message: z
+    .string()
+    .trim()
+    .min(1, "Please enter your message"),
+});
+
+export type SupportFormValues = z.infer<typeof supportSchema>;
