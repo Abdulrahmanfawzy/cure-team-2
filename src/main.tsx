@@ -11,6 +11,7 @@ if (!rootElement) {
 }
 const queryClient = new QueryClient();
 createRoot(rootElement).render(
+
   <StrictMode>
     {/* Global providers: Redux, React Query, (future: theme, etc.) */}
     <QueryClientProvider client={queryClient}>

@@ -1,15 +1,27 @@
 import { CalendarDays, MapPin } from "lucide-react"
-import docImg from "../../../assets/women.jpg"
 import AppointmentActions from "./AppointmentActions";
+import type {  Doctor } from "../types/booking.types";
+import { getImageUrl } from "@/utils/getImageUrl";
+import { format, parse } from "date-fns";
 import type { AppointmentStatus } from "../types/appointment.types";
+import { mapAppointmentStatus } from "@/utils/mapAppointmentStatus";
 
 interface IProps {
-
-  status: AppointmentStatus;
+  id:string;
+  date:string;
+  doctorInfo:Doctor;
+  time:string;
+  status:AppointmentStatus;
 
 }
 
-const AppointmentCard = ({ status }: IProps) => {
+const AppointmentCard = ({ id,date,doctorInfo,time,status }: IProps) => {
+  const dayName = format(new Date(date), "EEEE");
+  const Datee = format(new Date(date), "MMMM d");
+  const Time =format(parse(time, "HH:mm:ss", new Date()), "h:mm a");
+
+  const displayStatus = mapAppointmentStatus(status);
+  
   return (
     <div className="w-full sm:max-w-99 rounded-card border border-neutral-lighter bg-white p-3 pb-4">
       {/* Appointment Date */}
@@ -17,11 +29,11 @@ const AppointmentCard = ({ status }: IProps) => {
         {/* date & state */}
         <div className="w-full flex items-center justify-between gap-3 mb-2  ">
           <div className="flex items-center gap-2 ">
-            <CalendarDays size={16} className={status === 'Upcoming' ? "text-app-secondary" : "text-gray-500"} />
+            <CalendarDays size={16} className={displayStatus === "Upcoming" ? "text-app-secondary" : "text-gray-500"} />
 
-            <span className={`text-xs ${status === 'Upcoming' ? "text-app-secondary" : "text-content-muted"}`}>Monday, July 21 - 11:00 AM</span>
+            <span className={`text-xs ${displayStatus === "Upcoming" ? "text-app-secondary" : "text-content-muted"}`}>{dayName} ,{Datee } - {Time}</span>
           </div>
-          <p className={`text-sm ${status === "Upcoming" ? "text-app-main" : status === "Completed" ? "text-app-success" : "text-app-error"}`} >
+          <p className={`text-sm ${displayStatus === "Upcoming"? "text-app-main" : displayStatus === "Completed" ? "text-app-success" : "text-app-error"}`} >
             {status}
           </p>
         </div>
@@ -30,32 +42,28 @@ const AppointmentCard = ({ status }: IProps) => {
       </div>
 
       {/* Doctor */}
-      <div className="mt-2 flex items-center gap-2">
+      <div className="my-4 flex items-center gap-2">
         <img
-          src={docImg}
-          alt="Jennifer Miller"
+          src={getImageUrl(doctorInfo.doctor_image)}
+          alt={doctorInfo.doctor_name}
           className="h-10.25 w-10.75 rounded-full object-cover"
         />
 
         <div>
           <p className="font-Georgia text-base text-doctor-name">
-            Jennifer Miller
+            {doctorInfo.doctor_name}
           </p>
 
           <p className="text-sm text-content-muted">
-            Psychiatrist
+            {doctorInfo.specialist}
           </p>
         </div>
       </div>
 
-      {/* Location */}
-      <div className="mt-2 flex items-center gap-1 text-xs text-content-subtle">
-        <MapPin size={20} />
-        <span className="text-sm text-content-muted">129, El-Nasr Street, Cairo, Egypt</span>
-      </div>
+    
 
       {/* Actions */}
-      <AppointmentActions status={status} />
+      <AppointmentActions status={displayStatus}  bookingId={id}  />
 
     </div>
   )
