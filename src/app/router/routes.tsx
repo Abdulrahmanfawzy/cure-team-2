@@ -17,6 +17,8 @@ import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
 import ChatScreen from '@/features/chat'
 import BookingPage from '@/features/booking/pages/BookingPage'
 import HomePage from './pages/home-page'
+import PaymentSuccessPage from '@/features/appointment/component/Appointment/Payments/PaymentSuccess'
+import PaymentFaildPage from '@/features/appointment/component/Appointment/Payments/PaymentFaild'
 
 
 /**
@@ -52,6 +54,8 @@ const routes: RouteObject[] = [
 
       { path: PATHS.appointment, element: <AppointmentPage /> },
       { path: PATHS.booking, element: <BookingPage /> },
+      { path: PATHS.paymentSuccess, element: <PaymentSuccessPage /> },
+      { path: PATHS.paymentFailed, element: <PaymentFaildPage /> },
 
       // ——— Protected routes ———
       {

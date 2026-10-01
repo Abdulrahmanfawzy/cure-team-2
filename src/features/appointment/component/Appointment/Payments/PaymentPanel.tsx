@@ -3,15 +3,14 @@ import AddPaymentMethodForm from "./AddPaymentMethodForm";
 import PaymentDoctorInfo from "./PaymentDoctorInfo";
 import PaymentMethodList from "./PaymentMethodList";
 import PaymentSummary from "./PaymentSummary";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
-import { toast } from "sonner";
+import { useState, type Dispatch, type SetStateAction } from "react";
+
 import type {
     Doctor,
     Slot,
 } from "@/features/appointment/types/docAppointment.types";
 import useCreatePayment from "@/features/appointment/hooks/useCreatePayment";
-import useCreateBookAppointment from "@/features/appointment/hooks/useCreateBookAppointment";
-import { useSearchParams } from "react-router-dom";
+
 
 interface IProps {
     isOpen: boolean;
