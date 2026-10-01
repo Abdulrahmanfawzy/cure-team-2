@@ -1,4 +1,4 @@
-interface Doctor {
+export interface Doctor {
   doctor_id: string;
   doctor_name: string;
   doctor_image: string;
@@ -7,13 +7,15 @@ interface Doctor {
   longitude: number;
 }
 
-interface Booking {
+import type { AppointmentStatus } from "./appointment.types";
+
+export interface Booking {
   id: string;
   patient_id: string;
   time: string;
   date: string;
   doctor: Doctor;
-  status: string;
+  status: AppointmentStatus;
 }
 
 export interface BookingsResponse {

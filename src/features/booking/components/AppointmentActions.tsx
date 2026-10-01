@@ -1,8 +1,8 @@
-import type { AppointmentStatus } from "../types/appointment.types";
+import type { AppointmentFilter } from "../types/appointment.types";
 
 interface IProps {
 
- status: AppointmentStatus;
+ status: AppointmentFilter;
 
 }
 
