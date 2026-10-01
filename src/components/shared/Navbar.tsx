@@ -7,9 +7,9 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import { PATHS } from "@/app/router/paths";
 
 const links = [
-  { label: "Home", href: "/" },
-  { label: "Bookings", href: "/bookings" },
-  { label: "Chat", href: "/chat" },
+    { label: "Home", href: "/" },
+    { label: "Bookings", href: "/booking" },
+    { label: "Chat", href: "/chat" },
 ];
 
 export function Navbar() {

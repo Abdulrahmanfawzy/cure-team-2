@@ -1,20 +1,22 @@
 // types/appointment.types.ts
 
 export type AppointmentStatus =
+  | "pending"
+  | "confirmed"
+  | "completed"
+  | "cancelled"
+  | "rescheduled"
+  | "rejected"
+  | "expired";
+
+export type AppointmentFilter =
   | "Upcoming"
   | "Completed"
-  | "Cancelled";
+  | "Canceled";
 
-export interface Appointment {
-  id: string;
-  date: string;
-  time: string;
-  patientName: string;
-  doctorName: string;
-  doctorSpecialty: string;
-  doctorImage: string;
-  location: string;
-  status: AppointmentStatus;
-}
 
-export type AppointmentTab = "all" | AppointmentStatus;
+
+export type AppointmentTab =  | "all"
+  | "upcoming"
+  | "completed"
+  | "canceled";

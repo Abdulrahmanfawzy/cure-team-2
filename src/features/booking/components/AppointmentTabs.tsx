@@ -1,5 +1,6 @@
 import type { AppointmentTab } from "../types/appointment.types";
 
+
 interface IProps {
 
     activeTab: AppointmentTab;
@@ -13,15 +14,15 @@ const tabs: { label: string; value: AppointmentTab }[] = [
     },
     {
         label: "Upcoming",
-        value: "Upcoming",
+        value: "upcoming",
     },
     {
         label: "Completed",
-        value: "Completed",
+        value: "completed",
     },
     {
         label: "Canceled",
-        value: "Cancelled",
+        value: "canceled",
     },
 ];
 

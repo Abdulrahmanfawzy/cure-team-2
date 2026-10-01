@@ -1,20 +1,28 @@
-import type { AppointmentStatus } from "../types/appointment.types";
+import { useState } from "react";
+import type { AppointmentFilter } from "../types/appointment.types";
+import CancelAppointmentDialog from "./CancelAppointmentDialog";
+import SupportDialog from "./SupportDialog";
 
 interface IProps {
-
- status: AppointmentStatus;
+bookingId:string;
+ status: AppointmentFilter;
 
 }
 
-const AppointmentActions=({status}:IProps)=> {
+const AppointmentActions=({bookingId,status}:IProps)=> {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isBookAgainOpen, setIsBookAgainOpen] = useState(false);
   
     const buttonClass =
     "h-10 flex-1 rounded-action border text-sm font-montserrat";
 
   if (status === "Upcoming") {
     return (
-      <div className="mt-2.5 flex gap-3.5">
+      <>
+      <div className="my-2 flex gap-3.5">
         <button
+          type="button"
+          onClick={() => setIsDialogOpen(true)}
           className={`${buttonClass} border-action-muted text-action-muted`}
         >
           Cancel
@@ -26,6 +34,13 @@ const AppointmentActions=({status}:IProps)=> {
           Reschedule
         </button>
       </div>
+      <CancelAppointmentDialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        bookingId={bookingId}
+      />
+      </>
+      
     );
   }
 
@@ -48,6 +63,7 @@ const AppointmentActions=({status}:IProps)=> {
   }
 
   return (
+   <>
     <div className="mt-2 flex gap-2">
       <button
         className={`${buttonClass} border-app-main text-app-main`}
@@ -56,11 +72,28 @@ const AppointmentActions=({status}:IProps)=> {
       </button>
 
       <button
+        type="button"
+
+        onClick={() => setIsDialogOpen(true)}
         className={`${buttonClass} border-app-support bg-app-support text-white`}
       >
         Support
       </button>
     </div>
+
+    {/* dialog support */}
+     <SupportDialog
+      open={isDialogOpen}
+      onOpenChange={setIsDialogOpen}
+      bookingId={bookingId}
+    />
+     {/* <BookAgainDialog
+      open={isDialogOpen}
+      onOpenChange={setIsDialogOpen}
+      bookingId={bookingId}
+      date={date}
+    /> */}
+   </>
   );
   
 }
