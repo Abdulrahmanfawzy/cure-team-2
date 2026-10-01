@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   useLocation,
   useNavigate,
+  useSearchParams,
 } from "react-router-dom";
 import Cookies from 'js-cookie';
 
@@ -25,6 +26,8 @@ const [verificationCode, setVerificationCode] =
 
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const searchPhone = searchParams.get("phone");
 
   const stateFlow = location.state?.flow;
   if (stateFlow) {
@@ -37,12 +40,16 @@ const [verificationCode, setVerificationCode] =
 
   const sessionPhoneKey = isLogin ? "login_phone" : isForgotPassword ? "forgot_phone" : "register_phone";
   
-  if (location.state?.phone) {
+  if (searchPhone) {
+    sessionStorage.setItem(sessionPhoneKey, searchPhone);
+    if (isForgotPassword) sessionStorage.setItem("forgot_phone", searchPhone);
+  } else if (location.state?.phone) {
     sessionStorage.setItem(sessionPhoneKey, location.state.phone);
     if (isForgotPassword) sessionStorage.setItem("forgot_phone", location.state.phone);
   }
 
   const phone =
+    searchPhone ||
     sessionStorage.getItem(sessionPhoneKey) ||
     sessionStorage.getItem("forgot_phone") ||
     location.state?.phone ||
