@@ -109,9 +109,11 @@ export function Navbar() {
             <Bell className="h-4.5 w-4.5" />
           </Button>
           {/* Avatar */}
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="images/avatar.png" alt="avatar" />
-          </Avatar>
+          <Link to={PATHS.profile} aria-label="Profile" className="shrink-0">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="images/avatar.png" alt="avatar" />
+            </Avatar>
+          </Link>
         </div>
       </div>
     </header>

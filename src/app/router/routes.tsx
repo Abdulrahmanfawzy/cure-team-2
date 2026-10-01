@@ -13,6 +13,7 @@ import SignUp from '@/features/auth/pages/signUp'
 import CodeVerfication from '@/features/auth/pages/codeVerfication'
 import ForgotPasswordPage from '@/features/auth/pages/ForgotPasswordPage'
 import ResetPasswordPage from '@/features/auth/pages/ResetPassword'
+import { ProfilePage } from '@/features/profile'
 import AppointmentPage from '@/features/appointment/pages/AppointmentPage'
 import ChatScreen from '@/features/chat'
 import BookingPage from '@/features/booking/pages/BookingPage'
@@ -51,6 +52,7 @@ const routes: RouteObject[] = [
       { path: PATHS.codeVerfication, element: <CodeVerfication /> },
       { path: PATHS.forgotPassword, element: <ForgotPasswordPage /> },
       { path: PATHS.ResetPassword, element: <ResetPasswordPage /> },
+      { path: PATHS.profile, element: <ProfilePage /> },
 
       { path: PATHS.appointment, element: <AppointmentPage /> },
       { path: PATHS.booking, element: <BookingPage /> },
