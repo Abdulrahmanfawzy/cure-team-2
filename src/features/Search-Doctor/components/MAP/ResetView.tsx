@@ -25,7 +25,7 @@ const CAIRO_CENTER: [number, number] = [30.0444, 31.2357];
       onClick={handleReset}
       className="absolute top-4 left-4 z-1000 flex items-center gap-1.5 rounded-xl bg-white/95 px-3 py-1.5 text-xs font-medium text-gray-700 shadow-md backdrop-blur-sm hover:bg-white border border-gray-100"
     >
-      <Navigation className="size-3.5 text-[#3F3D9E]" />
+      <Navigation className="size-3.5 text-primary" />
       <span>Center All</span>
     </Button>
   );

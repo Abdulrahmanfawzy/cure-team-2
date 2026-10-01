@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useSpecialist from "../hooks/useSpecialist";
 import { useSearch } from "../hooks/useSearch";
+import type { ChooseSpecialistType } from "../types/sort.type";
 
+export const baseUrl="https://round-13-cure.huma-volve.com/"
 const ChooseSpecialistCard = ({setSearchParam}:{setSearchParam:UseSearchType}) => {
   const {data:specialist } = useSpecialist();
   console.log(specialist);
-  const baseUrl="https://round-13-cure.huma-volve.com/"
   const handelChoose =(name : string)=> {
     setSearchParam((prev :URLSearchParams) => {
     const next = new URLSearchParams(prev);
@@ -20,9 +21,9 @@ const ChooseSpecialistCard = ({setSearchParam}:{setSearchParam:UseSearchType}) =
       <h2 className="text-2xl font-normal">Choose Specialist</h2>
       <ScrollArea type="always" className="w-full pb-2">
         <div className="flex w-max gap-2 pb-2">
-          {specialist?.map((item, index) => (
+          {specialist?.map((item:ChooseSpecialistType) => (
             <Button
-              key={`${item.name}-${index}`}
+              key={`${item.name}-${item.id}`}
               className="cursor-pointer rounded-xl border border-neutral"
               variant="secondary"
               onClick={() => handelChoose(item.name)}

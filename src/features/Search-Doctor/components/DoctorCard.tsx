@@ -2,6 +2,7 @@ import { Clock, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { DoctorsType } from "../types/sort.type";
+import { baseUrl } from "./Choose";
 
 
 type DoctorCardProps = {
@@ -9,6 +10,7 @@ type DoctorCardProps = {
   isSelected?: boolean;
   onSelect?: () => void;
 };
+
 
 export default function DoctorCard({ doctor, isSelected = false, onSelect }: DoctorCardProps) {
   console.log(doctor);
@@ -26,7 +28,7 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
       <div className="flex items-center gap-3">
         <div className="relative shrink-0">
           <img
-            src={doctor.profile_image || (doctor as any).image}
+            src={`${baseUrl}${doctor.profile_image}` || (doctor as any).image}
             alt={doctor.name}
             className={`size-14 rounded-full object-cover transition-all ${
               isSelected ? "ring-2 ring-[#3F3D9E] ring-offset-2" : ""
@@ -71,9 +73,10 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
       <div className="mt-3 flex items-center gap-2">
         <Button
           type="button"
-          className="flex-1 rounded-lg bg-[#3F3D9E] hover:bg-[#3F3D9E]/90 text-white"
+          className="flex-1 rounded-lg bg-primary hover:bg-primary/90 text-white"
           onClick={(e) => {
             e.stopPropagation();
+            
           }}
         >
           Book appointment
@@ -87,7 +90,7 @@ export default function DoctorCard({ doctor, isSelected = false, onSelect }: Doc
           aria-label={`View ${doctor.name} on map`}
           className={`shrink-0 rounded-lg transition-colors ${
             isSelected
-              ? "bg-[#3F3D9E] text-white border-[#3F3D9E] hover:bg-[#3F3D9E]/90 hover:text-white"
+              ? "bg-primary text-white border-primary hover:bg-primary/90 hover:text-white"
               : "text-[#3F3D9E] hover:bg-[#3F3D9E]/10 border-gray-200"
           }`}
           onClick={(e) => {
