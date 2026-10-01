@@ -7,8 +7,8 @@ const TOKEN = import.meta.env.VITE_TOKEN;
 export const api =axios.create({
     baseURL:BASE_URL,
     headers:{
-        "Content-Type": "application/json",
-        // "Authorization":`Bearer ${TOKEN}`
+    "Content-Type": "application/json",
+    // "Authorization":`Bearer ${TOKEN}`
     }
 
 })

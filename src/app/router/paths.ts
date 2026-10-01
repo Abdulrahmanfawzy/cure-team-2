@@ -23,6 +23,7 @@ export const PATHS = {
   dashboard: '/dashboard',
   settings: '/settings',
   searchDoctor: '/search-doctor',
+  chat:'/chat'
 } as const
 
 export type PathKey = keyof typeof PATHS

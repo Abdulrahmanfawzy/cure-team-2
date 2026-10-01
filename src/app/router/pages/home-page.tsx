@@ -1,27 +1,19 @@
-import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-import { PATHS } from '../paths'
+import { TopDoctors } from "@/features/auth/components/home/doctors";
+import { Hero } from "@/features/auth/components/home/hero";
+import { FindCare } from "@/features/auth/components/home/maps";
+import { FAQ } from "@/features/auth/components/home/questions";
+import { Reviews } from "@/features/auth/components/home/reviews";
+import { HowItWorks } from "@/features/auth/components/home/works";
 
-/**
- * Home page placeholder.
- *
- * Replace with a real feature page or marketing home.
- * Keep pages thin: compose feature components, avoid business logic here.
- */
-export function HomePage(): ReactNode {
+export default function Home() {
   return (
-    <section className="mx-auto flex max-w-2xl flex-col items-center gap-4 px-4 py-16 text-center">
-      <h1 className="text-3xl font-semibold tracking-tight">Starter Architecture</h1>
-      <p className="text-muted-foreground">
-        React + Vite + TypeScript + Tailwind CSS + shadcn/ui + React Router + Redux Toolkit +
-        React Query + React Hook Form + Zod.
-      </p>
-      <Link
-        to={PATHS.dashboard}
-        className="text-sm font-medium underline underline-offset-4 hover:text-foreground"
-      >
-        Preview protected route →
-      </Link>
-    </section>
-  )
+    <main className="bg-white text-neutral-900 px-15">
+      <Hero />
+      <HowItWorks />
+      <FindCare />
+      <TopDoctors />
+      <Reviews />
+      <FAQ />
+    </main>
+  );
 }
