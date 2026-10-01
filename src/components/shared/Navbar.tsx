@@ -1,10 +1,11 @@
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { PATHS } from "@/app/router/paths";
+import { NotificationsMenu } from "@/features/notifications";
 
 const links = [
     { label: "Home", href: "/" },
@@ -101,13 +102,7 @@ export function Navbar() {
             </Button>
           </div>
           {/* Notification */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-10 w-10 rounded-[10px] bg-[#F5F6F8] text-slate-700 hover:bg-slate-100"
-          >
-            <Bell className="h-4.5 w-4.5" />
-          </Button>
+          <NotificationsMenu />
           {/* Avatar */}
           <Link to={PATHS.profile} aria-label="Profile" className="shrink-0">
             <Avatar className="h-10 w-10">
