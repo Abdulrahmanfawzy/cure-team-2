@@ -63,7 +63,7 @@ const AppointmentCard = ({ id,date,doctorInfo,time,status }: IProps) => {
     
 
       {/* Actions */}
-      <AppointmentActions status={displayStatus}  bookingId={id} />
+      <AppointmentActions status={displayStatus}  bookingId={id}  />
 
     </div>
   )

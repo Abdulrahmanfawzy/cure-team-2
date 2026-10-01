@@ -29,3 +29,7 @@ export interface SupportAppointmentPayload {
   message: string;
   subject: string;
 }
+export interface BookagainPayload {
+  slotId: string;
+ 
+}

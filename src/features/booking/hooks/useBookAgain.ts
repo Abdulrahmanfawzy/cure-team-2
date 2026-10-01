@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createSupport } from "../services/booking.service";
+import { bookAgain } from "../services/booking.service";
 
 
-export const useCreateSupport = () =>{
+export const useBookAgain = () =>{
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn:({bookingId,subject,message}:{bookingId:string,subject:string,message:string
+        mutationFn:({bookingId,slotId}:{bookingId:string,slotId:string
 
-        })=> createSupport(bookingId,{subject,message}),
+        })=> bookAgain(bookingId,{slotId}),
         onSuccess:()=>{
         queryClient.invalidateQueries({
             queryKey:['bookings']

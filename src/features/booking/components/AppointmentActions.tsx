@@ -11,6 +11,7 @@ bookingId:string;
 
 const AppointmentActions=({bookingId,status}:IProps)=> {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isBookAgainOpen, setIsBookAgainOpen] = useState(false);
   
     const buttonClass =
     "h-10 flex-1 rounded-action border text-sm font-montserrat";
@@ -86,6 +87,12 @@ const AppointmentActions=({bookingId,status}:IProps)=> {
       onOpenChange={setIsDialogOpen}
       bookingId={bookingId}
     />
+     {/* <BookAgainDialog
+      open={isDialogOpen}
+      onOpenChange={setIsDialogOpen}
+      bookingId={bookingId}
+      date={date}
+    /> */}
    </>
   );
   
