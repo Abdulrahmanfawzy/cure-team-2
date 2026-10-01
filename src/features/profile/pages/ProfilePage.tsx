@@ -5,7 +5,6 @@ import { sans, serif } from "@/types/home";
 import { PATHS } from "@/app/router";
 import ProfileSidebar, { type ProfileTab } from "../components/ProfileSidebar";
 import PersonalInformation from "../components/PersonalInformation";
-import PasswordManagement from "../components/PasswordManagement";
 import { useProfile } from "../hooks/useProfile";
 
 const AUTH_SESSION_KEYS = [
@@ -45,10 +44,6 @@ export default function ProfilePage() {
           </h1>
 
           <PersonalInformation profile={profile} />
-          {/* {tab === "personal" ? (
-          ) : (
-            <PasswordManagement />
-          )} */}
         </section>
       </div>
     </div>

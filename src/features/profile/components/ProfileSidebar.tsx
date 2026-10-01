@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Camera, Lock, LogOut, MapPin, UserRound } from "lucide-react";
+import { Camera, LogOut, MapPin, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { toast } from "sonner";
@@ -17,7 +17,6 @@ interface ProfileSidebarProps {
 
 const menuItems = [
   { key: "personal" as const, label: "Personal information", icon: UserRound },
-  // { key: "password" as const, label: "Password management", icon: Lock },
 ];
 
 export default function ProfileSidebar({

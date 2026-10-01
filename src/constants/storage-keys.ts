@@ -13,4 +13,6 @@
 export const STORAGE_KEYS = {
   accessToken: 'app.access_token',
   refreshToken: 'app.refresh_token',
+  accessTokenExpiresAt: 'app.access_token_expires_at',
+  refreshTokenExpiresAt: 'app.refresh_token_expires_at',
 } as const
