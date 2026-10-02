@@ -1,4 +1,6 @@
 import React from 'react';
+import mainImage from '@/assets/main.svg';
+import main2Image from '@/assets/main2.svg';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -16,15 +18,15 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
       {/* right side (Images) */}
       <div className="hidden lg:flex lg:w-1/2 relative justify-end items-center">
-        <img 
-          src="/src/assets/main2.svg" 
-          alt="" 
-          className="absolute right-0 top-0 h-full object-cover" 
+        <img
+          src={main2Image}
+          alt=""
+          className="absolute right-0 top-0 h-full object-cover"
         />
-        <img 
-          src="/src/assets/main.svg" 
-          alt="" 
-          className="absolute right-0 h-full object-cover" 
+        <img
+          src={mainImage}
+          alt=""
+          className="absolute right-0 h-full object-cover"
         />
       </div>
     </div>
