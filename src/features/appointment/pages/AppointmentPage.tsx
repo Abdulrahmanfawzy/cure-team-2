@@ -12,6 +12,7 @@ import DoctorDetailsMobile from "../component/Appointment/DoctorDetailsMobile"
 
 import AppointmentPickerMob from "../component/Appointment/AppointmentPicker/AppointmentPickerMob"
 import useGetDoctorDetails from "../hooks/useGetDoctorDetails"
+import { useFavourites } from "../hooks/useFavourites"
 import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
 import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
@@ -22,6 +23,7 @@ const AppointmentPage = () => {
 
     const { id } = useParams<{ id: string }>();
     const { data: doctor, isLoading, isError } = useGetDoctorDetails(id!);
+    const { isFavorite, toggleFavourite } = useFavourites();
 
     if (!id) {
         return <div>Missing doctor id</div>
@@ -55,7 +57,8 @@ const AppointmentPage = () => {
                     profile_image={doctor.data.profile_image}
                     name={doctor.data.name }
                     specialist={doctor.data.specialist.name}
-                    is_favorite={doctor.data.is_favorite } />
+                    is_favorite={isFavorite(id)}
+                    onToggleFavorite={() => toggleFavourite(id)} />
             </div>
 
             {/* picker for appointment in mob */}
@@ -66,7 +69,8 @@ const AppointmentPage = () => {
                     name={doctor.data.name}
                     profile_image={doctor.data.profile_image}
                     specialist={doctor.data.specialist.name}
-                    is_favorite={doctor.data.is_favorite}
+                    is_favorite={isFavorite(id)}
+                    onToggleFavorite={() => toggleFavourite(id)}
 
                 />
                 <DoctorStats

@@ -15,4 +15,5 @@ export const STORAGE_KEYS = {
   refreshToken: 'app.refresh_token',
   accessTokenExpiresAt: 'app.access_token_expires_at',
   refreshTokenExpiresAt: 'app.refresh_token_expires_at',
+  favouriteDoctors: 'app.favourite_doctor_ids',
 } as const
