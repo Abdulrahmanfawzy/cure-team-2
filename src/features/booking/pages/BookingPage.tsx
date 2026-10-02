@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AppointmentTabs from "../components/AppointmentTabs";
 import AppointmentDateFilter from "../components/AppointmentDateFilter";
 import AppointmentCard from "../components/AppointmentCard";
+import BookingCardsSkeleton from "../components/BookingCardsSkeleton";
 import useGetDocBooking from "../hooks/useGetDocBooking";
 import type { AppointmentStatus, AppointmentTab } from "../types/appointment.types";
 
@@ -58,7 +59,9 @@ const BookingPage = () => {
 
   const filteredAppointments = booking?.data ?? [];
 
-  if (isLoading || isAvailabilityLoading) return <div>Booking is loaaading.....</div>;
+  const showSkeleton = isLoading || isAvailabilityLoading;
+  const gridClass = "mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3";
+
   if (isError || isAvailabilityError) return <div>error</div>;
 
   return (
@@ -80,18 +83,22 @@ const BookingPage = () => {
           />
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredAppointments.map((card) => (
-            <AppointmentCard
-              key={card.id}
-              id={card.id}
-              date={card.date}
-              doctorInfo={card.doctor}
-              time={card.time}
-              status={card.status}
-            />
-          ))}
-        </div>
+        {showSkeleton ? (
+          <BookingCardsSkeleton className={gridClass} />
+        ) : (
+          <div className={gridClass}>
+            {filteredAppointments.map((card) => (
+              <AppointmentCard
+                key={card.id}
+                id={card.id}
+                date={card.date}
+                doctorInfo={card.doctor}
+                time={card.time}
+                status={card.status}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
