@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
 
 import AuthLayout from "../components/AuthLayout";
 import AuthHeader from "../components/AuthHeader";
@@ -10,14 +8,12 @@ import { PATHS } from "@/app/router";
 import { signInSchema, type SignInType } from "../schemas/auth-schemas";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react"; // تأكد من توفر المكتبة أو استبدالها بـ SVG
 
 export default function SignInPage() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  
+  const [apiError, setApiError] = useState<string | null>(null);
+
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors },
@@ -25,25 +21,25 @@ export default function SignInPage() {
     resolver: zodResolver(signInSchema),
     defaultValues: {
       phone: "",
-      password: "",
     },
   });
 
   const loginMutation = useLogin();
 
   const onSubmit = (data: SignInType) => {
+    setApiError(null);
     loginMutation.mutate(data.phone, { 
       onSuccess: (response) => {
         console.log("========== LOGIN SUCCESS =========Params:", response);
-
+        
         sessionStorage.setItem("login_phone", data.phone);
         sessionStorage.setItem("auth_flow", "login");
 
-        navigate(PATHS.codeVerfication, {
+        const params = new URLSearchParams({ phone: data.phone });
+        navigate(`${PATHS.codeVerfication}?${params.toString()}`, {
           replace: true,
           state: {
             flow: "login",
-            phone: data.phone,
           },
         });
       },
@@ -54,6 +50,13 @@ export default function SignInPage() {
         console.log("Response:", error.response?.data);
         console.log("Message:", error.response?.data?.message);
         console.log("======================================");
+
+        const data = error.response?.data;
+        setApiError(
+          data?.errors?.phone?.[0] ||
+            data?.message ||
+            "Something went wrong. Please try again."
+        );
       },
     });
   };
@@ -62,7 +65,7 @@ export default function SignInPage() {
     <AuthLayout>
       <AuthHeader
         title="Sign in"
-        subtitle="Please enter your phone number and password"
+        subtitle="Please enter your phone number"
       />
 
       <form
@@ -76,40 +79,21 @@ export default function SignInPage() {
             name="phone"
             control={control}
             render={({ field }) => (
-              <PhoneInput
-                defaultCountry="eg"
+              <input
+                id="phone"
+                type="tel"
+                placeholder="Enter your phone number"
                 value={field.value}
                 onChange={field.onChange}
-                inputClassName="!w-full !border-none !bg-transparent !text-sm !shadow-none !outline-none focus:!ring-0"
-                className="flex items-center w-full rounded-xl border border-gray-200 px-3 py-2 bg-white focus-within:border-blue-500"
+                className="border border-gray-200 rounded-xl px-3 py-2 w-full text-sm outline-none focus:border-blue-500"
               />
             )}
           />
           {errors.phone && (
             <span className="text-xs text-red-500">{errors.phone.message}</span>
           )}
-        </div>
-
-        {/* Password Input with Eye Icon */}
-        <div className="w-full flex flex-col gap-2">
-          <label className="font-medium text-sm text-gray-700">Password</label>
-          <div className="relative flex items-center">
-            <input
-              type={showPassword ? "text" : "password"}
-              {...register("password")}
-              placeholder="Enter your password"
-              className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white pr-10"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-          {errors.password && (
-            <span className="text-xs text-red-500">{errors.password.message}</span>
+          {apiError && !errors.phone && (
+            <span className="text-xs text-red-500">{apiError}</span>
           )}
         </div>
 
@@ -123,13 +107,13 @@ export default function SignInPage() {
         </button>
 
         {/* Divider */}
-        <div className="relative flex items-center justify-center my-2">
+        {/* <div className="relative flex items-center justify-center my-2">
           <div className="absolute bg-white px-3 text-xs text-gray-400">or</div>
           <div className="w-full border-t border-gray-100" />
-        </div>
+        </div> */}
 
         {/* Google */}
-        <button
+        {/* <button
           type="button"
           className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium p-3 rounded-xl flex justify-center items-center gap-2 transition duration-200 text-sm"
         >
@@ -139,18 +123,7 @@ export default function SignInPage() {
             alt="google"
           />
           Sign in with Google
-        </button>
-
-        {/* Forgot Password */}
-        <p className="text-center text-sm text-gray-500 mt-1">
-          Forgot your password?{" "}
-          <a
-            href={PATHS.forgotPassword}
-            className="text-blue-600 font-medium hover:underline"
-          >
-            Forgot password
-          </a>
-        </p>
+        </button> */}
 
         {/* Sign Up */}
         <p className="text-center text-sm text-gray-500">

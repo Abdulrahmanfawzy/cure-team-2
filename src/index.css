@@ -179,17 +179,24 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+.container-main {
+  @apply mx-auto w-full max-w-310 px-5 sm:px-8 lg:px-0
+}
+
 .font-montserrat {
   font-family: "Montserrat", sans-serif;
 }
+
 .font-Georgia {
   font-family: "Georgia", sans-serif;
 }
+
 .doctor-marker-wrapper {
   background: transparent;
   border: none;
@@ -241,12 +248,15 @@
 .custom-doctor-popup .leaflet-popup-tip {
   background: white;
 }
+
 .font-montserrat {
   font-family: "Montserrat", sans-serif;
 }
+
 .font-Georgia {
   font-family: "Georgia", sans-serif;
 }
+
 /* success payment */
 @keyframes checkIn {
   0% {
