@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import type { DoctorsType } from "../types/sort.type";
 import DoctorCard from "./DoctorCard";
 import DoctorsNotFound from "../ui/NotFoundDoctors";
+import DoctorsSkeleton from "../ui/DoctorsSkeleton";
 
 type DoctorsProps = {
   doctors?: DoctorsType[] | any;
@@ -11,6 +12,9 @@ type DoctorsProps = {
   onSelectDoctor?: (doctor: DoctorsType) => void;
   isMapOpen?: boolean;
   handelNextPage?: () => void;
+  isLoading?: boolean;
+  /** Hide "Next Page" when the current page is the last one. */
+  hasNextPage?: boolean;
 };
 
 export default function Doctors({
@@ -19,6 +23,8 @@ export default function Doctors({
   onSelectDoctor,
   isMapOpen = false,
   handelNextPage,
+  isLoading = false,
+  hasNextPage = false,
 }: DoctorsProps) {
   // Auto-scroll selected doctor into view when clicked from map
   useEffect(() => {
@@ -29,6 +35,17 @@ export default function Doctors({
       }
     }
   }, [selectedDoctorId]);
+
+  const gridClass = `grid gap-4 ${
+    isMapOpen
+      ? "grid-cols-1 xl:grid-cols-2"
+      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+  }`;
+
+  // Loading state — skeleton grid matching the real cards
+  if (isLoading) {
+    return <DoctorsSkeleton className={gridClass} />;
+  }
 
   // Safely extract doctor array whether passed as doctors or doctorsList,
   // and whether it's raw array or API response envelope ({ data: [...] })
@@ -44,13 +61,7 @@ export default function Doctors({
           <DoctorsNotFound type="empty"/>
         </div>
       ) : (
-        <div
-          className={`grid gap-4 ${
-            isMapOpen
-              ? "grid-cols-1 xl:grid-cols-2"
-              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-          }`}
-        >
+        <div className={gridClass}>
           {list.map((doctor: DoctorsType) => (
             <DoctorCard
               key={doctor.id}
@@ -62,7 +73,7 @@ export default function Doctors({
         </div>
       )}
 
-      {list.length > 0 && handelNextPage && (
+      {list.length > 0 && hasNextPage && handelNextPage && (
         <div className="flex justify-center pt-2">
           <Button
             variant="outline"

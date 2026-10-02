@@ -3,8 +3,9 @@ export type sortType = {
   label: string;
 };
 export type ChooseSpecialistType = {
-  img: string;
+  icone: string;
   name: string;
+  id: number;
 };
 
 export type DoctorsType = {

@@ -1,16 +1,41 @@
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { PATHS } from "@/app/router/paths";
+import { NotificationsMenu } from "@/features/notifications";
+import { useProfile } from "@/features/profile/hooks/useProfile";
+import { authStorage } from "@/utils/auth-storage";
+import { getImageUrl } from "@/utils/getImageUrl";
 
 const links = [
-    { label: "Home", href: "/" },
-    { label: "Bookings", href: "/booking" },
-    { label: "Chat", href: "/chat" },
+  { label: "Home", href: "/" },
+  { label: "Bookings", href: "/booking" },
+  { label: "Chat", href: "/chat" },
 ];
+
+function ProfileAvatar() {
+  const { data: profile } = useProfile();
+
+  return (
+    <Link to={PATHS.profile} aria-label="Profile" className="shrink-0">
+      <Avatar className="h-10 w-10">
+        <AvatarImage
+          src={
+            profile?.profile_image
+              ? getImageUrl(profile.profile_image)
+              : "/images/avatar.png"
+          }
+          alt={profile?.name || "avatar"}
+          className="object-cover"
+        />
+        <AvatarFallback>{profile?.name?.[0] || "U"}</AvatarFallback>
+      </Avatar>
+    </Link>
+  );
+}
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +43,7 @@ export function Navbar() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchValue = searchParams.get("search") || "";
+  const hasToken = Boolean(authStorage.getAccessToken());
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -48,11 +74,13 @@ export function Navbar() {
 
   return (
     <header className="h-27 w-full border-b border-slate-100 bg-white">
-      <div className="mx-auto h-full container flex  items-center justify-between px-6 lg:px-10">
+      <div className="h-full container-main flex  items-center justify-between px-6 lg:px-10">
         {/* Logo */}
         <div className="flex shrink-0 items-center">
           {/* <HeartPulse className="h-8 w-8 text-blue-600" /> */}
-          <img src="images/HeartPulse.svg" alt="HeartPulse" />
+          <Link to={"/"}>
+            <img src="/images/HeartPulse.svg" alt="HeartPulse" />
+          </Link>
         </div>
         {/* Search */}
         <div className="mx-8 hidden w-full max-w-142 md:block">
@@ -94,24 +122,25 @@ export function Navbar() {
               className="h-10 w-10 cursor-pointer rounded-[10px] bg-[#F5F6F8] text-slate-700 hover:bg-slate-100 ms-2"
             >
               {isOpen ? (
-                <img src="images/Close.svg" alt="Close" />
+                <img src="/images/Close.svg" alt="Close" />
               ) : (
-                <img src="images/menu.svg" alt="menu" />
+                <img src="/images/menu.svg" alt="menu" />
               )}
             </Button>
           </div>
           {/* Notification */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-10 w-10 rounded-[10px] bg-[#F5F6F8] text-slate-700 hover:bg-slate-100"
-          >
-            <Bell className="h-4.5 w-4.5" />
-          </Button>
-          {/* Avatar */}
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="images/avatar.png" alt="avatar" />
-          </Avatar>
+          {hasToken && <NotificationsMenu />}
+          {/* Profile / Sign in */}
+          {hasToken ? (
+            <ProfileAvatar />
+          ) : (
+            <Link
+              to={PATHS.signIn}
+              className="shrink-0 rounded-[10px] bg-[#F5F6F8] px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
     </header>

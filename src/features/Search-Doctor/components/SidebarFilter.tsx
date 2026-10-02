@@ -74,9 +74,9 @@ export default function FilterSidebar() {
   const hasActiveFilters = !!(gender || consultationType || availableDate || sort);
 
   return (
-    <aside className="w-full max-w-xs rounded-2xl border transition-all duration-300 transform origin-right scale-y-100 opacity-100 border-gray-200 bg-white p-5 shadow-sm font-sans text-gray-700">
+    <aside className="w-full rounded-2xl border transition-all duration-300 border-gray-200 bg-white p-4 sm:p-5 shadow-sm font-sans text-gray-700">
       {/* Header */}
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-4 sm:mb-5 flex items-center justify-between">
         <h2 className="font-semibold text-gray-800 text-base">Filters</h2>
         {hasActiveFilters && (
           <button

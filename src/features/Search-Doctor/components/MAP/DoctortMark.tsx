@@ -5,6 +5,7 @@ import { Marker, Popup } from "react-leaflet";
 import { Star, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { DoctorsType } from "../../types/sort.type";
+import { baseUrl } from "../Choose";
 
 type DoctorMarkerProps = {
   doctor: DoctorsType;
@@ -12,13 +13,20 @@ type DoctorMarkerProps = {
   onSelect?: () => void;
 };
 
-const createDoctorIcon = (image: string, isSelected?: boolean) => {
+const createDoctorIcon = (
+  image: string,
+  baseUrl: string,
+  isSelected?: boolean,
+) => {
+  const ImageUrl = `${baseUrl}${image}`;
+  console.log(ImageUrl);
+
   return L.divIcon({
     className: "doctor-marker-wrapper",
     html: `
       <div class="doctor-marker ${isSelected ? "selected" : ""}">
         <img
-          src="${image}"
+          src="${ImageUrl}"
           alt="doctor"
           onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150'"
         />
@@ -47,7 +55,7 @@ export default function DoctorMarker({
     <Marker
       ref={markerRef}
       position={[doctor.latitude, doctor.longitude]}
-      icon={createDoctorIcon(doctor.profile_image, isSelected)}
+      icon={createDoctorIcon(doctor.profile_image, baseUrl, isSelected)}
       zIndexOffset={isSelected ? 1000 : 1}
       eventHandlers={{
         click: () => {
@@ -59,7 +67,7 @@ export default function DoctorMarker({
         <div className="w-56 p-1 text-gray-800">
           <div className="flex items-center gap-2.5">
             <img
-              src={doctor.profile_image}
+              src={`${baseUrl}${doctor.profile_image}`}
               alt={doctor.name}
               className="size-11 rounded-full object-cover border border-gray-200"
               onError={(e) => {
