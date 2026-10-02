@@ -20,7 +20,7 @@ export function DownloadCTA() {
 
         {/* phone mockup */}
         <div aria-hidden="true" className="absolute -right-10 top-8 hidden h-65 w-75 rotate-[-28deg] md:block lg:right-10">
-          <img src="../../../../../public/images/iPhone.svg" alt="iPhone" />
+          <img src="/images/iPhone.svg" alt="iPhone" />
         </div>
       </div>
     </section>
