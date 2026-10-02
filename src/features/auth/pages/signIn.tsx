@@ -107,13 +107,13 @@ export default function SignInPage() {
         </button>
 
         {/* Divider */}
-        <div className="relative flex items-center justify-center my-2">
+        {/* <div className="relative flex items-center justify-center my-2">
           <div className="absolute bg-white px-3 text-xs text-gray-400">or</div>
           <div className="w-full border-t border-gray-100" />
-        </div>
+        </div> */}
 
         {/* Google */}
-        <button
+        {/* <button
           type="button"
           className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium p-3 rounded-xl flex justify-center items-center gap-2 transition duration-200 text-sm"
         >
@@ -123,7 +123,7 @@ export default function SignInPage() {
             alt="google"
           />
           Sign in with Google
-        </button>
+        </button> */}
 
         {/* Sign Up */}
         <p className="text-center text-sm text-gray-500">
