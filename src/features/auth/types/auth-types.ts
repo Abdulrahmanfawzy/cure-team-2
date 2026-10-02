@@ -17,3 +17,15 @@ export interface User {
   email: string
   name: string
 }
+
+export interface refreshTokenPayload {
+  refresh_token: string
+}
+
+export interface RefreshTokensResponse {
+  access_token: string
+  refresh_token?: string
+  raw_refresh_token?: string
+  access_token_expires_at?: string
+  refresh_token_expires_at?: string
+}

@@ -1,5 +1,6 @@
 
 import { api } from "./axios";
+import type { RefreshTokensResponse, refreshTokenPayload } from "../types/auth-types";
 
 export const signUpApi = async (userData: any) => {
   try {
@@ -121,4 +122,16 @@ export const verifyResetOtpApi = async (data: { phone: string; type: string; cod
 export const resetPasswordApi = async (data: { phone: string; reset_token: string; password: string; password_confirmation: string }) => {
   const response = await api.post('auth/reset-password', data);
   return response.data;
+};
+
+export const refreshToken = async (
+  payload: refreshTokenPayload
+): Promise<{ data: RefreshTokensResponse }> => {
+  try {
+    const response = await api.post("auth/refresh", payload);
+    return { data: response.data.data ?? response.data };
+  } catch (error: any) {
+    console.error("REFRESH TOKEN ERROR:", error.response?.data);
+    throw error;
+  }
 };

@@ -2,6 +2,7 @@ import { api } from "@/utils/axios";
 import type { DoctorResponse } from "../types/docAppointment.types";
 import type { AddPaymentMethodPayload, AddPaymentMethodResponse, CreatePaymentPayload, CreatePaymentResponse, PaymentMethodsResponse } from "../types/paymentMethods.types";
 import type { CreateBookingPayload } from "../types/bookAppointment.types";
+import type { CreateFavouriteResponse, FavouriteMessageResponse, FavouritesResponse } from "../types/favourites.types";
 
 
 
@@ -12,6 +13,24 @@ export const fetchDoctorDetails = async (id: string): Promise<DoctorResponse> =>
     return result.data;
 
 }
+
+// ─── Favourites ──────────────────────────────────────────────────────────────
+export const fetchFavourites = async (): Promise<FavouritesResponse> => {
+  const result = await api.get<FavouritesResponse>("favourites");
+  return result.data;
+};
+
+export const addFavourite = async (doctorId: string): Promise<CreateFavouriteResponse> => {
+  const result = await api.post<CreateFavouriteResponse>("favourites", {
+    doctor_id: doctorId,
+  });
+  return result.data;
+};
+
+export const removeFavourite = async (favouriteId: string): Promise<FavouriteMessageResponse> => {
+  const result = await api.delete<FavouriteMessageResponse>(`favourites/${favouriteId}`);
+  return result.data;
+};
 
 export const fetchPaymentMethods=async():Promise <PaymentMethodsResponse>=>{
      const result = await api.get<PaymentMethodsResponse>(`payment-methods`);

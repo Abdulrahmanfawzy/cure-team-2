@@ -19,7 +19,7 @@ const Reviews = ({ reviews }: ReviewsProps) => {
         <Carousel
             opts={{
                 align: "start",
-                slidesToScroll: 2,
+                slidesToScroll: 1,
             }}
             className="w-full"
         >
