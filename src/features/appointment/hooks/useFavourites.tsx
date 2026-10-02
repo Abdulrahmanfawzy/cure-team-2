@@ -80,6 +80,9 @@ export const useFavourites = () => {
       // Remove: storage was already updated optimistically.
       if (result.action === "add") {
         favouriteStorage.set(result.doctorId, result.favouriteId);
+        toast.success("Added to favorites");
+      } else {
+        toast.success("Removed from favorites");
       }
     },
     onError: (error, { doctorId, favouriteId }) => {

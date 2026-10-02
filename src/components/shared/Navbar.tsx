@@ -11,9 +11,9 @@ import { authStorage } from "@/utils/auth-storage";
 import { getImageUrl } from "@/utils/getImageUrl";
 
 const links = [
-    { label: "Home", href: "/" },
-    { label: "Bookings", href: "/booking" },
-    { label: "Chat", href: "/chat" },
+  { label: "Home", href: "/" },
+  { label: "Bookings", href: "/booking" },
+  { label: "Chat", href: "/chat" },
 ];
 
 function ProfileAvatar() {
@@ -26,7 +26,7 @@ function ProfileAvatar() {
           src={
             profile?.profile_image
               ? getImageUrl(profile.profile_image)
-              : "images/avatar.png"
+              : "/images/avatar.png"
           }
           alt={profile?.name || "avatar"}
           className="object-cover"
@@ -74,11 +74,13 @@ export function Navbar() {
 
   return (
     <header className="h-27 w-full border-b border-slate-100 bg-white">
-      <div className="mx-auto h-full container flex  items-center justify-between px-6 lg:px-10">
+      <div className="h-full container-main flex  items-center justify-between px-6 lg:px-10">
         {/* Logo */}
         <div className="flex shrink-0 items-center">
           {/* <HeartPulse className="h-8 w-8 text-blue-600" /> */}
-          <img src="images/HeartPulse.svg" alt="HeartPulse" />
+          <Link to={"/"}>
+            <img src="/images/HeartPulse.svg" alt="HeartPulse" />
+          </Link>
         </div>
         {/* Search */}
         <div className="mx-8 hidden w-full max-w-142 md:block">
@@ -120,9 +122,9 @@ export function Navbar() {
               className="h-10 w-10 cursor-pointer rounded-[10px] bg-[#F5F6F8] text-slate-700 hover:bg-slate-100 ms-2"
             >
               {isOpen ? (
-                <img src="images/Close.svg" alt="Close" />
+                <img src="/images/Close.svg" alt="Close" />
               ) : (
-                <img src="images/menu.svg" alt="menu" />
+                <img src="/images/menu.svg" alt="menu" />
               )}
             </Button>
           </div>

@@ -70,7 +70,7 @@ const SearchDoctor = () => {
 
   return (
     <div className="w-full pb-16 mt-10">
-      <main className="container mx-auto flex flex-col gap-4 sm:gap-6 px-6 lg:px-10">
+      <main className="container-main flex flex-col gap-4 sm:gap-6 px-6 lg:px-10">
         <section className="flex w-full items-center gap-2 sm:gap-4 md:gap-6">
           <SplitFilterButton
             isOpen={isFilterOpen}

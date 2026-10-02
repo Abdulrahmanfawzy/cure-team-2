@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
 import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
 import ErrorComponent from "@/components/shared/components/ErrorComponent"
+import { container } from "@/types/home"
 
 
 const AppointmentPage = () => {
@@ -29,33 +30,33 @@ const AppointmentPage = () => {
         return <div>Missing doctor id</div>
     }
 
-    if (isLoading ) {
+    if (isLoading) {
         return <AppointmentPageSkelton />
     }
 
     if (isError || !doctor?.data) {
-       return <ErrorComponent />;
-            
-        
+        return <ErrorComponent />;
+
+
     }
 
     return (
-        <main className="font-montserrat mx-auto mt-8 sm:mt-27 mb-18 flex w-full max-w-7xl flex-col gap-6 px-4 font-Georgia sm:px-6 lg:flex-row lg:items-start lg:px-8">
+        <main className={`font-montserrat container-main mx-auto mt-8 sm:mt-27 mb-18 flex flex-col gap-6 font-Georgia lg:flex-row lg:items-start lg:px-10`}>
             {/* -----select appointment Desktop----- */}
-            <div className="hidden sm:block w-full max-w-196 lg:flex-1">
+            <div className="hidden sm:block w-full lg:flex-1">
                 <AppointmentHeader />
                 <AppointmentPicker availableSlots={doctor.data.available_slots} doctor={doctor.data} />
                 <AppointmentRating rating={doctor.data.rating_avg} totalReview={doctor.data.reviews_count} />
-                <Reviews  reviews={doctor.data.reviews} />
-              
+                <Reviews reviews={doctor.data.reviews} />
+
             </div>
-            
+
             {/*---------- doc info mobile----------- */}
             <div className="sm:hidden flex flex-col gap-3">
                 <HeaderMobile />
                 <DoctorDetailsMobile
                     profile_image={doctor.data.profile_image}
-                    name={doctor.data.name }
+                    name={doctor.data.name}
                     specialist={doctor.data.specialist.name}
                     is_favorite={isFavorite(id)}
                     onToggleFavorite={() => toggleFavourite(id)} />
@@ -79,9 +80,9 @@ const AppointmentPage = () => {
                     rating_avg={doctor.data.rating_avg}
                     reviews_count={doctor.data.reviews_count}
                 />
-                <DoctorAbout about={doctor.data.about}/>
-                <DoctorLocation 
-                    
+                <DoctorAbout about={doctor.data.about} />
+                <DoctorLocation
+
                     latitude={doctor.data.location.latitude}
                     longitude={doctor.data.location.longitude} />
             </div>

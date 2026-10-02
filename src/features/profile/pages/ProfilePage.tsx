@@ -29,7 +29,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className={`${sans} container mx-auto px-6 py-14 lg:px-10 lg:py-16`}>
+    <div className={`${sans} container-main mx-auto px-6 py-14 lg:px-10 lg:py-16`}>
       <div className="grid items-start gap-10 lg:grid-cols-[317px_1fr] lg:gap-16">
         <ProfileSidebar
           profile={profile}
