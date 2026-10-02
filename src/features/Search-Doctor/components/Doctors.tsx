@@ -13,6 +13,8 @@ type DoctorsProps = {
   isMapOpen?: boolean;
   handelNextPage?: () => void;
   isLoading?: boolean;
+  /** Hide "Next Page" when the current page is the last one. */
+  hasNextPage?: boolean;
 };
 
 export default function Doctors({
@@ -22,6 +24,7 @@ export default function Doctors({
   isMapOpen = false,
   handelNextPage,
   isLoading = false,
+  hasNextPage = false,
 }: DoctorsProps) {
   // Auto-scroll selected doctor into view when clicked from map
   useEffect(() => {
@@ -70,7 +73,7 @@ export default function Doctors({
         </div>
       )}
 
-      {list.length > 0 && handelNextPage && (
+      {list.length > 0 && hasNextPage && handelNextPage && (
         <div className="flex justify-center pt-2">
           <Button
             variant="outline"

@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom"
 import Reviews from "../component/Appointment/Reviews"
 import AppointmentPageSkelton from "../component/Appointment/Skelton/AppointmentPageSkelton"
 import ErrorComponent from "@/components/shared/components/ErrorComponent"
-import { container } from "@/types/home"
 
 
 const AppointmentPage = () => {
@@ -41,7 +40,7 @@ const AppointmentPage = () => {
     }
 
     return (
-        <main className={`font-montserrat container-main mx-auto mt-8 sm:mt-27 mb-18 flex flex-col gap-6 font-Georgia lg:flex-row lg:items-start lg:px-10`}>
+        <main className={`font-montserrat container-main mx-auto mt-8 sm:mt-27 mb-18 flex flex-col gap-6 px-6 font-Georgia lg:flex-row lg:items-start lg:px-10`}>
             {/* -----select appointment Desktop----- */}
             <div className="hidden sm:block w-full lg:flex-1">
                 <AppointmentHeader />

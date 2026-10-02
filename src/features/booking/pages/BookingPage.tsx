@@ -62,8 +62,8 @@ const BookingPage = () => {
   if (isError || isAvailabilityError) return <div>error</div>;
 
   return (
-    <main className="container mt-9 min-h-screen p-4 sm:p-6">
-      <div className="mx-auto max-w-250">
+    <main className="container-main mt-9 min-h-screen p-4 sm:p-6">
+      <div>
         <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex min-w-0 flex-col justify-end gap-5 sm:gap-7">
             <h1 className="font-Georgia text-2xl font-medium leading-[100%] text-app-secondary">

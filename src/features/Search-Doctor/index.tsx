@@ -25,6 +25,13 @@ const SearchDoctor = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const page = Number(searchParam.get("page")) || 1;
   const { data: doctors, isLoading, error, refetch, isError } = useSearch(searchParam, page);
+  // Hide "Next Page" unless the response says another page exists.
+  const pagination = doctors?.pagination;
+  const hasNextPage = Boolean(
+    pagination?.last_page != null &&
+      pagination?.current_page != null &&
+      pagination.current_page < pagination.last_page,
+  );
   // =============================End Hooks =========================================//
 
   // =============================Start Functions===================================//
@@ -102,6 +109,7 @@ const SearchDoctor = () => {
                   isMapOpen={isMapOpen}
                   handelNextPage={handelNextPage}
                   isLoading={isLoading}
+                  hasNextPage={hasNextPage}
                 />
               </div>
 
