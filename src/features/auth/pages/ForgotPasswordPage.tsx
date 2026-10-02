@@ -4,8 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { PhoneInput } from 'react-international-phone';
-import 'react-international-phone/style.css';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
 import { forgotPasswordApi } from '../api/auth-api';
@@ -65,13 +63,13 @@ const { mutate: forgotPassword, isPending, isError, error } = useMutation({
             name="phone"
             control={control}
             render={({ field }) => (
-              <PhoneInput 
-                defaultCountry='eg'
+              <input
+                id="phone"
+                type="tel"
+                placeholder="Enter your phone number"
                 value={field.value}
                 onChange={field.onChange}
-                inputClassName="!w-full !border-none !bg-transparent !text-sm !shadow-none !outline-none focus:!ring-0"
-                className="flex items-center w-full rounded-xl border border-gray-200 px-3 py-2 bg-white shadow-sm focus-within:border-blue-500"
-                placeholder='Enter your phone number'
+                className="border border-gray-200 rounded-xl px-3 py-2 w-full text-sm outline-none focus:border-blue-500"
               />
             )}
           />
