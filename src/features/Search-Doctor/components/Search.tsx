@@ -31,12 +31,12 @@ const Search = ({ setSearchParam: propSetSearchParam, searchParam: propSearchPar
   };
 
   return (
-    <section className="flex-1">
+    <section className="flex-1 min-w-0">
       <div>
         <Input
           type="search"
-          className="px-5 py-5 flex-1"
-          placeholder="Search Doctor"
+          className="h-10 sm:h-11 px-3 sm:px-4 text-xs sm:text-sm flex-1 rounded-xl"
+          placeholder="Search Doctor..."
           value={searchValue}
           onChange={handleSearchChange}
         />

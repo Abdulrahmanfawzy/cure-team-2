@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AppointmentTabs from "../components/AppointmentTabs";
 import AppointmentDateFilter from "../components/AppointmentDateFilter";
 import AppointmentCard from "../components/AppointmentCard";
-import BookingPageSkeleton from "../components/BookingPageSkeleton";
+import BookingCardsSkeleton from "../components/BookingCardsSkeleton";
 import useGetDocBooking from "../hooks/useGetDocBooking";
 import type { AppointmentStatus, AppointmentTab } from "../types/appointment.types";
 
@@ -59,12 +59,14 @@ const BookingPage = () => {
 
   const filteredAppointments = booking?.data ?? [];
 
-  if (isFetching || isAvailabilityFetching) return <BookingPageSkeleton />;
+  const showSkeleton = isLoading || isAvailabilityLoading;
+  const gridClass = "mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3";
+
   if (isError || isAvailabilityError) return <div>error</div>;
 
   return (
-    <main className="container mt-9 min-h-screen p-4 sm:p-6">
-      <div className="mx-auto max-w-250">
+    <main className="container-main mt-9 min-h-screen p-4 sm:p-6">
+      <div>
         <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex min-w-0 flex-col justify-end gap-5 sm:gap-7">
             <h1 className="font-Georgia text-2xl font-medium leading-[100%] text-app-secondary">
@@ -81,18 +83,22 @@ const BookingPage = () => {
           />
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredAppointments.map((card) => (
-            <AppointmentCard
-              key={card.id}
-              id={card.id}
-              date={card.date}
-              doctorInfo={card.doctor}
-              time={card.time}
-              status={card.status}
-            />
-          ))}
-        </div>
+        {showSkeleton ? (
+          <BookingCardsSkeleton className={gridClass} />
+        ) : (
+          <div className={gridClass}>
+            {filteredAppointments.map((card) => (
+              <AppointmentCard
+                key={card.id}
+                id={card.id}
+                date={card.date}
+                doctorInfo={card.doctor}
+                time={card.time}
+                status={card.status}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

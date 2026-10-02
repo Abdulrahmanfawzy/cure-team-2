@@ -2,7 +2,7 @@ const AppointmentPageSkelton = () => {
     return (
         <div className="w-full animate-pulse flex">
 
-            <div className="block w-full max-w-196 lg:flex-1 m-9">
+            <div className="block w-full lg:flex-1 m-9">
 
                 <div className="h-8 w-68 bg-gray-200 rounded-[19px]" />
 
@@ -10,7 +10,7 @@ const AppointmentPageSkelton = () => {
                 <div className="h-75   bg-background-neutral-lightest w-full font-montserrat rounded-[19px]    p-4 mt-4" >
                     {/* Days */}
                     <div className="mt-5 flex gap-2">
-                        
+
 
                         <div className="grid flex-1 grid-cols-7 gap-2">
                             {Array.from({ length: 7 }).map((_, index) => (

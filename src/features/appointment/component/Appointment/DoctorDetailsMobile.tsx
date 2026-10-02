@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Check, Heart } from "lucide-react";
 import { getImageUrl } from "@/utils/getImageUrl";
 
@@ -6,12 +5,11 @@ interface IProps {
     profile_image: string;
     name: string;
     specialist: string;
-    is_favorite:boolean;
-
+    is_favorite: boolean;
+    onToggleFavorite: () => void;
 }
 
-const DoctorDetailsMobile = ({ profile_image, name, specialist,is_favorite }: IProps) => {
-    const [isFavorite, setIsFavorite] = useState(is_favorite);
+const DoctorDetailsMobile = ({ profile_image, name, specialist, is_favorite, onToggleFavorite }: IProps) => {
 
     return (
         <section className="flex items-center justify-between gap-3 mt-5 px-7">
@@ -34,13 +32,13 @@ const DoctorDetailsMobile = ({ profile_image, name, specialist,is_favorite }: IP
             </div>
             <button
                 type="button"
-                aria-label={isFavorite ? "Remove doctor from favorites" : "Add doctor to favorites"}
-                aria-pressed={isFavorite}
-                onClick={() => setIsFavorite((favorite) => !favorite)}
+                aria-label={is_favorite ? "Remove doctor from favorites" : "Add doctor to favorites"}
+                aria-pressed={is_favorite}
+                onClick={onToggleFavorite}
                 className="cursor-pointer"
             >
                 <Heart
-                    className={isFavorite ? "fill-red-500 text-red-500" : "text-app-secondary"}
+                    className={is_favorite ? "fill-red-500 text-red-500" : "text-app-secondary"}
                 />
             </button>
         </section>
