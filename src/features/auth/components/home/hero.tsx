@@ -1,5 +1,6 @@
 import { CalIcon, Person, PinIcon } from "@/components/shared/components/icons";
 import { container, outline, primary, sans, serif } from "@/types/home";
+import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
@@ -47,10 +48,10 @@ export function Hero() {
         </div>
 
         <div className={`${sans} mt-7 flex flex-wrap items-center justify-center gap-4`}>
-          <a href="#" className={`${primary} rounded-md px-12 py-3 text-sm transition-colors`}>Get started</a>
-          <a href="#" className={`${outline} inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm transition-colors`}>
+          <Link to="/search-doctor" className={`${primary} rounded-md px-12 py-3 text-sm transition-colors`}>Get started</Link>
+          <Link to="/search-doctor" className={`${outline} inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm transition-colors`}>
             <CalIcon /> Book Appointment
-          </a>
+          </Link>
         </div>
       </div>
     </section>

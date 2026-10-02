@@ -1,13 +1,18 @@
+import { useLocation } from "react-router-dom";
 import { company, sans, serif, support } from "@/types/home";
 import { contacts, Logo, socials } from "./components/icons";
 import LinkColumn from "./components/link-column";
 import { DownloadCTA } from "@/features/auth/components/home/health";
+import { PATHS } from "@/app/router/paths";
 
 export default function Footer() {
+    const { pathname } = useLocation();
+    const isHome = pathname === PATHS.home;
+
     return (
         <>
-            <footer className="bg-[#03162C] text-white px-20 relative mt-60">
-                <div className="absolute -top-60 right-0 left-0"><DownloadCTA /></div>
+            <footer className={`bg-[#03162C] text-white px-20 relative ${isHome ? "mt-60" : ""}`}>
+                {isHome && <div className="absolute -top-60 right-0 left-0"><DownloadCTA /></div>}
                 <div className="mx-auto container px-6 pb-10 pt-25 sm:px-10 lg:px-0">
                     <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:gap-x-15">
                         {/* Brand */}

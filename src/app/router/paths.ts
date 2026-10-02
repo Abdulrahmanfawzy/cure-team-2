@@ -16,6 +16,7 @@ export const PATHS = {
   signUp:'/signUp',
   codeVerfication:'/codeVerfication',
   ResetPassword: '/ResetPassword',
+  profile: '/profile',
   
   appointment: '/appointment/:id',
   paymentSuccess:'/payment-success',
